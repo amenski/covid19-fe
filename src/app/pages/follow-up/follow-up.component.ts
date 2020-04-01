@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: "app-notifications",
-  templateUrl: "notifications.component.html"
+  selector: "app-follow-up",
+  templateUrl: "follow-up.component.html"
 })
-export class NotificationsComponent implements OnInit {
+export class FollowUpComponent implements OnInit {
   staticAlertClosed  = false;
   staticAlertClosed1 = false;
   staticAlertClosed2 = false;

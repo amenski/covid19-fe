@@ -1,5 +1,5 @@
 <div class=" card-body">
-  HEALTH FACILITIES TO BE DEDICATED TO FIGHT COVID19
+  HEALTH FACILITIES TO BE DEDICATED TO FIGHT COVID-19
   <div class=" card-body">
     <div class=" table-responsive">
       <table class=" table tablesorter" id="">
@@ -15,13 +15,13 @@
         </thead>
         <tbody>
         <tr *ngFor="let facility of facilities">
-          <td>{{route.id}}</td>
-          <td>{{route.route.routeId}}</td>
-          <td>{{route.route.routeInfo}}</td>
-          <td>{{route.cityOrder}}</td>
-          <td>{{route.cityId.cityId}}</td>
-          <td>{{route.cityId.cityName}}</td>
-          <td>{{route.cityId.country}}</td>
+          <td>{{facility.id}}</td>
+          <td>{{facility.osmId}}</td>
+          <td>{{facility.name}}</td>
+          <td>{{facility.amenity}}</td>
+          <td>{{facility.xCord}}</td>
+          <td>{{facility.yCord}}</td>
+
         </tr>
         </tbody>
       </table>

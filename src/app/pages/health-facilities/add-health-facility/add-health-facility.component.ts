@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-add-routes',
+  selector: 'app-add-health-facility',
   templateUrl: './add-health-facility.component.html',
   styleUrls: ['./add-health-facility.component.scss']
 })

@@ -8,7 +8,7 @@ import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 import { CasesComponent } from "../../pages/cases/cases.component";
 import { HealthFacilitiesComponent } from "../../pages/health-facilities/health-facilities.component";
-import { NotificationsComponent } from "../../pages/notifications/notifications.component";
+import { FollowUpComponent } from "../../pages/follow-up/follow-up.component";
 import { UserComponent } from "../../pages/user/user.component";
 import { TablesComponent } from "../../pages/tables/tables.component";
 import { TypographyComponent } from "../../pages/typography/typography.component";
@@ -20,16 +20,20 @@ import {AddCasesComponent} from "../../pages/cases/add-cases/add-cases.component
 import {HealthFacilityListComponent} from "../../pages/health-facilities/health-facility-list/health-facility-list.component";
 import {AddHealthFacilityComponent} from "../../pages/health-facilities/add-health-facility/add-health-facility.component";
 import {LoginComponent} from "../../pages/login/login.component";
+import {NgSelectModule} from "@ng-select/ng-select";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule.forChild(AdminLayoutRoutes),
-        FormsModule,
-        HttpClientModule,
-        NgbModule,
-        ReactiveFormsModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(AdminLayoutRoutes),
+    FormsModule,
+    HttpClientModule,
+    NgbModule,
+    ReactiveFormsModule,
+    NgSelectModule,
+    MatAutocompleteModule,
+  ],
   declarations: [
     DashboardComponent,
     UserComponent,
@@ -38,7 +42,7 @@ import {LoginComponent} from "../../pages/login/login.component";
     CaseListComponent,
     AddCasesComponent,
     TypographyComponent,
-    NotificationsComponent,
+    FollowUpComponent,
     HealthFacilitiesComponent,
     HealthFacilityListComponent,
     AddHealthFacilityComponent

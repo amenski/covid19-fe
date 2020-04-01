@@ -3,7 +3,7 @@ import {Case} from '../../../models/case';
 import {CasesService} from "../../../services/cases.service";
 
 @Component({
-  selector: 'app-city-list',
+  selector: 'app-case-list',
   templateUrl: './case-list.component.html',
   styleUrls: ['./case-list.component.scss']
 })

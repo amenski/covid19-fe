@@ -15,7 +15,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/cases",
-    title: "Cases",
+    title: "Covid-19 Cases",
     icon: "icon-atom",
     class: ""
   },
