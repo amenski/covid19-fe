@@ -6,7 +6,6 @@ import { HealthFacilitiesComponent } from "../../pages/health-facilities/health-
 import { FollowUpComponent } from "../../pages/follow-up/follow-up.component";
 import { UserComponent } from "../../pages/user/user.component";
 import { TablesComponent } from "../../pages/tables/tables.component";
-import { TypographyComponent } from "../../pages/typography/typography.component";
 import {AuthGuard} from "../../helpers/auth.guard";
 import {LoginComponent} from "../../pages/login/login.component";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";

@@ -8,7 +8,7 @@
         <h4>
           Register
         </h4>
-        <form ngNativeValidate [formGroup]="register" (ngSubmit)="onSubmit()">
+        <form ngNativeValidate [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label >Username</label>
             <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
