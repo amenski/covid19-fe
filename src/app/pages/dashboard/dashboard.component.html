@@ -95,11 +95,11 @@
   </div>
 
   <div class=" row">
-    <div class=" col-lg-6 col-md-12">
+    <div class=" col-lg-12 col-md-12">
       <div class=" card card-tasks">
         <div class=" card-header">
-          <h6 class=" title d-inline">Activities(5)</h6>
-          <p class=" card-category d-inline">today</p>
+          <h6 class=" title d-inline">Recent Cases</h6>
+<!--          <p class=" card-category d-inline">today</p>-->
           <div ngbDropdown>
             <button
               class=" btn btn-link btn-icon"
@@ -117,19 +117,49 @@
           </div>
         </div>
         <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+              <tr>
+                <th>Date</th>
+                <th>Total Cases</th>
+                <th>New Cases</th>
+                <th>Total Deaths Caes</th>
+                <th>New Deaths</th>
+                <th>Active Cases</th>
+                <th>Serious Critical</th>
+                <th>Recovered</th>
+<!--                <th class=" text-center">Salary</th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let case of caseStats">
+                <td>{{case.reportDate}}</td>
+                <td>{{case.totalCases}}</td>
+                <td>{{case.newCases}}</td>
+                <td>{{case.totalDeaths}}</td>
+                <td>{{case.newDeaths}}</td>
+                <td>{{case.activeCases}}</td>
+                <td>{{case.criticalCases}}</td>
+                <td>{{case.recovered}}</td>
 
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-    <div class=" col-lg-6 col-md-12">
-      <div class=" card">
-        <div class=" card-header">
-          <h4 class=" card-title">Recent Cases</h4>
-        </div>
-        <div class=" card-body">
+<!--    <div class=" col-lg-6 col-md-12">-->
+<!--      <div class=" card">-->
+<!--        <div class=" card-header">-->
+<!--          <h4 class=" card-title">Recent Cases</h4>-->
+<!--        </div>-->
+<!--        <div class=" card-body">-->
 
-        </div>
-      </div>
-    </div>
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </div>

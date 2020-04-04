@@ -4,7 +4,7 @@
   "description": "Ethio Covid19 Case Reporting Panel",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "generate": "swagger-angular-generator -s ../../resources/schema/swagger/covid19-swagger-spec.yml -d src/app/model",
     "test": "ng test",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/black-dashboard-angular.git"
+    "url": "git+https://github.com/amenski/covid19-fe.git"
   },
   "keywords": [
     "Covid19 Case Reporting Panel",

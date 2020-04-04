@@ -10,7 +10,7 @@ import { CasesComponent } from "../../pages/cases/cases.component";
 import { HealthFacilitiesComponent } from "../../pages/health-facilities/health-facilities.component";
 import { FollowUpComponent } from "../../pages/follow-up/follow-up.component";
 import { UserComponent } from "../../pages/user/user.component";
-import { TablesComponent } from "../../pages/tables/tables.component";
+import { QuestionnaireComponent } from "../../pages/questionnaire/questionnaire.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import {CaseListComponent} from "../../pages/cases/case-list/case-list.component";
@@ -34,7 +34,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
   declarations: [
     DashboardComponent,
     UserComponent,
-    TablesComponent,
+    QuestionnaireComponent,
     CasesComponent,
     CaseListComponent,
     AddCasesComponent,

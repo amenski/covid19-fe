@@ -39,4 +39,15 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
+
+  registerUser(firstName: string, lastName: string, email: any, password: any) {
+    this.user.firstName = firstName;
+    this.user.lastName = lastName;
+    this.user.email = email;
+    this.user.password = password;
+    return this.http.post<any>(BASE_URL+'/v1/register-user', this.user )
+      .pipe(map(res => {
+        return this.user;
+      }));
+  }
 }
