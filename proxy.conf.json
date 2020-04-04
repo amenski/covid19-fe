@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://covid19-eth.herokuapp.com",
+    "secure": false
+  }
+}
