@@ -13,9 +13,9 @@ export class DailyStatusService {
   constructor(private http: HttpClient) { }
   getAllCaseStats(): Observable<DailyStatus[]>{
     let dailyStatUrl = BASE_URL+"/v1/daily-status/all";
-    // let headers = {
-    //   'Access-Control-Allow-Origin': true
-    // };
+    let headers = {
+      'Access-Control-Allow-Origin': true
+    };
     // @ts-ignore
     return this.http.get<DailyStatus[]>(dailyStatUrl);
   }
