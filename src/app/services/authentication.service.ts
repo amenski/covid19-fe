@@ -4,34 +4,48 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 import {BASE_URL} from '../helpers/constants'
 import { User } from '../models/user';
+import {JwtResponse} from "../models/jwtResponse";
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   user: User;
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  jwtResponse: JwtResponse;
+  private currentUserSubject: BehaviorSubject<string>;
+  public currentUser: Observable<string>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUserSubject = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
     this.user = new User();
+    this.jwtResponse = new class implements JwtResponse {
+      errors: Array<string>;
+      jwtToken: string;
+      message: string;
+      resultCode: number;
+      success: boolean;
+      transactionId: string;
+      type: string;
+    };
   }
 
-  login(username: string, password: string): Observable<any> {
+  login(username: string, password: string): Observable<JwtResponse> {
     this.user.email = username;
     this.user.password = password;
-    return this.http.post<any>(BASE_URL+'/v1/authenticate', this.user )
-
+    return this.http.post<JwtResponse>(BASE_URL+'/v1/authenticate', this.user )
       .pipe(map(res => {
         // login successful if there's a jwt token in the response
-          this.user.token = res.jwtToken;
+        //   this.user.token = res;
+        alert("TOKEN: "+ res.jwtToken);
+          this.jwtResponse.jwtToken = res.jwtToken;
+
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(this.user));
-          this.currentUserSubject.next(this.user);
-        return this.user;
+          localStorage.setItem('currentUser', JSON.stringify( this.jwtResponse.jwtToken));
+          this.currentUserSubject.next(this.jwtResponse.jwtToken);
+        return this.jwtResponse;
       }));
   }
-  public get currentUserValue(): User {
+  public get currentUserValue(): string {
+    //alert("token to request: "+this.user.token)
     return this.currentUserSubject.value;
   }
   logout() {

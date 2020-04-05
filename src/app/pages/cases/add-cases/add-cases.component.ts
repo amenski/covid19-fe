@@ -30,9 +30,26 @@ export class AddCasesComponent implements OnInit {
 
   constructor(public fb: FormBuilder, private casesService: CasesService, private calendar: NgbCalendar) {
     this.form = this.fb.group({
-      caseCode: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      gender: '',
+      dob: '',
+      phone: '',
+      passportNo: '',
+      nationality: '',
+      occupation: '',
+      region: '',
+      subCity: '',
+      woreda: '',
+      kebele: '',
+      streetName: '',
+      houseNo: '',
+      latitude: '',
+      longitude: '',
+      travelHistory: '',
+      presumptiveResult: '',
+      confirmedResult: '',
+
     })
   }
 

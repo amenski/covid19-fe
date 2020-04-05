@@ -13,7 +13,6 @@ import {RegisterUserComponent} from "../../pages/register/register-user.componen
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule,
-    HttpClientModule,
     NgbModule,
     ReactiveFormsModule
   ],

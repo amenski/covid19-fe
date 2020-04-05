@@ -19,13 +19,13 @@ import {HealthFacilityListComponent} from "../../pages/health-facilities/health-
 import {AddHealthFacilityComponent} from "../../pages/health-facilities/add-health-facility/add-health-facility.component";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {authInterceptorProviders} from "../../helpers/jwt.interceptor";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
-    HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
     NgSelectModule,
@@ -42,6 +42,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     HealthFacilitiesComponent,
     HealthFacilityListComponent,
     AddHealthFacilityComponent
-  ]
+  ],
+  providers: [authInterceptorProviders],
 })
 export class AdminLayoutModule {}
