@@ -4,7 +4,7 @@
   "description": "Ethio Covid19 Case Reporting Panel",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build --aot --prod",
     "postinstall": "ng build --aot --prod",
     "test": "ng test",
