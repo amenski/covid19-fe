@@ -17,6 +17,6 @@ export class DailyStatusService {
       'Access-Control-Allow-Origin': true
     };
     // @ts-ignore
-    return this.http.get<DailyStatus[]>(dailyStatUrl);
+    return this.http.get<DailyStatus[]>(dailyStatUrl, headers);
   }
 }
