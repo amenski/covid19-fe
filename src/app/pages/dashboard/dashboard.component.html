@@ -56,9 +56,9 @@
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Total Deaths ({{totalDeath}})</h5>
+          <h5 class=" card-category">Total Deaths</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-bell-55 text-danger-states"> </i> 0
+            <i class=" tim-icons icon-bell-55 text-danger-states"> </i> {{totalDeath}}
           </h3>
         </div>
         <div class=" card-body">
@@ -142,9 +142,11 @@
               <tr *ngFor="let case of caseStats">
                 <td>{{case.reportDate}}</td>
                 <td>{{case.totalCases}}</td>
-                <td>{{case.newCases}}</td>
+                <td> <span *ngIf="case.newCases===0"></span>
+                  <span *ngIf="case.newCases!==0" style="background-color: #fb6340">+{{case.newCases}}</span></td>
                 <td>{{case.totalDeaths}}</td>
-                <td>{{case.newDeaths}}</td>
+                <td><span *ngIf="case.newDeaths===0"></span>
+                  <span *ngIf="case.newDeaths!==0" style="background-color: #ec250d">+{{case.newDeaths}}</span></td>
                 <td>{{case.activeCases}}</td>
                 <td>{{case.criticalCases}}</td>
                 <td>{{case.recovered}}</td>
