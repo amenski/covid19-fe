@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ModelAttributeList } from './modelAttributeList';
+import { ResponseDailyCaseStatusListAllOf } from './responseDailyCaseStatusListAllOf';
+import { ModelDailyCaseStatusList } from './modelDailyCaseStatusList';
 import { ResponseBase } from './responseBase';
-import { ResponseAttributesListAllOf } from './responseAttributesListAllOf';
 
 
-export interface ResponseAttributesList extends ResponseBase { 
-    returnValue?: ModelAttributeList;
+export interface ResponseDailyCaseStatusList extends ResponseBase { 
+    returnValue?: ModelDailyCaseStatusList;
 }
 

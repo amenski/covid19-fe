@@ -11,11 +11,12 @@ import {LoginComponent} from "../../pages/login/login.component";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
-  // { path: "login", component: LoginComponent},
-  { path: "home", component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: "cases", component: CasesComponent, canActivate: [AuthGuard]},
-  { path: "health-facilities", component: HealthFacilitiesComponent, canActivate: [AuthGuard]},
-  { path: "follow-up", component: FollowUpComponent, canActivate: [AuthGuard] },
-  { path: "questionnaire", component: QuestionnaireComponent, canActivate: [AuthGuard] },
-  { path: "user", component: UserComponent, canActivate: [AuthGuard] },
+   // { path: "", redirectTo:"home", pathMatch: "full"},
+  { path: '', redirectTo: "home", pathMatch: "full" },
+  { path: 'home', component: DashboardComponent},
+  { path: 'cases', component: CasesComponent},
+  { path: 'health-facilities', component: HealthFacilitiesComponent},
+  { path: 'follow-up', component: FollowUpComponent, canActivate: [AuthGuard] },
+  { path: 'questionnaire', component: QuestionnaireComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
 ];

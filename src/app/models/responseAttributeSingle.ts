@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ModelAttributeList } from './modelAttributeList';
+import { ResponseAttributeSingleAllOf } from './responseAttributeSingleAllOf';
+import { ModelAttribute } from './modelAttribute';
 import { ResponseBase } from './responseBase';
-import { ResponseAttributesListAllOf } from './responseAttributesListAllOf';
 
 
-export interface ResponseAttributesList extends ResponseBase { 
-    returnValue?: ModelAttributeList;
+export interface ResponseAttributeSingle extends ResponseBase { 
+    returnValue?: ModelAttribute;
 }
 

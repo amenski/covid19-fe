@@ -7,7 +7,7 @@
           <div class=" row">
             <div class=" col-sm-6 text-left">
               <h5 class=" card-category"><img src="../../../assets/img/favicon-32x32.png"/></h5>
-              <h2 class=" card-title">Total Corona virus Cases</h2>
+              <h2 class=" card-title">Total Corona virus Cases ({{totalCase}})</h2>
             </div>
             <div class=" col-sm-6">
               <div class=" btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -56,7 +56,7 @@
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Total Deaths</h5>
+          <h5 class=" card-category">Total Deaths ({{totalDeath}})</h5>
           <h3 class=" card-title">
             <i class=" tim-icons icon-bell-55 text-danger-states"> </i> 0
           </h3>
@@ -84,7 +84,7 @@
         <div class=" card-header">
           <h5 class=" card-category">Currently Infected</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-send text-success"> </i> 26
+            <i class=" tim-icons icon-send text-success"> </i> {{totalActiveCase}}
           </h3>
         </div>
         <div class=" card-body">
@@ -95,7 +95,7 @@
   </div>
 
   <div class=" row">
-    <div class=" col-lg-12 col-md-12">
+    <div class=" col-lg-12 col-md-20">
       <div class=" card card-tasks">
         <div class=" card-header">
           <h6 class=" title d-inline">Recent Cases</h6>
@@ -118,13 +118,19 @@
         </div>
         <div class=" card-body">
           <div class=" table-responsive">
-            <table class=" table tablesorter" id="">
+            <table class=" table tablesorter" id="" >
               <thead class=" text-primary">
               <tr>
-                <th>Date</th>
+                <th>
+                  <a href="#"  (click)="sortType = 'reportDate'; sortReverse = !sortReverse">
+                   report Date
+                    <span ng-show="sortType == 'reportDate' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'reportDate' && sortReverse" class="fa fa-caret-up"></span>
+                 </a>
+                </th>
                 <th>Total Cases</th>
                 <th>New Cases</th>
-                <th>Total Deaths Caes</th>
+                <th>Total Deaths</th>
                 <th>New Deaths</th>
                 <th>Active Cases</th>
                 <th>Serious Critical</th>

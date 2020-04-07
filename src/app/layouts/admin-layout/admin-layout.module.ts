@@ -20,17 +20,19 @@ import {AddHealthFacilityComponent} from "../../pages/health-facilities/add-heal
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {authInterceptorProviders} from "../../helpers/jwt.interceptor";
+import {ScrollingModule} from "@angular/cdk/scrolling";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
-    NgbModule,
-    ReactiveFormsModule,
-    NgSelectModule,
-    MatAutocompleteModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(AdminLayoutRoutes),
+        FormsModule,
+        NgbModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+        MatAutocompleteModule,
+        ScrollingModule,
+    ],
   declarations: [
     DashboardComponent,
     UserComponent,

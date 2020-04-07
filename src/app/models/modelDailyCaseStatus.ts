@@ -9,12 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ModelAttributeList } from './modelAttributeList';
-import { ResponseBase } from './responseBase';
-import { ResponseAttributesListAllOf } from './responseAttributesListAllOf';
 
 
-export interface ResponseAttributesList extends ResponseBase { 
-    returnValue?: ModelAttributeList;
+export interface ModelDailyCaseStatus { 
+    newCases?: number;
+    newDeaths?: number;
+    totalDeaths?: number;
+    recovered?: number;
+    activeCases?: number;
+    criticalCases?: number;
+    totalCases?: number;
+    reportDate?: string;
 }
 

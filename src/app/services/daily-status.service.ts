@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {Case} from "../models/case";
 import {BASE_URL} from "../helpers/constants";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {DailyStatus} from "../models/daily-status";
+import {ResponseDailyCaseStatusList} from "../models/responseDailyCaseStatusList";
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,19 @@ import {DailyStatus} from "../models/daily-status";
 export class DailyStatusService {
 
   constructor(private http: HttpClient) { }
-  getAllCaseStats(): Observable<DailyStatus[]>{
+  getAllCaseStats(): Observable<ResponseDailyCaseStatusList>{
     let dailyStatUrl = BASE_URL+"/v1/daily-status/all";
-    let headers = {
-      'Access-Control-Allow-Origin': true
-    };
-    // @ts-ignore
-    return this.http.get<DailyStatus[]>(dailyStatUrl, headers);
+    // let he = new HttpHeaders()
+    // const headers = {
+    //   'Access-Control-Allow-Origin': true
+    // };
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     'Access-Control-Allow-Origin': 'true',
+    //   })
+    // };
+
+    return this.http.get<ResponseDailyCaseStatusList>(dailyStatUrl);
   }
 }

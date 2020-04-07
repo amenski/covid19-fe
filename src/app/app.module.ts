@@ -27,7 +27,7 @@ import {authInterceptorProviders} from "./helpers/jwt.interceptor";
     ToastrModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [authInterceptorProviders],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
