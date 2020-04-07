@@ -72,14 +72,26 @@
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
                 <label>Nationality *</label>
-                <input type="text" formControlName="nationality" class=" form-control" placeholder="ዜግነት"/>
+                <input type="text" formControlName="occupation" placeholder="ዜግነት"
+                       [matAutocomplete]="auto" class=" form-control">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                  <mat-option *ngFor="let nationality of nationalityFilteredOptions | async" [value]="nationality">
+                    {{nationality}}
+                  </mat-option>
+                </mat-autocomplete>
               </div>
             </div>
 
             <div class=" col-md-4 px-md-1">
               <div class=" form-group">
                 <label> Occupation </label>
-                <input type="text" formControlName="lastName" class=" form-control" placeholder="ስራ"/>
+                <input type="text" formControlName="occupation" placeholder="ስራ"
+                       [matAutocomplete]="auto" class=" form-control">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                  <mat-option *ngFor="let occupation of occupationsFilteredOptions | async" [value]="occupation">
+                    {{occupation}}
+                  </mat-option>
+                </mat-autocomplete>
               </div>
             </div>
           </div>
@@ -101,11 +113,11 @@
             <div class=" form-group">
               <label>Region *</label>
 <!--              <input type="text" class=" form-control" placeholder="ክልል"/>-->
-              <input type="text" formControlName="region" placeholder="Pick one"
+              <input type="text" formControlName="region" placeholder="ክልል"
                      [matAutocomplete]="auto" class=" form-control">
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option}}
+                <mat-option *ngFor="let region of regionsFilteredOptions | async" [value]="region">
+                  {{region}}
                 </mat-option>
               </mat-autocomplete>
 
@@ -113,7 +125,7 @@
           </div>
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>Sub city *</label>
+              <label>Sub city/Zone *</label>
               <input type="text" formControlName="subCity" class=" form-control" placeholder="ክፍለ ከተማ"/>
             </div>
           </div>

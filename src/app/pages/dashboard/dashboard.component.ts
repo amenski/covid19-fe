@@ -361,7 +361,7 @@ export class DashboardComponent implements OnInit {
       let data1 = {
         labels: ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
           'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
-          'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06'],
+          'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07'],
         datasets: [{
           label: "Total Deaths Stat",
           fill: true,
@@ -403,7 +403,7 @@ export class DashboardComponent implements OnInit {
       let data2 = {
         labels: ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
           'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
-          'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06'],
+          'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07'],
         datasets: [{
           label: "Currently active cases",
           fill: true,
@@ -436,7 +436,7 @@ export class DashboardComponent implements OnInit {
 
       let chart_labels = ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
         'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
-        'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06'];
+        'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07'];
       this.datasets = [
         [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
         [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
@@ -503,7 +503,7 @@ export class DashboardComponent implements OnInit {
         data: {
           labels: ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
             'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
-            'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06'],
+            'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07'],
           datasets: [{
             label: "New cases",
             fill: true,
