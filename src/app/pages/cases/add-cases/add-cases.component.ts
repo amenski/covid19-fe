@@ -180,25 +180,25 @@ export class AddCasesComponent implements OnInit {
     return this.countries.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  private _searchRegion(value: string) {
+  _searchRegion(value: string) {
     this.regionsFilteredOptions = this.myControl.valueChanges.pipe(
       startWith(value),
       map(value => this._filterRegions(value))
     );
   }
-  private _searchOccupation(value: string) {
+  _searchOccupation(value: string) {
     this.occupationsFilteredOptions = this.myControl.valueChanges.pipe(
       startWith(value),
       map(value => this._filterOccupations(value))
     );
   }
-  private _searchNationality(value: string) {
+  _searchNationality(value: string) {
     this.nationalityFilteredOptions = this.myControl.valueChanges.pipe(
       startWith(value),
       map(value => this._filterNationalities(value))
     );
   }
-  private _searchCountry(value: string) {
+  _searchCountry(value: string) {
     this.countriesFilteredOptions = this.myControl.valueChanges.pipe(
       startWith(value),
       map(value => this._filterCountries(value))
