@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HealthFacilitiesService} from "../../../services/health-facilities.service";
 import {HealthFacilities} from "../../../models/health-facilities";
+import {ModelHealthFacility} from "../../../models/modelHealthFacility";
 
 @Component({
   selector: 'app-health-facility-list',
@@ -8,12 +9,12 @@ import {HealthFacilities} from "../../../models/health-facilities";
   styleUrls: ['./health-facility-list.component.scss']
 })
 export class HealthFacilityListComponent implements OnInit {
-  facilities: HealthFacilities[];
+  facilities: ModelHealthFacility[];
   constructor(private healthFacilitiesService: HealthFacilitiesService) { }
 
   ngOnInit() {
     this.healthFacilitiesService.getFacilities().subscribe(result=>{
-      this.facilities = result;
+      this.facilities = result.returnValue.facilities;
     })
 
   }
