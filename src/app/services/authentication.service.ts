@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
-import {BASE_URL} from '../helpers/constants'
-import { User } from '../models/user';
-import { JwtResponse } from 'app/generated';
+import {AuthenticateService, JwtRequest, JwtResponse} from 'app/generated';
+import {User} from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   user: User;
   jwtResponse: JwtResponse;
+  private jwtRequest: JwtRequest;
   private currentUserSubject: BehaviorSubject<string>;
   public currentUser: Observable<string>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private auth: AuthenticateService) {
     this.currentUserSubject = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
     this.user = new User();
@@ -29,23 +29,13 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Observable<JwtResponse> {
-    this.user.email = username;
-    this.user.password = password;
-    return this.http.post<JwtResponse>(BASE_URL+'/v1/authenticate', this.user )
-      .pipe(map(res => {
-        // login successful if there's a jwt token in the response
-        //   this.user.token = res;
-        alert("TOKEN: "+ res.jwtToken);
-          this.jwtResponse.jwtToken = res.jwtToken;
-
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify( this.jwtResponse.jwtToken));
-          this.currentUserSubject.next(this.jwtResponse.jwtToken);
-        return this.jwtResponse;
-      }));
+    this.jwtRequest.email = username;
+    this.jwtRequest.password = password;
+    return this.auth.authenticateUser(this.jwtRequest).pipe(map(response => response));
   }
+
   public get currentUserValue(): string {
-    //alert("token to request: "+this.user.token)
+    // alert("token to request: "+this.user.token)
     return this.currentUserSubject.value;
   }
   logout() {
@@ -55,13 +45,14 @@ export class AuthenticationService {
   }
 
   registerUser(firstName: string, lastName: string, email: any, password: any) {
-    this.user.firstName = firstName;
-    this.user.lastName = lastName;
-    this.user.email = email;
-    this.user.password = password;
-    return this.http.post<any>(BASE_URL+'/v1/register-user', this.user )
-      .pipe(map(res => {
-        return this.user;
-      }));
+    // this.user.firstName = firstName;
+    // this.user.lastName = lastName;
+    // this.user.email = email;
+    // this.user.password = password;
+    // return this.http.post<any>(BASE_URL+'/v1/register-user', this.user )
+    //   .pipe(map(res => {
+    //     return this.user;
+    //   }));
+      return this.user;
   }
 }

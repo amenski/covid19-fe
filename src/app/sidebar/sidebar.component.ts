@@ -1,33 +1,67 @@
 import { Component, OnInit } from '@angular/core';
 
-
-export interface RouteInfo {
+declare interface RouteInfo {
     path: string;
     title: string;
     icon: string;
     class: string;
 }
-
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard',     title: 'Dashboard',         icon:'nc-bank',       class: '' },
-    { path: '/icons',         title: 'Icons',             icon:'nc-diamond',    class: '' },
-    { path: '/maps',          title: 'Maps',              icon:'nc-pin-3',      class: '' },
-    { path: '/notifications', title: 'Notifications',     icon:'nc-bell-55',    class: '' },
-    { path: '/user',          title: 'User Profile',      icon:'nc-single-02',  class: '' },
-    { path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
-    { path: '/typography',    title: 'Typography',        icon:'nc-caps-small', class: '' },
-    { path: '/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
+    {
+        path: '/home',
+        title: 'Dashboard',
+        icon: 'icon-chart-pie-36',
+        class: ''
+    },
+    {
+        path: '/cases',
+        title: 'Covid-19 Cases',
+        icon: 'icon-atom',
+        class: ''
+    },
+    {
+        path: '/follow-up',
+        title: 'PUI Follow Up',
+        icon: 'icon-pin',
+        class: '' },
+    {
+        path: '/health-facilities',
+        title: 'Health Facilities',
+        icon: 'icon-bell-55',
+        class: ''
+    },
+    {
+        path: '/questionnaire',
+        title: 'Questionnaire',
+        icon: 'icon-puzzle-10',
+        class: ''
+    },
+
+    {
+        path: '/user',
+        title: 'User Profile',
+        icon: 'icon-single-02',
+        class: ''
+    }
 ];
 
 @Component({
-    moduleId: module.id,
-    selector: 'sidebar-cmp',
-    templateUrl: 'sidebar.component.html',
+    selector: 'app-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.css']
 })
-
 export class SidebarComponent implements OnInit {
-    public menuItems: any[];
+    menuItems: any[];
+
+    constructor() {}
+
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+    }
+    isMobileMenu() {
+        if (window.innerWidth > 991) {
+            return false;
+        }
+        return true;
     }
 }

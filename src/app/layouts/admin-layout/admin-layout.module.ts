@@ -15,6 +15,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HealthFacilityListComponent} from '../../pages/health-facilities/health-facility-list/health-facility-list.component';
 import {AddHealthFacilityComponent} from '../../pages/health-facilities/add-health-facility/add-health-facility.component';
 import {authInterceptorProviders} from '../../helpers/jwt.interceptor';
+import {AddCasesComponent} from '../../pages/cases/add-cases/add-cases.component';
+import {CasesComponent} from '../../pages/cases/cases.component';
+import {CaseListComponent} from '../../pages/cases/case-list/case-list.component';
 
 @NgModule({
   imports: [
@@ -28,6 +31,9 @@ import {authInterceptorProviders} from '../../helpers/jwt.interceptor';
     DashboardComponent,
     UserComponent,
     QuestionnaireComponent,
+    CasesComponent,
+    CaseListComponent,
+    AddCasesComponent,
     FollowUpComponent,
     HealthFacilitiesComponent,
     HealthFacilityListComponent,

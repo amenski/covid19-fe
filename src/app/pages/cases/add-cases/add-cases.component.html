@@ -1,0 +1,226 @@
+<form ngNativeValidate [formGroup]="form" (ngSubmit) = addCase()>
+<div class=" row">
+  <div class=" col-6">
+
+    <div class=" card">
+      <div class=" card-header">
+        <h4 class=" card-title">BASIC INFO / መሰረታዊ መረጃ</h4>
+      </div>
+      <div class=" card-body">
+
+          <!--FIRST AND LAST NAME-->
+          <div class=" row">
+
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label> First name *</label>
+                <input formControlName="firstName" class=" form-control" placeholder="ስም" type="text" />
+              </div>
+            </div>
+
+            <div class=" col-md-6 px-md-1">
+              <div class=" form-group">
+                <label> Last name *</label>
+                <input formControlName="lastName" class=" form-control" placeholder="የአባት ስም" type="text" />
+              </div>
+            </div>
+          </div>
+
+          <!--GENDER AND DATE OF BIRTH-->
+          <div class=" row">
+
+            <div class=" col-md-7 pr-md-1">
+              <div class=" form-group">
+                <label> Birth date *</label>
+                <div class="input-group">
+                  <input class="form-control" formControlName="dob" placeholder="የትውልድ ቀን" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class=" col-md-3 px-md-1">
+              <div class=" form-group">
+                <label> Gender *</label>
+                <ng-select [items]="gender" formControlName="gender" class=" form-control" formControlName="gender" >
+                </ng-select>
+              </div>
+            </div>
+          </div>
+
+          <!--PHONE AND PASSPORT NUMBER-->
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label>Phone *</label>
+                <input type="text" formControlName="phone" class=" form-control" placeholder="ስልክ ቁጥር"/>
+              </div>
+            </div>
+            <div class=" col-md-4 px-md-1">
+              <div class=" form-group">
+                <label> Passport/ID Number *</label>
+                <input type="text" formControlName="lastName" class=" form-control" placeholder="የመታወቂያ/ፓስፖርት ቁጥር"/>
+              </div>
+            </div>
+          </div>
+
+          <!--NATIONALITY AND OCCUPATION-->
+          <div class=" row">
+
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label>Nationality *</label>
+                <input type="text" formControlName="nationality" class=" form-control" placeholder="ዜግነት"/>
+              </div>
+            </div>
+
+            <div class=" col-md-4 px-md-1">
+              <div class=" form-group">
+                <label> Occupation </label>
+                <input type="text" formControlName="lastName" class=" form-control" placeholder="ስራ"/>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class=" col-md-6">
+    <div class=" card">
+      <div class=" card-header">
+        <h4 class=" card-title">RESIDENTIAL INFO / አድራሻ</h4>
+      </div>
+      <div class=" card-body">
+        <!--REGION AND SUB CITY-->
+        <div class=" row">
+
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>Region *</label>
+<!--              <input type="text" class=" form-control" placeholder="ክልል"/>-->
+              <input type="text" formControlName="region" placeholder="Pick one"
+                     [matAutocomplete]="auto" class=" form-control">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+
+            </div>
+          </div>
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>Sub city *</label>
+              <input type="text" formControlName="subCity" class=" form-control" placeholder="ክፍለ ከተማ"/>
+            </div>
+          </div>
+        </div>
+
+        <!--WOREDA AND KEBELLE-->
+        <div class=" row">
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>Woreda *</label>
+              <input type="text" formControlName="woreda" class=" form-control" placeholder="ወረዳ"/>
+            </div>
+          </div>
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>Kebele *</label>
+              <input type="text" formControlName="kebele" class=" form-control" placeholder="ቀበሌ"/>
+            </div>
+          </div>
+        </div>
+
+        <!--HOUSE NUMBER -->
+        <div class=" row">
+          <div class=" col-md-8 pr-md-1">
+            <div class=" form-group">
+              <label>Street name. </label>
+              <input type="text" formControlName="streetName" class=" form-control" placeholder="የመንገድ ስም"/>
+            </div>
+          </div>
+          <div class=" col-md-3 pr-md-1">
+            <div class=" form-group">
+              <label>House No. *</label>
+              <input type="text" formControlName="houseNo" class=" form-control" placeholder="የቤት ቁጥር"/>
+            </div>
+          </div>
+        </div>
+
+        <!--LATITUDE AND LONGITUDE -->
+        <div class=" row">
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>Latitude </label>
+              <input type="text" formControlName="latitude" class=" form-control" placeholder="ኬክሮስ"/>
+            </div>
+          </div>
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>Longitude </label>
+              <input type="text" formControlName="longitude" class=" form-control" placeholder="ኬንትሮስ"/>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class=" row">
+
+  <div class=" col-6">
+
+    <div class=" card">
+      <div class=" card-header">
+        <h4 class=" card-title">TRAVEL HISTORY/ የቅርብ ጊዜ ጉዞዎች</h4>
+      </div>
+      <div class=" card-body">
+        <div class=" row">
+          <div class=" col-md-8 pr-md-1">
+            <div class=" form-group">
+              <label>Search and Select all countries visited recently. </label>
+<!--              <input type="text" class=" form-control" placeholder="የቅርብ ጊዜ ጉዞዎች"/>-->
+              <textarea formControlName="travelHistory" class=" form-control" placeholder="የቅርብ ጊዜ ጉዞዎች"></textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class=" col-6">
+    <div class=" card">
+      <div class=" card-header">
+        <h4 class=" card-title">RESULT/ የምርመራ ውጤት</h4>
+      </div>
+      <div class=" card-body">
+        <div class=" row">
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>Presumptive Result </label>
+              <textarea formControlName="presumptiveResult" class=" form-control" placeholder="የመጀመሪያ ውጤት"></textarea>
+            </div>
+          </div>
+
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>Confirmed Result </label>
+              <textarea formControlName="confirmedResult" class=" form-control" placeholder="የተረጋገጠ ውጤት" disabled="disabled"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <button class=" btn btn-fill btn-danger" type="submit">Register Case</button>
+</form>
