@@ -1,0 +1,33 @@
+<div class=" card-body">
+  HEALTH FACILITIES TO BE DEDICATED TO FIGHT COVID-19
+  <div class=" card-body">
+    <div class=" table-responsive">
+      <table class=" table tablesorter" id="">
+        <thead class=" text-primary">
+        <tr>
+          <th>ID</th>
+          <th>Osm id</th>
+          <th>name</th>
+          <th>Amenity</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let facility of facilities">
+          <td>{{facility.id}}</td>
+          <td>{{facility.osmId}}</td>
+          <td>{{facility.name}}</td>
+          <td>{{facility.amenity}}</td>
+          <td>{{facility.xCord}}</td>
+          <td>{{facility.yCord}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
