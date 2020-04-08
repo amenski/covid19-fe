@@ -16,7 +16,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'home', component: DashboardComponent},
   { path: 'cases', component: CasesComponent},
   { path: 'health-facilities', component: HealthFacilitiesComponent},
-  { path: 'follow-up', component: FollowUpComponent, canActivate: [AuthGuard] },
-  { path: 'questionnaire', component: QuestionnaireComponent, canActivate: [AuthGuard] },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'follow-up', component: FollowUpComponent},
+  { path: 'questionnaire', component: QuestionnaireComponent},
+  { path: 'user', component: UserComponent},
 ];

@@ -12,12 +12,14 @@ import {map, startWith} from "rxjs/operators";
   styleUrls: ['./add-cases.component.scss']
 })
 export class AddCasesComponent implements OnInit {
-  form: FormGroup;
+  caseForm: FormGroup;
   cityName: string;
   country: string;
-  model: NgbDateStruct;
-  date: { year: number; month: number };
-  gender = ['Male', 'Female'];
+  dateOfBirth: NgbDateStruct;
+  reportDate: NgbDateStruct;
+  modifiedDate: NgbDateStruct;
+
+  genders: string[] = ['Male', 'Female'];
 
   myControl = new FormControl();
   regions: string[] =
@@ -33,6 +35,39 @@ export class AddCasesComponent implements OnInit {
       'Physician', 'Politics', 'Producer', 'Religious leader', 'Religious worker', 'Scholar',
       'Scientist', 'Sports', 'Theater', 'Writer'
     ];
+  countries = ["Afghanistan", "Åland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla",
+    "Antarctica", "Antigua And Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas",
+    "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia, " +
+    "Plurinational State Of", "Bonaire, Sint Eustatius And Saba", "Bosnia And Herzegovina", "Botswana", "Bouvet Island",
+    "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia",
+    "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China",
+    "Christmas Island", "Cocos (keeling) Islands", "Colombia", "Comoros", "Congo",
+    "Congo, The Democratic Republic Of The", "Cook Islands", "Costa Rica", "Côte D'ivoire", "Croatia", "Cuba", "Curaçao",
+    "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
+    "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (malvinas)", "Faroe Islands", "Fiji", "Finland",
+    "France", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany",
+    "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea",
+    "Guinea-bissau", "Guyana", "Haiti", "Heard Island And Mcdonald Islands", "Holy See (vatican City State)", "Honduras",
+    "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran, Islamic Republic Of", "Iraq", "Ireland", "Isle Of Man",
+    "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
+    "Korea, Democratic People's Republic Of", "Korea, Republic Of", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic",
+    "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao",
+    "Macedonia, The Former Yugoslav Republic Of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta",
+    "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States Of",
+    "Moldova, Republic Of", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia",
+    "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island",
+    "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Palestine, State Of", "Panama", "Papua New Guinea",
+    "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Réunion", "Romania",
+    "Russian Federation", "Rwanda", "Saint Barthélemy", "Saint Helena, Ascension And Tristan Da Cunha",
+    "Saint Kitts And Nevis", "Saint Lucia", "Saint Martin (french Part)", "Saint Pierre And Miquelon", "Saint Vincent And The Grenadines",
+    "Samoa", "San Marino", "Sao Tome And Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
+    "Sint Maarten (dutch Part)", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia And The South Sandwich Islands",
+    "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard And Jan Mayen", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic",
+    "Taiwan, Province Of China", "Tajikistan", "Tanzania, United Republic Of", "Thailand", "Timor-leste", "Togo", "Tokelau",
+    "Tonga", "Trinidad And Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks And Caicos Islands", "Tuvalu", "Uganda", "Ukraine",
+    "United Arab Emirates", "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan",
+    "Vanuatu", "Venezuela, Bolivarian Republic Of", "Viet Nam", "Virgin Islands, British", "Virgin Islands, U.s.", "Wallis And Futuna",
+    "Western Sahara", "Yemen", "Zambia", "Zimbabwe"];
 
   nationality: string[] =
     [ 'Afghan', 'Albanian', 'Algerian', 'American', 'Andorran', 'Angolan', 'Antiguans', 'Argentinean',
@@ -68,25 +103,39 @@ export class AddCasesComponent implements OnInit {
   regionsFilteredOptions: Observable<string[]>;
   occupationsFilteredOptions: Observable<string[]>;
   nationalityFilteredOptions: Observable<string[]>;
-
+  countriesFilteredOptions: Observable<string[]>;
+  genderOptions: Observable<string[]>;
+  date = new FormControl(new Date());
 
   constructor(public fb: FormBuilder, private casesService: CasesService, private calendar: NgbCalendar) {
-    this.form = this.fb.group({
+    this.caseForm = this.fb.group({
       firstName: '', lastName: '',
       gender: '', dob: '',
-      phone: '', passportNo: '',
+      phoneNo: '', passportNumber: '',
       nationality: '', occupation: '',
-      region: '', subCity: '',
+      incidentPhone1: '', incidentPhone2: '',
+      countryOfResidence: '', countryOfOrigin: '',
+      region: '', subcityOrZone: '',
       woreda: '', kebele: '',
       streetName: '', houseNo: '',
       latitude: '', longitude: '',
-      travelHistory: '',
+      recentTravelTo: '',
       presumptiveResult: '', confirmedResult: '',
+      identifiedBy: '', modifiedBy: '',
+      reportDate: '', modifiedDate: '',
+      parentCaseCode: '',
+      admittedToFacility: '',
+      status: ''
 
     })
   }
 
   ngOnInit() {
+
+    this.genderOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterGender(value))
+    );
     this.regionsFilteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filterRegions(value)),
@@ -101,8 +150,16 @@ export class AddCasesComponent implements OnInit {
       startWith(''),
       map(value => this._filterNationalities(value))
     );
+    this.countriesFilteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterCountries(value))
+    );
   }
 
+  private _filterGender(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.genders.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
   private _filterRegions(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.regions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
@@ -118,14 +175,74 @@ export class AddCasesComponent implements OnInit {
     return this.nationality.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  private _filterCountries(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.countries.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  private _searchRegion(value: string) {
+    this.regionsFilteredOptions = this.myControl.valueChanges.pipe(
+      startWith(value),
+      map(value => this._filterRegions(value))
+    );
+  }
+  private _searchOccupation(value: string) {
+    this.occupationsFilteredOptions = this.myControl.valueChanges.pipe(
+      startWith(value),
+      map(value => this._filterOccupations(value))
+    );
+  }
+  private _searchNationality(value: string) {
+    this.nationalityFilteredOptions = this.myControl.valueChanges.pipe(
+      startWith(value),
+      map(value => this._filterNationalities(value))
+    );
+  }
+  private _searchCountry(value: string) {
+    this.countriesFilteredOptions = this.myControl.valueChanges.pipe(
+      startWith(value),
+      map(value => this._filterCountries(value))
+    );
+  }
+
   addCase() {
-    console.log("Adding a new Case "+ this.form.get('caseCode').value);
+  //  console.log("Adding a new Case "+ this.caseForm.get('caseCode').value);
     let formData: any = new FormData();
-    formData.append("firstName", this.form.get('firstName').value);
-    formData.append("lastName", this.form.get('lastName').value);
+    formData.append("firstName", this.caseForm.get('firstName').value);
+    formData.append("lastName", this.caseForm.get('lastName').value);
+    formData.append("dob", this.caseForm.get('dob').value);
+    formData.append("gender", this.caseForm.get('gender').value);
+    formData.append("phoneNo", this.caseForm.get('phoneNo').value);
+    formData.append("passportNumber", this.caseForm.get('passportNumber').value);
+    formData.append("nationality", this.caseForm.get('nationality').value);
+    formData.append("occupation", this.caseForm.get('occupation').value);
+
+    formData.append("region", this.caseForm.get('region').value);
+    formData.append("subcityOrZone", this.caseForm.get('subcityOrZone').value);
+    formData.append("woreda", this.caseForm.get('woreda').value);
+    formData.append("kebele", this.caseForm.get('kebele').value);
+    formData.append("streetName", this.caseForm.get('streetName').value);
+    formData.append("houseNo", this.caseForm.get('houseNo').value);
+    formData.append("latitude", this.caseForm.get('latitude').value);
+    formData.append("longitude", this.caseForm.get('longitude').value);
+
+    formData.append("recentTravelTo", this.caseForm.get('recentTravelTo').value);
+    formData.append("admittedToFacility", this.caseForm.get('admittedToFacility').value);
+
+    formData.append("identifiedBy", this.caseForm.get('identifiedBy').value);
+    formData.append("modifiedBy", this.caseForm.get('modifiedBy').value);
+    formData.append("reportDate", this.caseForm.get('reportDate').value);
+    formData.append("modifiedDate", this.caseForm.get('modifiedDate').value);
+
+    formData.append("status", this.caseForm.get('status').value);
+    formData.append("parentCaseCode", this.caseForm.get('parentCaseCode').value);
+
+
+
     this.casesService.createNewCase(formData).subscribe(result=>{
-      alert(result);
+      alert("Case Registered" +result);
     })
 
   }
+
 }

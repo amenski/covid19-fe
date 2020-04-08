@@ -21,12 +21,12 @@ export class CasesService {
   }
 
   createNewCase(formData: FormData): Observable<any>{
-      const url = BASE_URL+'/v1/cases';
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-        })
-      };
+      const url = BASE_URL+'/v1/case';
+      // const httpOptions = {
+      //   headers: new HttpHeaders({
+      //     'Content-Type':  'application/json',
+      //   })
+      // };
       let puiCase = {};
       formData.forEach((value, key) => {
         puiCase[key] = value;
@@ -34,7 +34,7 @@ export class CasesService {
         console.log(key+" : "+value);
       });
       let json = JSON.stringify(puiCase);
-      return this.http.post(url, puiCase, httpOptions);
+      return this.http.put(url, puiCase);
   }
 
 }

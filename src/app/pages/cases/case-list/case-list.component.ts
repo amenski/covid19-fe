@@ -12,9 +12,9 @@ export class CaseListComponent implements OnInit {
   constructor(private casesService: CasesService) {}
 
   ngOnInit() {
-    this.casesService.getAllCases().subscribe(result=>{
-      this.cases = result;
-    })
+    // this.casesService.getAllCases().subscribe(result=>{
+    //   this.cases = result;
+    // })
   }
 
 }

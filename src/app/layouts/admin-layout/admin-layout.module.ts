@@ -21,6 +21,10 @@ import {NgSelectModule} from "@ng-select/ng-select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {authInterceptorProviders} from "../../helpers/jwt.interceptor";
 import {ScrollingModule} from "@angular/cdk/scrolling";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import {NativeDateAdapter} from "@angular/material/core";
+
 
 @NgModule({
     imports: [
@@ -32,6 +36,8 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
         NgSelectModule,
         MatAutocompleteModule,
         ScrollingModule,
+        MatDatepickerModule,
+
     ],
   declarations: [
     DashboardComponent,
@@ -45,6 +51,6 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
     HealthFacilityListComponent,
     AddHealthFacilityComponent
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, NativeDateAdapter],
 })
 export class AdminLayoutModule {}

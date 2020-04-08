@@ -14,6 +14,10 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 import {authInterceptorProviders} from "./helpers/jwt.interceptor";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {DateAdapter, MatNativeDateModule, NativeDateAdapter} from "@angular/material/core";
+
+
 
 @NgModule({
   imports: [
@@ -24,10 +28,11 @@ import {authInterceptorProviders} from "./helpers/jwt.interceptor";
     NgbModule,
     RouterModule,
     AppRoutingModule,
+    MatNativeDateModule,
     ToastrModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [],
+  providers: [NativeDateAdapter],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
