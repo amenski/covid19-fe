@@ -8,6 +8,7 @@ import { DashboardComponent }       from '../../pages/dashboard/dashboard.compon
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LandingLayoutRoutes } from './landing-layout.routing';
 import { LandingLayoutComponent } from './landing-layout.component';
+import {HealthFacilitiesComponent} from '../../pages/health-facilities/health-facilities.component';
 
 @NgModule({
   imports: [
@@ -17,8 +18,8 @@ import { LandingLayoutComponent } from './landing-layout.component';
     NgbModule
   ],
   declarations: [
-    DashboardComponent
-  ], 
+    DashboardComponent,
+  ],
   exports: [ RouterModule ]
 })
 

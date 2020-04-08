@@ -35,7 +35,6 @@ import {CaseListComponent} from '../../pages/cases/case-list/case-list.component
     CaseListComponent,
     AddCasesComponent,
     FollowUpComponent,
-    HealthFacilitiesComponent,
     HealthFacilityListComponent,
     AddHealthFacilityComponent
   ],

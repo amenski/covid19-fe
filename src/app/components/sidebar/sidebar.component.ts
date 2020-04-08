@@ -39,7 +39,7 @@ export const ROUTES: RouteInfo[] = [
 
     {
         path: '/user',
-        title: 'User Profile',
+        title: 'Login',
         icon: 'icon-single-02',
         class: ''
     }

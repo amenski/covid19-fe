@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {CasesService} from "../../../services/cases.service";
-import {NgbCalendar, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
-import {Observable} from "rxjs";
-import {map, startWith} from "rxjs/operators";
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {CasesService} from '../../../services/cases.service';
+import {NgbCalendar, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 import {ModelCase} from '../../../generated';
 
 
@@ -69,14 +69,14 @@ export class AddCasesComponent implements OnInit {
   }
 
   addCase() {
-    console.log("Adding a new Case "+ this.form.get('caseCode').value);
-    let formData: any = new FormData();
-    formData.append("firstName", this.form.get('firstName').value);
-    formData.append("lastName", this.form.get('lastName').value);
+    console.log('Adding a new Case ' + this.form.get('caseCode').value);
+    const formData: any = new FormData();
+    formData.append('firstName', this.form.get('firstName').value);
+    formData.append('lastName', this.form.get('lastName').value);
 
     Object.assign(this.modelCase, this.form.value)
 
-    this.casesService.createNewCase(formData).subscribe(result=> {
+    this.casesService.createNewCase(formData).subscribe(result => {
       alert(result);
     })
   }
