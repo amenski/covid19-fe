@@ -4,6 +4,7 @@ import {CasesService} from "../../../services/cases.service";
 import {NgbCalendar, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
+import { RequestSaveCase } from '../../../generated';
 
 
 @Component({
@@ -107,6 +108,8 @@ export class AddCasesComponent implements OnInit {
   genderOptions: Observable<string[]>;
   date = new FormControl(new Date());
 
+  requestSave: RequestSaveCase;
+
   constructor(public fb: FormBuilder, private casesService: CasesService, private calendar: NgbCalendar) {
     this.caseForm = this.fb.group({
       firstName: '', lastName: '',
@@ -207,40 +210,48 @@ export class AddCasesComponent implements OnInit {
 
   addCase() {
   //  console.log("Adding a new Case "+ this.caseForm.get('caseCode').value);
-    let formData: any = new FormData();
-    formData.append("firstName", this.caseForm.get('firstName').value);
-    formData.append("lastName", this.caseForm.get('lastName').value);
-    formData.append("dob", this.caseForm.get('dob').value);
-    formData.append("gender", this.caseForm.get('gender').value);
-    formData.append("phoneNo", this.caseForm.get('phoneNo').value);
-    formData.append("passportNumber", this.caseForm.get('passportNumber').value);
-    formData.append("nationality", this.caseForm.get('nationality').value);
-    formData.append("occupation", this.caseForm.get('occupation').value);
+  //   let formData: any = new FormData();
+    // formData.append("firstName", this.caseForm.get('firstName').value);
+    // formData.append("lastName", this.caseForm.get('lastName').value);
+    // formData.append("dob", this.caseForm.get('dob').value);
+    // formData.append("gender", this.caseForm.get('gender').value);
+    // formData.append("phoneNo", this.caseForm.get('phoneNo').value);
+    // formData.append("passportNumber", this.caseForm.get('passportNumber').value);
+    // formData.append("nationality", this.caseForm.get('nationality').value);
+    // formData.append("occupation", this.caseForm.get('occupation').value);
 
-    formData.append("region", this.caseForm.get('region').value);
-    formData.append("subcityOrZone", this.caseForm.get('subcityOrZone').value);
-    formData.append("woreda", this.caseForm.get('woreda').value);
-    formData.append("kebele", this.caseForm.get('kebele').value);
-    formData.append("streetName", this.caseForm.get('streetName').value);
-    formData.append("houseNo", this.caseForm.get('houseNo').value);
-    formData.append("latitude", this.caseForm.get('latitude').value);
-    formData.append("longitude", this.caseForm.get('longitude').value);
+    // formData.append("region", this.caseForm.get('region').value);
+    // formData.append("subcityOrZone", this.caseForm.get('subcityOrZone').value);
+    // formData.append("woreda", this.caseForm.get('woreda').value);
+    // formData.append("kebele", this.caseForm.get('kebele').value);
+    // //formData.append("streetName", this.caseForm.get('streetName').value);
+    // formData.append("houseNo", this.caseForm.get('houseNo').value);
+    // formData.append("latitude", this.caseForm.get('latitude').value);
+    // formData.append("longitude", this.caseForm.get('longitude').value);
+    //
+    // formData.append("recentTravelTo", this.caseForm.get('recentTravelTo').value);
+    // formData.append("admittedToFacility", this.caseForm.get('admittedToFacility').value);
+    //
+    // formData.append("identifiedBy", this.caseForm.get('identifiedBy').value);
+    // formData.append("modifiedBy", this.caseForm.get('modifiedBy').value);
+    // formData.append("reportDate", this.caseForm.get('reportDate').value);
+    // formData.append("modifiedDate", this.caseForm.get('modifiedDate').value);
+    //
+    // formData.append("status", this.caseForm.get('status').value);
+    // formData.append("parentCaseCode", this.caseForm.get('parentCaseCode').value);
 
-    formData.append("recentTravelTo", this.caseForm.get('recentTravelTo').value);
-    formData.append("admittedToFacility", this.caseForm.get('admittedToFacility').value);
+    this.requestSave = {
+      firstName :  this.caseForm.get('firstName').value,
+      lastName : this.caseForm.get('lastName').value,
+      passportNumber : this.caseForm.get('passportNumber').value,
+      incidentContactPhone1 : 'wwww',
+      countryOfResidence : this.caseForm.get('countryOfResidence').value,
+      identifiedBy : {id: 1020, value: this.caseForm.get('identifiedBy').value},
+      modifiedBy : this.caseForm.get('modifiedBy').value
+    }
 
-    formData.append("identifiedBy", this.caseForm.get('identifiedBy').value);
-    formData.append("modifiedBy", this.caseForm.get('modifiedBy').value);
-    formData.append("reportDate", this.caseForm.get('reportDate').value);
-    formData.append("modifiedDate", this.caseForm.get('modifiedDate').value);
-
-    formData.append("status", this.caseForm.get('status').value);
-    formData.append("parentCaseCode", this.caseForm.get('parentCaseCode').value);
-
-
-
-    this.casesService.createNewCase(formData).subscribe(result=>{
-      alert("Case Registered" +result);
+    this.casesService.createNewCase(this.requestSave).subscribe(result=>{
+      alert("Case Registered with code: " + result);
     })
 
   }
