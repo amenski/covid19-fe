@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { ToastrModule } from 'ngx-toastr';
@@ -16,6 +16,9 @@ import { ComponentsModule } from "./components/components.module";
 import {authInterceptorProviders} from "./helpers/jwt.interceptor";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MatNativeDateModule, NativeDateAdapter} from "@angular/material/core";
+import { AddQuestionsComponent } from './pages/questionnaire/add-questions/add-questions.component';
+import { QuestionListComponent } from './pages/questionnaire/question-list/question-list.component';
+import {AccordionModule} from "ngx-bootstrap/accordion";
 
 
 
@@ -29,10 +32,16 @@ import {DateAdapter, MatNativeDateModule, NativeDateAdapter} from "@angular/mate
     RouterModule,
     AppRoutingModule,
     MatNativeDateModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    AccordionModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [NativeDateAdapter],
+  providers: [ NativeDateAdapter],
+  exports: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

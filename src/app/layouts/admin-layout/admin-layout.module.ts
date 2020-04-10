@@ -24,6 +24,8 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import {NativeDateAdapter} from "@angular/material/core";
+import {AddQuestionsComponent} from "../../pages/questionnaire/add-questions/add-questions.component";
+import {QuestionListComponent} from "../../pages/questionnaire/question-list/question-list.component";
 
 
 @NgModule({
@@ -37,7 +39,6 @@ import {NativeDateAdapter} from "@angular/material/core";
         MatAutocompleteModule,
         ScrollingModule,
         MatDatepickerModule,
-
     ],
   declarations: [
     DashboardComponent,
@@ -49,8 +50,10 @@ import {NativeDateAdapter} from "@angular/material/core";
     FollowUpComponent,
     HealthFacilitiesComponent,
     HealthFacilityListComponent,
-    AddHealthFacilityComponent
+    AddHealthFacilityComponent,
+    AddQuestionsComponent,
+    QuestionListComponent
   ],
-  providers: [authInterceptorProviders, NativeDateAdapter],
+  providers: [ NativeDateAdapter],
 })
 export class AdminLayoutModule {}
