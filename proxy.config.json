@@ -1,0 +1,11 @@
+{
+    "/v1": {
+      "target": "http://https://covid19-eth.herokuapp.com",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite" :{
+        "^/v1" : ""
+      },
+      "logLevel": "debug"
+    }
+  }
