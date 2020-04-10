@@ -19,7 +19,7 @@ import {HealthFacilityListComponent} from "../../pages/health-facilities/health-
 import {AddHealthFacilityComponent} from "../../pages/health-facilities/add-health-facility/add-health-facility.component";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {authInterceptorProviders} from "../../helpers/jwt.interceptor";
+//import {authInterceptorProviders} from "../../helpers/jwt.interceptor";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
@@ -51,6 +51,6 @@ import {NativeDateAdapter} from "@angular/material/core";
     HealthFacilityListComponent,
     AddHealthFacilityComponent
   ],
-  providers: [authInterceptorProviders, NativeDateAdapter],
+  providers: [NativeDateAdapter],
 })
 export class AdminLayoutModule {}

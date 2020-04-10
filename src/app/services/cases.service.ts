@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Case} from '../models/case';
 import {BASE_URL} from "../helpers/constants";
+import {RequestSaveCase} from '../generated';
 
 @Injectable({
   providedIn: 'root'
@@ -20,21 +21,25 @@ export class CasesService {
     return this.http.get<Case[]>(casesUrl, headers);
   }
 
-  createNewCase(formData: FormData): Observable<any>{
-      const url = BASE_URL+'/v1/case';
-      // const httpOptions = {
-      //   headers: new HttpHeaders({
-      //     'Content-Type':  'application/json',
-      //   })
-      // };
-      let puiCase = {};
-      formData.forEach((value, key) => {
-        puiCase[key] = value;
+  // createNewCase(formData: FormData): Observable<any>{
+  //     const url = BASE_URL+'/v1/api/case';
+  //     // const httpOptions = {
+  //     //   headers: new HttpHeaders({
+  //     //     'Content-Type':  'application/json',
+  //     //   })
+  //     // };
+  //     let puiCase = {};
+  //     formData.forEach((value, key) => {
+  //       puiCase[key] = value;
+  //
+  //       console.log(key+" : "+value);
+  //     });
+  //     let json = JSON.stringify(puiCase);
+  //     return this.http.put(url, puiCase);
+  // }
 
-        console.log(key+" : "+value);
-      });
-      let json = JSON.stringify(puiCase);
-      return this.http.put(url, puiCase);
+  createNewCase(requestData: RequestSaveCase): Observable<any>{
+    const url = BASE_URL+'/v1/api/case';
+    return this.http.put(url, requestData);
   }
-
 }

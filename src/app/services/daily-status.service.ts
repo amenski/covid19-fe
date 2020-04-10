@@ -15,9 +15,9 @@ export class DailyStatusService {
   getAllCaseStats(): Observable<ResponseDailyCaseStatusList>{
     let dailyStatUrl = BASE_URL+"/v1/daily-status/all";
     // let he = new HttpHeaders()
-    // const headers = {
-    //   'Access-Control-Allow-Origin': true
-    // };
+    // let headers = new HttpHeaders({
+    //   'Access-Control-Allow-Origin': '*'
+    // });
     // const httpOptions = {
     //   headers: new HttpHeaders({
     //     'Content-Type':  'application/json',

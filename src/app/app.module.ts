@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 import { ToastrModule } from 'ngx-toastr';
 
@@ -13,9 +13,10 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
-import {authInterceptorProviders} from "./helpers/jwt.interceptor";
+//import {authInterceptorProviders, JwtInterceptor} from './helpers/jwt.interceptor';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MatNativeDateModule, NativeDateAdapter} from "@angular/material/core";
+import {JwtInterceptor} from './helpers/jwt.interceptor';
 
 
 
@@ -32,7 +33,10 @@ import {DateAdapter, MatNativeDateModule, NativeDateAdapter} from "@angular/mate
     ToastrModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [NativeDateAdapter],
+  providers: [
+    NativeDateAdapter,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
