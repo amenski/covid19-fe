@@ -7,9 +7,11 @@ import { FooterComponent } from "./footer/footer.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { AlertComponent } from './alert/alert.component';
+import {AccordionModule} from "ngx-bootstrap/accordion";
+
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgbModule],
+    imports: [CommonModule, RouterModule, NgbModule, AccordionModule],
   declarations: [FooterComponent, NavbarComponent, SidebarComponent, AlertComponent],
   exports: [FooterComponent, NavbarComponent, SidebarComponent, AlertComponent]
 })
