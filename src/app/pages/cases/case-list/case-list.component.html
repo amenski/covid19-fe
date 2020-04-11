@@ -1,4 +1,35 @@
-<div class="row">
+<div class=" card-body">
+ COVID-19 CASE REPORT
+  <div class=" card-body">
+    <div class=" table-responsive">
+      <table class=" table tablesorter" id="">
+        <thead class=" text-primary">
+        <tr>
+          <th>ID</th>
+          <th>CASE CODE</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Presumptive Result</th>
+          <th>Confirmed Result</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let case of cases">
+          <td>{{case.id}}</td>
+          <td>{{case.caseCode}}</td>
+          <td>{{case.firstName}}</td>
+          <td>{{case.lastName}}</td>
+          <td>{{case.presumptiveResult}}</td>
+          <td>{{case.confirmedResult}}</td>
+          <td>{{case.status}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </div>
 

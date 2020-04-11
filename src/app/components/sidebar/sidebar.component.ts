@@ -23,17 +23,18 @@ export const ROUTES: RouteInfo[] = [
     path: "/admin/follow-up",
     title: "PUI Follow Up",
     icon: "icon-pin",
-    class: "" },
-  {
-    path: "/admin/health-facilities",
-    title: "Health Facilities",
-    icon: "icon-bell-55",
     class: ""
   },
   {
     path: "/admin/questionnaire",
     title: "Questionnaire",
     icon: "icon-puzzle-10",
+    class: ""
+  },
+  {
+    path: "/admin/health-facilities",
+    title: "Health Facilities",
+    icon: "icon-bell-55",
     class: ""
   },
 

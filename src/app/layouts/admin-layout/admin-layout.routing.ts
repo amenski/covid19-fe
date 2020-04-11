@@ -8,15 +8,16 @@ import { UserComponent } from "../../pages/user/user.component";
 import { QuestionnaireComponent } from "../../pages/questionnaire/questionnaire.component";
 import {AuthGuard} from "../../helpers/auth.guard";
 import {LoginComponent} from "../../pages/login/login.component";
+import {DynamicFormComponent} from "../../pages/dynamic-form/dynamic-form.component";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
    // { path: "", redirectTo:"home", pathMatch: "full"},
   { path: '', redirectTo: "home", pathMatch: "full" },
-  { path: 'home', component: DashboardComponent},
-  { path: 'cases', component: CasesComponent},
-  { path: 'health-facilities', component: HealthFacilitiesComponent},
-  { path: 'follow-up', component: FollowUpComponent},
-  { path: 'questionnaire', component: QuestionnaireComponent},
-  { path: 'user', component: UserComponent},
+  { path: 'home', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'cases', component: CasesComponent, canActivate: [AuthGuard]},
+  { path: 'health-facilities', component: HealthFacilitiesComponent, canActivate: [AuthGuard]},
+  { path: 'follow-up', component: FollowUpComponent, canActivate: [AuthGuard]},
+  { path: 'questionnaire', component: QuestionnaireComponent, canActivate: [AuthGuard]},
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
 ];

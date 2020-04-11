@@ -2,7 +2,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { ToastrModule } from 'ngx-toastr';
 
@@ -43,7 +42,7 @@ import {AccordionModule} from "ngx-bootstrap/accordion";
   providers: [
     NativeDateAdapter,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
-    ]
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

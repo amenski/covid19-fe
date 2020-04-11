@@ -271,9 +271,9 @@
         <div class=" row">
           <div class=" col-md-8 pr-md-1">
             <div class=" form-group">
-              <label>ADMITTED TO HEALTH FACILITY/የተቀበለው የጤና ተቋም</label>
+              <label>ADMITTED TO FACILITY/የመጀመሪያው ቀን ሁኔታ</label>
               <!--              <input type="text" class=" form-control" placeholder="የቅርብ ጊዜ ጉዞዎች"/>-->
-              <input formControlName="admittedToFacility" class=" form-control" placeholder="የተቀበለው የጤና ተቋም"/>
+              <input formControlName="admittedToFacility" class=" form-control" placeholder="የመጀመሪያው ቀን ሁኔታ"/>
             </div>
           </div>
 
@@ -293,7 +293,14 @@
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
               <label>PUI Current Status: </label>
-              <input formControlName="status" class=" form-control" placeholder="አሁን ያለበት ሁኔታ"/>
+<!--              <input formControlName="status" class=" form-control" placeholder="አሁን ያለበት ሁኔታ"/>-->
+              <input type="text" formControlName="status" placeholder="አሁን ያለበት ሁኔታ"
+                     [matAutocomplete]="sAuto" class = "form-control" ngModel>
+              <mat-autocomplete autoActiveFirstOption #sAuto="matAutocomplete">
+                <mat-option *ngFor="let status of statusOptions | async" [value]="status">
+                  {{status}}
+                </mat-option>
+              </mat-autocomplete>
             </div>
           </div>
 
@@ -308,7 +315,7 @@
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
               <label>Presumptive Result </label>
-              <textarea formControlName="presumptiveResult" class=" form-control" placeholder="የመጀመሪያ ውጤት"></textarea>
+              <textarea formControlName="presumptiveResult" class=" form-control" placeholder="የመጀመሪያ ውጤት" disabled></textarea>
             </div>
           </div>
 
@@ -340,7 +347,14 @@
             <div class=" col-md-8 pr-md-1">
               <div class=" form-group">
                 <label>Case Identified By * </label>
-                <input type="text" formControlName="identifiedBy" class=" form-control" placeholder="የለየው ሰው"/>
+<!--                <input type="text" formControlName="identifiedBy" class=" form-control" placeholder="የለየው ሰው"/>-->
+                <input type="text" formControlName="identifiedBy" placeholder="የተለየበት ሁኔታ"
+                       [matAutocomplete]="ibAuto" class = "form-control" >
+                <mat-autocomplete autoActiveFirstOption #ibAuto="matAutocomplete">
+                  <mat-option *ngFor="let ib of identifiedByOptions | async" [value]="ib">
+                    {{ib}}
+                  </mat-option>
+                </mat-autocomplete>
               </div>
             </div>
 

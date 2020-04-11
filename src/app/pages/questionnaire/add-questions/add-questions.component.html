@@ -8,6 +8,7 @@
           <h4 class=" card-title">ADD QUESTIONS/ አዲስ ጥያቄ ያስገቡ</h4>
         </div>
         <div class=" card-body">
+          <!--QUESTION AND IT'S OPTIONS-->
           <div class=" row">
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
@@ -15,25 +16,45 @@
                 <textarea type="text" formControlName="question" class=" form-control" placeholder="ጥያቄ"></textarea>
               </div>
             </div>
+
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label>Options * </label>
-                <input type="text" formControlName="options" class=" form-control" placeholder="አማራጮች"/>
+                <label>Description  </label>
+                <textarea type="text" formControlName="description" class=" form-control" placeholder="ማብራሪያ"></textarea>
               </div>
             </div>
+
           </div>
 
+          <!--CATEGORY AND PARENT QUESTION ID-->
           <div class=" row">
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
                 <label>Category * </label>
-                <input type="text" formControlName="category" class=" form-control" placeholder="ምድብ"/>
+<!--                <input type="text" formControlName="category" class=" form-control" placeholder="ምድብ"/>-->
+                <input type="text" formControlName="category" placeholder="ምድብ"
+                       [matAutocomplete]="nAuto" class = "form-control" >
+                <mat-autocomplete autoActiveFirstOption #nAuto="matAutocomplete">
+                  <mat-option *ngFor="let category of categoryOptions | async" [value]="category">
+                   {{category.id}} - {{category.value}}
+                  </mat-option>
+                </mat-autocomplete>
               </div>
             </div>
             <div class=" col-md-6 pr-md-1">
-              <div class=" form-group">
-                <label>Parent Question ID  </label>
-                <input type="text" formControlName="parentId" class=" form-control" placeholder="የጥያቄው የበላይ መለያ ቁጥር"/>
+              <label>Options * </label>
+              <div class="input-group-append">
+                <input type="text" formControlName="options" class=" form-control" placeholder="አማራጮች"/>
+                <button (click)="addOption({id: 0, title: 'Option', addDisabled: true, removeDisabled: true})"><i class="fas fa-plus" ></i></button>
+              </div>
+
+              <div  formArrayName="options" *ngFor="let arrayItem of arrayItems; let i=index">
+<!--                  <label [for]="arrayItem.id+1" class="array-item-title">{{arrayItem.title}} {{arrayItem.id+1}}</label>-->
+                  <div class="input-group-append">
+                    <input [id]="arrayItem.id+1" type="text" class= "form-control" [formControl]="options[i]">
+                    <button (click)="removeOption(arrayItem)" *ngIf="arrayItem.removeDisabled"><i class="fa fa-minus" ></i></button>
+                  </div>
+                  <mat-button  (click)="addOption(arrayItem)" *ngIf="arrayItem.addDisabled"><i class="fa fa-plus" ></i></mat-button>
               </div>
             </div>
           </div>
@@ -41,8 +62,8 @@
           <div class=" row">
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label>Description  </label>
-                <input type="text" formControlName="description" class=" form-control" placeholder="ማብራሪያ"/>
+                <label>Parent Question ID  </label>
+                <input type="text" formControlName="parentId" class=" form-control" placeholder="የጥያቄው የበላይ መለያ ቁጥር"/>
               </div>
             </div>
             <div class=" col-md-6 pr-md-1">

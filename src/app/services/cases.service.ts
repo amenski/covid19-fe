@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Case} from '../models/case';
 import {BASE_URL} from "../helpers/constants";
 import {RequestSaveCase} from '../generated';
+import {ResponseCaseList} from "../models/responseCaseList";
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,14 @@ export class CasesService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCases(): Observable<Case[]>{
-    let casesUrl = BASE_URL+"/v1/cases";
-    let headers = {
-        'Access-Control-Allow-Origin': true
-      };
+  getAllCases(): Observable<ResponseCaseList>{
+    let casesUrl = BASE_URL+"/v1/case/all";
+    // let headers = {
+    //     'Access-Control-Allow-Origin': true
+    //   };
     // @ts-ignore
-    return this.http.get<Case[]>(casesUrl, headers);
+    return this.http.get<ResponseCaseList>(casesUrl);
   }
-
   // createNewCase(formData: FormData): Observable<any>{
   //     const url = BASE_URL+'/v1/api/case';
   //     // const httpOptions = {

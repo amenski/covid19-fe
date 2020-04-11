@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   public totalDeath: number;
   public totalCase: any;
   public totalActiveCase: number;
-
+  public maxNewCase: number;
 
   caseStats: ModelDailyCaseStatus[];
   public dailyTotalDeaths: number[] = [];
@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
       this.dailyActiveCases = this.caseStats.map(res=>{
         return res.activeCases;
       })
-
+      this.maxNewCase = Math.max(...this.dailyNewCases);
 
 
       this.totalCase = Math.max(...this.dailyTotalCases)
@@ -445,9 +445,6 @@ export class DashboardComponent implements OnInit {
       //  this.data = this.datasets[0];
       this.data = this.dailyTotalCases;
 
-
-
-
       this.canvas = document.getElementById("chartBig1");
       this.ctx = this.canvas.getContext("2d");
 
@@ -460,6 +457,7 @@ export class DashboardComponent implements OnInit {
       let config = {
         type: 'line',
         data: {
+          type: 'category',
           labels: chart_labels,
           datasets: [{
             label: "Total Covid-19 Cases",
@@ -529,7 +527,7 @@ export class DashboardComponent implements OnInit {
 
   }
   public updateOptions() {
-    this.myChartData.data.datasets[0].data = this.data;
-    this.myChartData.update();
+    this.myChartData.data.datasets[0].data =  this.data;
+    //this.myChartData.update();
   }
 }

@@ -26,20 +26,23 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import {NativeDateAdapter} from "@angular/material/core";
 import {AddQuestionsComponent} from "../../pages/questionnaire/add-questions/add-questions.component";
 import {QuestionListComponent} from "../../pages/questionnaire/question-list/question-list.component";
+import {DynamicFormComponent} from "../../pages/dynamic-form/dynamic-form.component";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule.forChild(AdminLayoutRoutes),
-        FormsModule,
-        NgbModule,
-        ReactiveFormsModule,
-        NgSelectModule,
-        MatAutocompleteModule,
-        ScrollingModule,
-        MatDatepickerModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(AdminLayoutRoutes),
+    FormsModule,
+    NgbModule,
+    ReactiveFormsModule,
+    NgSelectModule,
+    MatAutocompleteModule,
+    ScrollingModule,
+    MatDatepickerModule,
+    MatIconModule,
+  ],
   declarations: [
     DashboardComponent,
     UserComponent,
@@ -52,7 +55,7 @@ import {QuestionListComponent} from "../../pages/questionnaire/question-list/que
     HealthFacilityListComponent,
     AddHealthFacilityComponent,
     AddQuestionsComponent,
-    QuestionListComponent
+    QuestionListComponent, DynamicFormComponent
   ],
   providers: [ NativeDateAdapter],
 })

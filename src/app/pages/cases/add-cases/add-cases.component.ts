@@ -20,6 +20,12 @@ export class AddCasesComponent implements OnInit {
   reportDate: NgbDateStruct;
   modifiedDate: NgbDateStruct;
 
+  /*ENUMS*/
+  identifiedBy: string[] = ['CLINICAL_EVALUATION', 'CONTACT_TRACING', 'COMMUNITY_SURVEILLANCE'];
+  status: string[] = ['STABLE', 'CRITICAL', 'DECEASED', 'RECOVERED', 'NA']
+  result: string[] = ['TEST_PENDING', 'TEST_NEGATIVE', 'TEST_POSITIVE'];
+
+
   genders: string[] = ['Male', 'Female'];
 
   myControl = new FormControl();
@@ -100,12 +106,15 @@ export class AddCasesComponent implements OnInit {
       'Venezuelan', 'Vietnamese', 'Welsh', 'Yemenite', 'Zambian', 'Zimbabwean'
     ];
 
-
   regionsFilteredOptions: Observable<string[]>;
   occupationsFilteredOptions: Observable<string[]>;
   nationalityFilteredOptions: Observable<string[]>;
   countriesFilteredOptions: Observable<string[]>;
   genderOptions: Observable<string[]>;
+  /*ENUMS*/
+  resultOptions: Observable<string[]>;
+  statusOptions: Observable<string[]>;
+  identifiedByOptions: Observable<string[]>;
   date = new FormControl(new Date());
 
   requestSave: RequestSaveCase;
@@ -134,6 +143,19 @@ export class AddCasesComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.resultOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterResult(value))
+    );
+    this.statusOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterStatus(value))
+    );
+    this.identifiedByOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterIdentifiedBy(value))
+    );
 
     this.genderOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -244,16 +266,29 @@ export class AddCasesComponent implements OnInit {
       firstName :  this.caseForm.get('firstName').value,
       lastName : this.caseForm.get('lastName').value,
       passportNumber : this.caseForm.get('passportNumber').value,
-      incidentContactPhone1 : 'wwww',
+      incidentContactPhone1 : this.caseForm.get('incidentPhone1').value,
       countryOfResidence : this.caseForm.get('countryOfResidence').value,
       identifiedBy : {id: 1020, value: this.caseForm.get('identifiedBy').value},
       modifiedBy : this.caseForm.get('modifiedBy').value
     }
 
     this.casesService.createNewCase(this.requestSave).subscribe(result=>{
-      alert("Case Registered with code: " + result);
+      alert("Case Registered with code: " + result.toString());
     })
 
   }
 
+  private _filterResult(value: string) : string[] {
+    const filterValue = value.toLowerCase();
+    return this.result.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  private _filterStatus(value: string) : string[] {
+    const filterValue = value.toLowerCase();
+    return this.status.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+  private _filterIdentifiedBy(value: string) : string[] {
+    const filterValue = value.toLowerCase();
+    return this.identifiedBy.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
 }
