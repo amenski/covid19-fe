@@ -8,7 +8,6 @@ import { UserComponent } from "../../pages/user/user.component";
 import { QuestionnaireComponent } from "../../pages/questionnaire/questionnaire.component";
 import {AuthGuard} from "../../helpers/auth.guard";
 import {LoginComponent} from "../../pages/login/login.component";
-import {DynamicFormComponent} from "../../pages/dynamic-form/dynamic-form.component";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
