@@ -18,5 +18,5 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'health-facilities', component: HealthFacilitiesComponent, canActivate: [AuthGuard]},
   { path: 'follow-up', component: FollowUpComponent, canActivate: [AuthGuard]},
   { path: 'questionnaire', component: QuestionnaireComponent, canActivate: [AuthGuard]},
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
+  { path: 'user', component: UserComponent},
 ];
