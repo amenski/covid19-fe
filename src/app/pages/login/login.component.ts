@@ -55,13 +55,12 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          alert("token: "+ data);
           this.router.navigate([this.returnUrl]);
         });
   }
 
   logout() {
     localStorage.removeItem('currentUser');
-    alert("LoggedOut");
+    //alert("LoggedOut");
   }
 }

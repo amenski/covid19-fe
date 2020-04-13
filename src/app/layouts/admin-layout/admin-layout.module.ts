@@ -43,7 +43,7 @@ import {MatIconModule} from "@angular/material/icon";
     MatIconModule,
   ],
   declarations: [
-    DashboardComponent,
+    // DashboardComponent,
     UserComponent,
     QuestionnaireComponent,
     CasesComponent,

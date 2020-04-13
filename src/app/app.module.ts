@@ -20,6 +20,7 @@ import {JwtInterceptor} from './helpers/jwt.interceptor';
 import { AddQuestionsComponent } from './pages/questionnaire/add-questions/add-questions.component';
 import { QuestionListComponent } from './pages/questionnaire/question-list/question-list.component';
 import {AccordionModule} from "ngx-bootstrap/accordion";
+import { LandingLayoutComponent } from './layouts/landing-layout/landing-layout.component';
 
 
 
@@ -38,7 +39,7 @@ import {AccordionModule} from "ngx-bootstrap/accordion";
     MatDatepickerModule,
     AccordionModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LandingLayoutComponent],
   providers: [
     NativeDateAdapter,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

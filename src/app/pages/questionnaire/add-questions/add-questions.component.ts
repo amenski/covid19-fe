@@ -76,13 +76,17 @@ export class AddQuestionsComponent implements OnInit {
     // formData.append("modifiedBy", this.questionsForm.get('modifiedBy').value);
     // formData.append("insertDate", this.questionsForm.get('insertDate').value);
     // formData.append("modifiedDate", this.questionsForm.get('modifiedDate').value);
+    //alert("Options: "+this.questionsForm.get('options').value.toString());
+    //alert("Category: "+this.questionsForm.get('category').value.toString());
     this.requestSaveQuestion = {
       question: this.questionsForm.get('question').value,
       options: this.questionsForm.get('options').value,
       category:  this.questionsForm.get('category').value,
       parentId:  this.questionsForm.get('parentId').value,
-      description:  this.questionsForm.get('description').value, modifiedBy:  this.questionsForm.get('modifiedBy').value,
-      insertDate:  this.questionsForm.get('insertDate').value, modifiedDate:  this.questionsForm.get('modifiedDate').value,
+      description:  this.questionsForm.get('description').value,
+      modifiedBy:  this.questionsForm.get('modifiedBy').value,
+      insertDate:  this.questionsForm.get('insertDate').value,
+      modifiedDate:  this.questionsForm.get('modifiedDate').value,
     }
     this.questionnaireService.addQuestion(this.requestSaveQuestion).subscribe(result=>{
       alert(result.message);

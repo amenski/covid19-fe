@@ -61,7 +61,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     //this.currentUserSubject.next(null);
-    this.router.navigate(['/']);
+    this.router.navigate(['/admin/login']);
   }
 
   collapse() {

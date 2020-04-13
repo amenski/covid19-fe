@@ -8,6 +8,7 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { AlertComponent } from './alert/alert.component';
 import {AccordionModule} from "ngx-bootstrap/accordion";
+import { LandingNavbarComponent } from './landing-navbar/landing-navbar.component';
 
 
 @NgModule({

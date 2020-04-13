@@ -12,11 +12,11 @@ import {LoginComponent} from "../../pages/login/login.component";
 
 export const AdminLayoutRoutes: Routes = [
    // { path: "", redirectTo:"home", pathMatch: "full"},
-  { path: '', redirectTo: "home", pathMatch: "full" },
-  { path: 'home', component: DashboardComponent},
+  { path: '', redirectTo: "cases", pathMatch: "full" },
+  // { path: 'home', component: DashboardComponent},
   { path: 'cases', component: CasesComponent, canActivate: [AuthGuard]},
   { path: 'health-facilities', component: HealthFacilitiesComponent, canActivate: [AuthGuard]},
   { path: 'follow-up', component: FollowUpComponent, canActivate: [AuthGuard]},
   { path: 'questionnaire', component: QuestionnaireComponent, canActivate: [AuthGuard]},
-  { path: 'user', component: UserComponent},
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
 ];
