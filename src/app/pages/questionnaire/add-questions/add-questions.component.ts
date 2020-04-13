@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {ModelEnumIdValue} from "../../../models/modelEnumIdValue";
 import {Option} from "../../../models/option";
 import {RequestSaveQuestionnier} from "../../../models/requestSaveQuestionnier";
+import {AlertService} from "../../../services/alert.service";
 
 @Component({
   selector: 'app-add-questions',
@@ -16,6 +17,11 @@ import {RequestSaveQuestionnier} from "../../../models/requestSaveQuestionnier";
 export class AddQuestionsComponent implements OnInit {
   questionsForm: FormGroup;
   insertDate= new FormControl(new Date());
+  /*Alert options*/
+  alertOptions = {
+    autoClose: false,
+    keepAfterRouteChange: false
+  };
   categories =  {
     "category": [
       {
@@ -37,7 +43,8 @@ export class AddQuestionsComponent implements OnInit {
   requestSaveQuestion: RequestSaveQuestionnier;
   questionnaireControl = new FormControl();
   categoryOptions: Observable<({ id: string; value: string } | { id: string; value: string } | { id: string; value: string })[]>;
-  constructor(public fb: FormBuilder, private questionnaireService: QuestionControlService) {
+  constructor(public fb: FormBuilder, private questionnaireService: QuestionControlService,
+              private alertService: AlertService) {
     this.questionsForm = this.fb.group({
       question: '', options: this.fb.array([], this.minInputFields()),
       category: '', parentId: '',
@@ -76,12 +83,12 @@ export class AddQuestionsComponent implements OnInit {
     // formData.append("modifiedBy", this.questionsForm.get('modifiedBy').value);
     // formData.append("insertDate", this.questionsForm.get('insertDate').value);
     // formData.append("modifiedDate", this.questionsForm.get('modifiedDate').value);
-    //alert("Options: "+this.questionsForm.get('options').value.toString());
-    //alert("Category: "+this.questionsForm.get('category').value.toString());
+    //alert("Category: "+this.questionsForm.get('category').value);
     this.requestSaveQuestion = {
       question: this.questionsForm.get('question').value,
-      options: this.questionsForm.get('options').value,
-      category:  this.questionsForm.get('category').value,
+      options: this.questionsForm.get('options').value.toString(),
+      // category:  this.questionsForm.get('category').value,
+      category: {id: 1040},
       parentId:  this.questionsForm.get('parentId').value,
       description:  this.questionsForm.get('description').value,
       modifiedBy:  this.questionsForm.get('modifiedBy').value,
@@ -89,7 +96,8 @@ export class AddQuestionsComponent implements OnInit {
       modifiedDate:  this.questionsForm.get('modifiedDate').value,
     }
     this.questionnaireService.addQuestion(this.requestSaveQuestion).subscribe(result=>{
-      alert(result.message);
+      this.alertService.success("Question Added!", this.options)
+
     });
   }
 

@@ -33,10 +33,10 @@
                 <label>Category * </label>
 <!--                <input type="text" formControlName="category" class=" form-control" placeholder="ምድብ"/>-->
                 <input type="text" formControlName="category" placeholder="ምድብ"
-                       [matAutocomplete]="nAuto" class = "form-control" >
-                <mat-autocomplete autoActiveFirstOption #nAuto="matAutocomplete">
-                  <mat-option *ngFor="let category of categoryOptions | async" [value]="category" required>
-                   {{category.id}} - {{category.value}}
+                       [matAutocomplete]="cAuto" class = "form-control" >
+                <mat-autocomplete autoActiveFirstOption #cAuto="matAutocomplete">
+                  <mat-option *ngFor="let category of categoryOptions | async" [value]="category.value" required>
+                   {{category.id}}
                   </mat-option>
                 </mat-autocomplete>
               </div>
@@ -45,7 +45,7 @@
               <label>Options * </label>
               <div class="input-group-append">
                 <input type="text" formControlName="options" class=" form-control" placeholder="አማራጮች" required/>
-                <button (click)="addOption({id: 0, title: 'Option', addDisabled: true, removeDisabled: true})"><i class="fas fa-plus" ></i></button>
+                <button type="button" (click)="addOption({id: 0, title: 'Option', addDisabled: true, removeDisabled: true})"><i class="fas fa-plus" ></i></button>
               </div>
 
               <div  formArrayName="options" *ngFor="let arrayItem of arrayItems; let i=index">
@@ -100,7 +100,7 @@
 
         </div>
       </div>
-
+      <alert></alert>
     </div>
     Only Fields Marked with * are Mandatory
 

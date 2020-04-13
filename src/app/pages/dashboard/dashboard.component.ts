@@ -1,9 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import Chart from 'chart.js';
 import {DailyStatusService} from "../../services/daily-status.service";
 import {first} from "rxjs/operators";
 import {DailyStatus} from "../../models/daily-status";
 import {ModelDailyCaseStatus} from "../../models/modelDailyCaseStatus";
+import {MatSort} from "@angular/material/sort";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
 
 
 @Component({
@@ -11,6 +14,9 @@ import {ModelDailyCaseStatus} from "../../models/modelDailyCaseStatus";
   templateUrl: "dashboard.component.html"
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   public canvas : any;
   public ctx;
   public datasets: any;
@@ -33,11 +39,21 @@ export class DashboardComponent implements OnInit {
   sortType: string;
   sortReverse: boolean;
 
+
+  displayedColumns: string[] = ['reportDate', 'totalCases', 'newCases', 'totalDeaths', 'newDeaths',
+                                'activeCases', 'criticalCases', 'recovered'];
+
+  dataSource: any;
+
   constructor(private dailyStatusService: DailyStatusService) {
     this.dailyStatusService.getAllCaseStats().subscribe(result=>{
       //this.caseStats = result;
       this.caseStats = result.returnValue.list
       // console.log("REsult: "+ res);
+
+      this.dataSource =  new MatTableDataSource(this.caseStats);
+      this.dataSource.sort = this.sort;
+     // this.dataSource.paginator = this.paginator;
       this.dailyTotalDeaths = this.caseStats.map(res=>{
         return res.totalDeaths;
       })
@@ -527,7 +543,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-
 
   }
   public updateOptions() {

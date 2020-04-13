@@ -15,6 +15,9 @@ import { QuestionnaireComponent } from "../../pages/questionnaire/questionnaire.
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { LandingNavBarComponent } from './landing-nav-bar/landing-nav-bar.component';
 import { RumorReportingComponent } from './rumor-reporting/rumor-reporting.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
 
 
 
@@ -25,6 +28,9 @@ import { RumorReportingComponent } from './rumor-reporting/rumor-reporting.compo
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   declarations: [
     DashboardComponent,

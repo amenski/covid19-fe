@@ -5,6 +5,7 @@ import {NgbCalendar, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
 import { RequestSaveCase } from '../../../generated';
+import {AlertService} from "../../../services/alert.service";
 
 
 @Component({
@@ -19,7 +20,11 @@ export class AddCasesComponent implements OnInit {
   dateOfBirth: NgbDateStruct;
   reportDate: NgbDateStruct;
   modifiedDate: NgbDateStruct;
-
+  /*Alert options*/
+  options = {
+    autoClose: false,
+    keepAfterRouteChange: false
+  };
   /*ENUMS*/
   identifiedBy: string[] = ['CLINICAL_EVALUATION', 'CONTACT_TRACING', 'COMMUNITY_SURVEILLANCE'];
   status: string[] = ['STABLE', 'CRITICAL', 'DECEASED', 'RECOVERED', 'NA']
@@ -119,7 +124,8 @@ export class AddCasesComponent implements OnInit {
 
   requestSave: RequestSaveCase;
 
-  constructor(public fb: FormBuilder, private casesService: CasesService, private calendar: NgbCalendar) {
+  constructor(public fb: FormBuilder, private casesService: CasesService, private calendar: NgbCalendar,
+              private alertService: AlertService) {
     this.caseForm = this.fb.group({
       firstName: '', lastName: '',
       gender: '', dob: '',
@@ -273,7 +279,9 @@ export class AddCasesComponent implements OnInit {
     }
 
     this.casesService.createNewCase(this.requestSave).subscribe(result=>{
-      alert("Case Registered with code: " + result.toString());
+      this.alertService.success("Case Registered!", this.options)
+     // alert("Case Registered with code: " + result.toString());
+
     })
 
   }

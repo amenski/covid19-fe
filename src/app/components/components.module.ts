@@ -12,7 +12,7 @@ import {AccordionModule} from "ngx-bootstrap/accordion";
 
 @NgModule({
     imports: [CommonModule, RouterModule, NgbModule, AccordionModule],
-  declarations: [FooterComponent, NavbarComponent, SidebarComponent, AlertComponent],
-  exports: [FooterComponent, NavbarComponent, SidebarComponent, AlertComponent]
+  declarations: [FooterComponent, NavbarComponent, SidebarComponent],
+  exports: [FooterComponent, NavbarComponent, SidebarComponent]
 })
 export class ComponentsModule {}

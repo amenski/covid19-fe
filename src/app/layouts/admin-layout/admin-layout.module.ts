@@ -28,6 +28,8 @@ import {AddQuestionsComponent} from "../../pages/questionnaire/add-questions/add
 import {QuestionListComponent} from "../../pages/questionnaire/question-list/question-list.component";
 import {MatIconModule} from "@angular/material/icon";
 import {AdminDashboardComponent} from "../../pages/admin-dashboard/admin-dashboard.component";
+import {ComponentsModule} from "../../components/components.module";
+import {AlertModule} from "../../components/alert/alert.module";
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import {AdminDashboardComponent} from "../../pages/admin-dashboard/admin-dashboa
     ScrollingModule,
     MatDatepickerModule,
     MatIconModule,
+    ComponentsModule,
+    AlertModule,
   ],
   declarations: [
     AdminDashboardComponent,
