@@ -27,6 +27,7 @@ import {NativeDateAdapter} from "@angular/material/core";
 import {AddQuestionsComponent} from "../../pages/questionnaire/add-questions/add-questions.component";
 import {QuestionListComponent} from "../../pages/questionnaire/question-list/question-list.component";
 import {MatIconModule} from "@angular/material/icon";
+import {AdminDashboardComponent} from "../../pages/admin-dashboard/admin-dashboard.component";
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import {MatIconModule} from "@angular/material/icon";
     MatIconModule,
   ],
   declarations: [
-    // DashboardComponent,
+    AdminDashboardComponent,
     UserComponent,
     QuestionnaireComponent,
     CasesComponent,

@@ -35,7 +35,6 @@ export class AuthenticationService {
       .pipe(map(res => {
         // login successful if there's a jwt token in the response
         //   this.user.token = res;
-        alert("TOKEN: "+ res.jwtToken);
           this.jwtResponse.jwtToken = res.jwtToken;
 
           // store user details and jwt token in local storage to keep user logged in between page refreshes

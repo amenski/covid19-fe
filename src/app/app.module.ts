@@ -21,24 +21,26 @@ import { AddQuestionsComponent } from './pages/questionnaire/add-questions/add-q
 import { QuestionListComponent } from './pages/questionnaire/question-list/question-list.component';
 import {AccordionModule} from "ngx-bootstrap/accordion";
 import { LandingLayoutComponent } from './layouts/landing-layout/landing-layout.component';
+import {LandingLayoutModule} from "./layouts/landing-layout/landing-layout.module";
 
 
 
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    ComponentsModule,
-    NgbModule,
-    RouterModule,
-    AppRoutingModule,
-    MatNativeDateModule,
-    ToastrModule.forRoot(),
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    AccordionModule.forRoot()
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        ComponentsModule,
+        NgbModule,
+        RouterModule,
+        AppRoutingModule,
+        MatNativeDateModule,
+        ToastrModule.forRoot(),
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        AccordionModule.forRoot(),
+        LandingLayoutModule
+    ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LandingLayoutComponent],
   providers: [
     NativeDateAdapter,

@@ -13,6 +13,8 @@ import { UserComponent } from "../../pages/user/user.component";
 import { QuestionnaireComponent } from "../../pages/questionnaire/questionnaire.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { LandingNavBarComponent } from './landing-nav-bar/landing-nav-bar.component';
+import { RumorReportingComponent } from './rumor-reporting/rumor-reporting.component';
 
 
 
@@ -26,7 +28,12 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
   ],
   declarations: [
     DashboardComponent,
+    LandingNavBarComponent,
+    RumorReportingComponent,
   ],
-  providers: [ ],
+  providers: [],
+  exports: [
+    LandingNavBarComponent
+  ]
 })
 export class LandingLayoutModule {}
