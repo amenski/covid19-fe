@@ -1,0 +1,53 @@
+  <div class="content">
+    <div class="row">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="table tablesorter">
+          <!-- Report Date Column -->
+          <ng-container matColumnDef="reportDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Report Date </th>
+            <td mat-cell *matCellDef="let rumor"> {{rumor.reportDate}} </td>
+          </ng-container>
+
+          <!--suspectName Column -->
+          <ng-container matColumnDef="suspectName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Suspect Name </th>
+            <td mat-cell *matCellDef="let rumor"> {{rumor.suspectName}} </td>
+          </ng-container>
+
+          <!--Reporting Person name Column -->
+          <ng-container matColumnDef="reportingPersonName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Reporting Person Name </th>
+            <td mat-cell *matCellDef="let rumor"> {{rumor.reportingPersonName}} </td>
+          </ng-container>
+
+          <!-- Relation with Suspect Column -->
+          <ng-container matColumnDef="relationWithSuspect">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Relation with Suspect </th>
+            <td mat-cell *matCellDef="let rumor"> {{rumor.relationWithSuspect}} </td>
+          </ng-container>
+
+          <!--Phone Number 1 Column -->
+          <ng-container matColumnDef="phoneNumber1">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number 1 </th>
+            <td mat-cell *matCellDef="let rumor">{{rumor.phoneNumber1}}</td>
+          </ng-container>
+
+          <!-- Phone Number 2 -->
+          <ng-container matColumnDef="phoneNumber2">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number 2 </th>
+            <td mat-cell *matCellDef="let rumor"> {{rumor.phoneNumber2}} </td>
+          </ng-container>
+
+          <!-- Extra Column -->
+          <ng-container matColumnDef="extra">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Investigate </th>
+            <td mat-cell *matCellDef="let rumor">  </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!--                      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>-->
+      </div>
+    </div>
+  </div>
