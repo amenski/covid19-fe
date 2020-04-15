@@ -1,1 +1,181 @@
-<p>Under Construction!</p>
+<form ngNativeValidate [formGroup]="rumorForm" (ngSubmit) = reportRumor()>
+<div class="landing-content">
+  <div class=" row">
+    <div class=" col-12">
+
+<!--      Suspected Person INFO-->
+      <div class=" card">
+        <div class=" card-header">
+          <h3 class=" title d-inline">Suspected Person INFO</h3>
+        </div>
+        <div class=" card-body">
+
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label> Suspect Name *</label>
+                <input formControlName="suspectName" class=" form-control" placeholder="የተጠርጣሪ ስም" type="text" required/>
+              </div>
+            </div>
+
+            <div class=" col-md-6 px-md-1">
+              <div class=" form-group">
+                <label> Gender </label>
+                <input type="text" formControlName="gender" placeholder="ፆታ"
+                       [matAutocomplete]="gAuto" class = "form-control" >
+                <mat-autocomplete autoActiveFirstOption #gAuto="matAutocomplete">
+                  <mat-option *ngFor="let gender of genderOptions | async" [value]="gender">
+                    {{gender}}
+                  </mat-option>
+                </mat-autocomplete>
+              </div>
+            </div>
+          </div>
+
+
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label> Address *</label>
+                <input formControlName="address" class=" form-control" placeholder="የተጠርጣሪ አድራሻ" type="text" required/>
+              </div>
+            </div>
+
+            <div class=" col-md-6 px-md-1">
+              <div class=" form-group">
+                 <label>Report Date to RRT </label>
+                <div class="input-group-append">
+                  <input class="form-control" matInput [matDatepicker]="dor" formControlName="reportDate" [formControl]="date">
+                  <mat-datepicker-toggle matSuffix [for]="dor"></mat-datepicker-toggle>
+                  <mat-datepicker #dor></mat-datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!--      SYMPTOMS SHOWN-->
+      <div class=" card">
+        <div class=" card-header">
+          <h3 class=" title d-inline">SYMPTOMS SHOWN</h3>
+        </div>
+        <div class=" card-body">
+
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                 <section class="symptoms-section">
+                  <label class="symptoms-margin">Fever: </label>
+                  <mat-radio-group [(ngModel)]="fever" formControlName="fever">
+                    <mat-radio-button class="symptoms-margin" value="after">Yes</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="before">No</mat-radio-button>
+                  </mat-radio-group>
+                </section>
+              </div>
+            </div>
+
+            <div class=" col-md-6 px-md-1">
+              <div class=" form-group">
+                <section class="symptoms-section">
+                  <label class="symptoms-margin">Headache: </label>
+                  <mat-radio-group [(ngModel)]="headache" formControlName="headache">
+                    <mat-radio-button class="symptoms-margin" value="after">Yes</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="before">No</mat-radio-button>
+                  </mat-radio-group>
+                </section>
+              </div>
+            </div>
+          </div>
+
+
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <section class="symptoms-section">
+                  <label class="symptoms-margin">Cough: </label>
+                  <mat-radio-group [(ngModel)]="cough" formControlName="cough">
+                    <mat-radio-button class="symptoms-margin" value="after">Yes</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="before">No</mat-radio-button>
+                  </mat-radio-group>
+                </section>
+              </div>
+            </div>
+
+            <div class=" col-md-6 px-md-1">
+              <div class=" form-group">
+                <label>Duration of Symptoms: </label>
+                <input type="text" formControlName="symptomsDuration" placeholder="የሕመም ምልክቶች ቆይታ"
+                       [matAutocomplete]="durAuto" class = "form-control" >
+                <mat-autocomplete autoActiveFirstOption #durAuto="matAutocomplete">
+                  <mat-option *ngFor="let dur of durationOptions | async" [value]="dur">
+                    {{dur}}
+                  </mat-option>
+                </mat-autocomplete>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      <!--  Reporting Person INFO   -->
+      <div class=" card">
+        <div class=" card-header">
+          <h3 class=" title d-inline">Reporting Person INFO</h3>
+        </div>
+        <div class=" card-body">
+
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label >Name: *</label>
+                <input type="text" formControlName="reportingPersonName" placeholder="ሪፖርት ያደረገው የሰው ስም" class = "form-control" >
+              </div>
+            </div>
+
+            <div class=" col-md-6 px-md-1">
+              <div class=" form-group">
+                <label >Relation with the suspect: </label>
+                <input type="text" formControlName="relationWithSuspect" placeholder="ተጠርጣሪው ጋር ያሎት ግንኙነት" class = "form-control" >
+              </div>
+            </div>
+          </div>
+
+
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label >Phone Number 1 : *</label>
+                <input type="text" formControlName="phoneNumber1" placeholder="ስልክ ቁጥር 1: *" class = "form-control" >
+              </div>
+            </div>
+
+            <div class=" col-md-6 px-md-1">
+              <div class=" form-group">
+                <label >Phone Number 2 : </label>
+                <input type="text" formControlName="phoneNumber2" placeholder="ስልክ ቁጥር 2: *" class = "form-control" >
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+
+  </div>
+  <alert></alert>
+  Only Fields Marked with * are Mandatory
+
+    <div id="footer">
+      <button class=" btn btn-fill btn-primary" type="submit"><i class="fas fa-ambulance"></i> Report Rumor</button>
+    </div>
+  </div>
+
+
+
+</form>

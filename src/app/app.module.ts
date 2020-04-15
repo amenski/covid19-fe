@@ -22,6 +22,9 @@ import { QuestionListComponent } from './pages/questionnaire/question-list/quest
 import {AccordionModule} from "ngx-bootstrap/accordion";
 import { LandingLayoutComponent } from './layouts/landing-layout/landing-layout.component';
 import {LandingLayoutModule} from "./layouts/landing-layout/landing-layout.module";
+import { RumorListComponent } from './pages/rumors/rumor-list/rumor-list.component';
+import { ScreeningComponent } from './pages/screening/screening.component';
+import { RumorInvestigationComponent } from './pages/rumors/rumor-investigation/rumor-investigation.component';
 
 
 
@@ -41,7 +44,7 @@ import {LandingLayoutModule} from "./layouts/landing-layout/landing-layout.modul
         AccordionModule.forRoot(),
         LandingLayoutModule
     ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LandingLayoutComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LandingLayoutComponent, RumorInvestigationComponent],
   providers: [
     NativeDateAdapter,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

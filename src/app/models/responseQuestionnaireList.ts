@@ -9,17 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ModelQuestionnaireList } from './modelQuestionnaireList';
+import { ResponseBase } from './responseBase';
 
 
-export interface ModelDailyCaseStatus { 
-    newCases?: number;
-    newDeaths?: number;
-    totalDeaths?: number;
-    recovered?: number;
-    activeCases?: number;
-    criticalCases?: number;
-    totalCases?: number;
-    newTests?: number;
-    totalTests?: number;
-    reportDate?: string;
+export interface ResponseQuestionnaireList extends ResponseBase { 
+    returnValue?: ModelQuestionnaireList;
 }

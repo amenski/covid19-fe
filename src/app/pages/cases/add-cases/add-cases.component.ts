@@ -4,8 +4,8 @@ import {CasesService} from "../../../services/cases.service";
 import {NgbCalendar, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
-import { RequestSaveCase } from '../../../generated';
 import {AlertService} from "../../../services/alert.service";
+import {RequestSaveCase} from "../../../models/requestSaveCase";
 
 
 @Component({

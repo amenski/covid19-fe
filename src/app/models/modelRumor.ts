@@ -11,15 +11,18 @@
  */
 
 
-export interface ModelDailyCaseStatus { 
-    newCases?: number;
-    newDeaths?: number;
-    totalDeaths?: number;
-    recovered?: number;
-    activeCases?: number;
-    criticalCases?: number;
-    totalCases?: number;
-    newTests?: number;
-    totalTests?: number;
+export interface ModelRumor { 
+    rumorId?: number;
+    suspectName: string;
+    gender?: string;
+    address?: string;
     reportDate?: string;
+    fever: string;
+    cough: string;
+    headache: string;
+    symptomsDuration?: number;
+    reportingPersonName: string;
+    relationWithSuspect?: string;
+    phoneNumber1: string;
+    phoneNumber2?: string;
 }

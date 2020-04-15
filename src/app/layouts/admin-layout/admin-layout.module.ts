@@ -30,23 +30,35 @@ import {MatIconModule} from "@angular/material/icon";
 import {AdminDashboardComponent} from "../../pages/admin-dashboard/admin-dashboard.component";
 import {ComponentsModule} from "../../components/components.module";
 import {AlertModule} from "../../components/alert/alert.module";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {RumorListComponent} from "../../pages/rumors/rumor-list/rumor-list.component";
+import {ScreeningComponent} from "../../pages/screening/screening.component";
+import {MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
-    NgbModule,
-    ReactiveFormsModule,
-    NgSelectModule,
-    MatAutocompleteModule,
-    ScrollingModule,
-    MatDatepickerModule,
-    MatIconModule,
-    ComponentsModule,
-    AlertModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(AdminLayoutRoutes),
+        FormsModule,
+        NgbModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+        MatAutocompleteModule,
+        ScrollingModule,
+        MatDatepickerModule,
+        MatIconModule,
+        ComponentsModule,
+        AlertModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatFormFieldModule,
+      MatInputModule
+    ],
   declarations: [
     AdminDashboardComponent,
     UserComponent,
@@ -59,7 +71,9 @@ import {AlertModule} from "../../components/alert/alert.module";
     HealthFacilityListComponent,
     AddHealthFacilityComponent,
     AddQuestionsComponent,
-    QuestionListComponent
+    QuestionListComponent,
+    RumorListComponent,
+    ScreeningComponent
   ],
   providers: [ NativeDateAdapter],
 })

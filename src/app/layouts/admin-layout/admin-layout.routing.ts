@@ -9,6 +9,9 @@ import { QuestionnaireComponent } from "../../pages/questionnaire/questionnaire.
 import {AuthGuard} from "../../helpers/auth.guard";
 import {LoginComponent} from "../../pages/login/login.component";
 import {AdminDashboardComponent} from "../../pages/admin-dashboard/admin-dashboard.component";
+import {RumorListComponent} from "../../pages/rumors/rumor-list/rumor-list.component";
+import {ScreeningComponent} from "../../pages/screening/screening.component";
+import {RumorInvestigationComponent} from "../../pages/rumors/rumor-investigation/rumor-investigation.component";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
@@ -17,6 +20,9 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard]},
   { path: 'cases', component: CasesComponent, canActivate: [AuthGuard]},
   { path: 'health-facilities', component: HealthFacilitiesComponent, canActivate: [AuthGuard]},
+  { path: 'rumor-list', component: RumorListComponent, canActivate: [AuthGuard]},
+  { path: 'investigate-rumor', component: RumorInvestigationComponent, canActivate: [AuthGuard]},
+  { path: 'screening', component: ScreeningComponent, canActivate: [AuthGuard]},
   { path: 'follow-up', component: FollowUpComponent, canActivate: [AuthGuard]},
   { path: 'questionnaire', component: QuestionnaireComponent, canActivate: [AuthGuard]},
   { path: 'user', component: UserComponent, canActivate: [AuthGuard]},

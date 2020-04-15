@@ -1,34 +1,55 @@
+<form ngNativeValidate [formGroup]="followupForm" (ngSubmit) = SearchPUI()>
+
 <div class=" content">
   <div class=" row">
-    <div class=" col-md-6">
-      <div class=" card">
-        <div class=" card-header">
-          <h4 class=" card-title">Notifications Style</h4>
-        </div>
-        <div class=" card-body">
-
-        </div>
-      </div>
-    </div>
-
-    <div class=" col-md-6">
-      <div class=" card">
-        <div class=" card-header">
-          <h4 class=" card-title">Notification states</h4>
-        </div>
-        <div class=" card-body">
-
-        </div>
-      </div>
-    </div>
-
 
     <div class=" col-md-12">
       <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Search a PUI by Case Code</h4>
+          <mat-form-field>
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput type="search" formControlName="caseCode" placeholder="Enter Case code" class="search-input">
+          </mat-form-field>
+          <button type="submit">Search</button>
+        </div>
         <div class=" card-body">
 
         </div>
       </div>
     </div>
+
+    <div class=" col-md-12" *ngIf="showSearchResult" >
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">SEARCH RESULT</h4>
+        </div>
+        <div class=" card-body">
+          <div class="row">
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Case code({{caseFollowUp.puiCaseCode}})</h2>
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Insert Date ({{caseFollowUp.insertDate}})</h2>
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Modified by ({{caseFollowUp.modifiedBy}})</h2>
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Question ({{caseFollowUp.question}})</h2>
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Selected Option ({{caseFollowUp.selectedOption}})</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <alert></alert>
 </div>
+
+
+</form>

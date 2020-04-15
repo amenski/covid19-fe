@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Case} from '../models/case';
 import {BASE_URL} from "../helpers/constants";
-import {RequestSaveCase} from '../generated';
 import {ResponseCaseList} from "../models/responseCaseList";
+import {RequestSaveCase} from "../models/requestSaveCase";
 
 @Injectable({
   providedIn: 'root'

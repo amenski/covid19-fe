@@ -11,15 +11,9 @@
  */
 
 
-export interface ModelDailyCaseStatus { 
-    newCases?: number;
-    newDeaths?: number;
-    totalDeaths?: number;
-    recovered?: number;
-    activeCases?: number;
-    criticalCases?: number;
-    totalCases?: number;
-    newTests?: number;
-    totalTests?: number;
-    reportDate?: string;
+export interface ModelUser { 
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
 }

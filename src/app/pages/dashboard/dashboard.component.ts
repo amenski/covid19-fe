@@ -48,11 +48,11 @@ export class DashboardComponent implements OnInit {
   constructor(private dailyStatusService: DailyStatusService) {
     this.dailyStatusService.getAllCaseStats().subscribe(result=>{
       //this.caseStats = result;
-      this.caseStats = result.returnValue.list
-      // console.log("REsult: "+ res);
+      this.caseStats = result.returnValue.list;
 
       this.dataSource =  new MatTableDataSource(this.caseStats);
       this.dataSource.sort = this.sort;
+
      // this.dataSource.paginator = this.paginator;
       this.dailyTotalDeaths = this.caseStats.map(res=>{
         return res.totalDeaths;

@@ -6,6 +6,7 @@ import {HealthFacilities} from "../models/health-facilities";
 import {ResponseHealthFacilityList} from "../models/responseHealthFacilityList";
 import {RequestSaveFacility} from "../models/requestSaveFacility";
 import {ResponseBase} from "../models/responseBase";
+import {ModelHealthFacility} from "../models/modelHealthFacility";
 
 @Injectable({
   providedIn: 'root'

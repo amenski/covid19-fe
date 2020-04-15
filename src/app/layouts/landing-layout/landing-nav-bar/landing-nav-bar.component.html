@@ -1,10 +1,10 @@
-<nav class=" navbar navbar-expand-lg bg-dark navbar-transparent">
+<nav class=" navbar navbar-expand-lg navbar-absolute navbar-transparent">
   <div class=" container-fluid">
+
     <div class=" navbar-wrapper">
-        <a class=" navbar-brand" href="https://localhost:4200">
+        <a class=" navbar-brand" href="https://covid19casereporting-ethio.herokuapp.com/">
           <img src="./assets/img/ethiopia-flag-icon-32.png"/>
         </a>
-
     </div>
     <button
       aria-label="Toggle navigation"
@@ -12,22 +12,22 @@
       (click)="collapse()"
       [attr.aria-expanded]="!isCollapsed"
       aria-controls="collapseExample"
-      id="navigation"
+      id="navigation1"
       type="button"
     >
-      <span class=" navbar-toggler-bar navbar-kebab"> </span>
-      <span class=" navbar-toggler-bar navbar-kebab"> </span>
-      <span class=" navbar-toggler-bar navbar-kebab"> </span>
+      <span class=" navbar-toggler-bar bar1"> </span>
+      <span class=" navbar-toggler-bar bar2"> </span>
+      <span class=" navbar-toggler-bar bar3"> </span>
     </button>
 
-    <div class=" navbar-collapse" [ngbCollapse]="isCollapsed" id="navigation">
+    <div class=" navbar-collapse" [ngbCollapse]="isCollapsed" id="navigation1">
     <!-- Links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/auth/login">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/report-rumor">Rumor Report</a>
+        <a class="nav-link" routerLink="/report-rumor">Report a rumor</a>
       </li>
     </ul>
     </div>

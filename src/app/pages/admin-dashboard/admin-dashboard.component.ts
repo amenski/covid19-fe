@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModelDailyCaseStatus} from "../../models/modelDailyCaseStatus";
 import {DailyStatusService} from "../../services/daily-status.service";
 import Chart from 'chart.js';
+import {MatTableDataSource} from "@angular/material/table";
+import {MatSort} from "@angular/material/sort";
+import {MatPaginator} from "@angular/material/paginator";
 
 
 @Component({
@@ -10,6 +13,8 @@ import Chart from 'chart.js';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   public canvas : any;
   public ctx;
   public datasets: any;
@@ -32,11 +37,19 @@ export class AdminDashboardComponent implements OnInit {
   sortType: string;
   sortReverse: boolean;
 
+  displayedColumns: string[] = ['reportDate', 'totalCases', 'newCases', 'totalDeaths', 'newDeaths',
+    'activeCases', 'criticalCases', 'recovered'];
+  dataSource: any;
+
   constructor(private dailyStatusService: DailyStatusService) {
     this.dailyStatusService.getAllCaseStats().subscribe(result=>{
       //this.caseStats = result;
       this.caseStats = result.returnValue.list
       // console.log("REsult: "+ res);
+
+      this.dataSource =  new MatTableDataSource(this.caseStats);
+      this.dataSource.sort = this.sort;
+
       this.dailyTotalDeaths = this.caseStats.map(res=>{
         return res.totalDeaths;
       })

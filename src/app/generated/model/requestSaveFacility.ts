@@ -13,11 +13,5 @@ import { ModelHealthFacility } from './modelHealthFacility';
 
 
 export interface RequestSaveFacility { 
-    id?: number;
-    osmId?: number;
-    name?: string;
-    amenity?: string;
-    addrfull?: string;
-    xCord?: number;
-    yCord?: number;
+    facilities: Array<ModelHealthFacility>;
 }

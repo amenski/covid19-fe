@@ -18,6 +18,10 @@ import { RumorReportingComponent } from './rumor-reporting/rumor-reporting.compo
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatRadioModule} from "@angular/material/radio";
+import {AlertModule} from "../../components/alert/alert.module";
 
 
 
@@ -30,7 +34,11 @@ import {MatSortModule} from "@angular/material/sort";
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    AlertModule
   ],
   declarations: [
     DashboardComponent,
