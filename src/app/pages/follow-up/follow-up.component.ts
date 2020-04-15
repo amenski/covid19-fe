@@ -8,7 +8,8 @@ import {ModelPuiFollowUp} from "../../models/modelPuiFollowUp";
 
 @Component({
   selector: "app-follow-up",
-  templateUrl: "follow-up.component.html"
+  templateUrl: "follow-up.component.html",
+  styleUrls: ['./follow-up.component.scss']
 })
 export class FollowUpComponent implements OnInit {
 
@@ -23,11 +24,13 @@ export class FollowUpComponent implements OnInit {
   constructor(public fb: FormBuilder, private alertService: AlertService,
               private communityInspectionService: CommunityInspectionService) {
     this.followupForm = this.fb.group({
-      caseCode: ''
+      searchTerm: '',
+      criteria: ''
     });
   }
 
   showSearchResult: boolean = false;
+  searchCriteria: 'Case code' | 'Region'| 'Result' | 'Status' | 'Recent Travel' = 'Case code';
 
   ngOnInit() {}
 

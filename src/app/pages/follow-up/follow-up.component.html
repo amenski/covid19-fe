@@ -6,14 +6,34 @@
     <div class=" col-md-12">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">Search a PUI by Case Code</h4>
-          <mat-form-field>
-            <mat-icon matPrefix>search</mat-icon>
-            <input matInput type="search" formControlName="caseCode" placeholder="Enter Case code" class="search-input">
-          </mat-form-field>
-          <button type="submit">Search</button>
+          <h4 class=" card-title">Search a PUI</h4>
+
         </div>
         <div class=" card-body">
+
+          <div class="row">
+            <div class=" col-sm-6 text-left">
+              <mat-form-field>
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput type="search" formControlName="searchTerm" placeholder="Enter {{this.followupForm.get('criteria').value}}" class="search-input" required>
+              </mat-form-field>
+              <button type="submit" class="form-control">Search</button>
+            </div>
+            <div class=" col-sm-6 text-left">
+              <div class=" form-group">
+                <section class="criteria-section">
+                  <strong><label class="criteria-margin">Search By: </label></strong>
+                  <mat-radio-group [(ngModel)]="searchCriteria" formControlName="criteria">
+                    <mat-radio-button class="symptoms-margin" value="Case Code">Case Code</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Region">Region</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Result">Result</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Status">Status</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Recent Travel">Recent Travel</mat-radio-button>
+                  </mat-radio-group>
+                </section>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>

@@ -37,6 +37,7 @@ import {RumorListComponent} from "../../pages/rumors/rumor-list/rumor-list.compo
 import {ScreeningComponent} from "../../pages/screening/screening.component";
 import {MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {MatInputModule} from "@angular/material/input";
         MatPaginatorModule,
         MatSortModule,
         MatFormFieldModule,
-      MatInputModule
+        MatInputModule,
+        MatRadioModule
     ],
   declarations: [
     AdminDashboardComponent,
