@@ -550,7 +550,7 @@ export class DashboardComponent implements OnInit {
     return new Date(date).toDateString();
   }
   public updateOptions() {
-    this.myChartData.data.datasets[0].data =  this.data;
-    //this.myChartData.update();
+    this.myChartData.data.datasets[0].data =  this.totalCase;
+    this.myChartData.update();
   }
 }
