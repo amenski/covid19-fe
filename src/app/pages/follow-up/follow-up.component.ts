@@ -5,6 +5,7 @@ import {AlertService} from "../../services/alert.service";
 import {CommunityInspectionService} from "../../services/community-inspection.service";
 import {ResponsePuiFollowUpSingle} from "../../models/responsePuiFollowUpSingle";
 import {ModelPuiFollowUp} from "../../models/modelPuiFollowUp";
+import {ModelCase} from "../../models/modelCase";
 
 @Component({
   selector: "app-follow-up",
@@ -19,7 +20,7 @@ export class FollowUpComponent implements OnInit {
     autoClose: false,
     keepAfterRouteChange: false
   };
-  caseFollowUp: ModelPuiFollowUp;
+  caseFollowUp: ModelCase;
 
   constructor(public fb: FormBuilder, private alertService: AlertService,
               private communityInspectionService: CommunityInspectionService) {
@@ -35,7 +36,7 @@ export class FollowUpComponent implements OnInit {
   ngOnInit() {}
 
   SearchPUI() {
-    this.communityInspectionService.getPUIByCaseCode(this.followupForm.get('caseCode').value).subscribe(result=>{
+    this.communityInspectionService.getPUIByCaseCode(this.followupForm.get('searchTerm').value).subscribe(result=>{
         this.caseFollowUp = result.returnValue;
       }
     );

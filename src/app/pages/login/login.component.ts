@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/admin/dashboard']);
     } else {
       this.logout();
-      this.router.navigate(['']);
+      this.router.navigate(['/auth/login']);
     }
   }
 

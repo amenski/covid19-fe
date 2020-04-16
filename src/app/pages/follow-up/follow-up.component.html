@@ -47,19 +47,23 @@
         <div class=" card-body">
           <div class="row">
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Case code({{caseFollowUp.puiCaseCode}})</h2>
+              <h2 class=" card-title">Case code {{caseFollowUp.caseCode}}  </h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Insert Date ({{caseFollowUp.insertDate}})</h2>
+              <h2 class=" card-title">Name {{caseFollowUp.firstName}} {{caseFollowUp.lastName}}</h2>
+              <h2 class=" card-title"> {{caseFollowUp.lastName}}</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Modified by ({{caseFollowUp.modifiedBy}})</h2>
+              <h2 class=" card-title">Status ({{caseFollowUp.status.value}})</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Question ({{caseFollowUp.question}})</h2>
+              <h2 class=" card-title">Parent Case code ({{caseFollowUp.parentCaseCode}})</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Selected Option ({{caseFollowUp.selectedOption}})</h2>
+              <h2 class=" card-title">Presumptive Result ({{caseFollowUp.presumptiveResult.value}})</h2>
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Confirmed Result ({{caseFollowUp.confirmedResult.value}})</h2>
             </div>
           </div>
         </div>

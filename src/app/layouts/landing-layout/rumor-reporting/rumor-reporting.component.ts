@@ -35,6 +35,7 @@ export class RumorReportingComponent implements OnInit {
     autoClose: false,
     keepAfterRouteChange: false
   };
+    loading: boolean = false;
 
   constructor(public fb: FormBuilder, private rumorsService: RumorsService, private alertService: AlertService) {
 
@@ -82,6 +83,7 @@ export class RumorReportingComponent implements OnInit {
   }
 
   reportRumor() {
+    this.loading = false;
     this.rumor = {
       suspectName: this.rumorForm.get('suspectName').value,
       gender: this.rumorForm.get('gender').value,
@@ -105,4 +107,7 @@ export class RumorReportingComponent implements OnInit {
     });
   }
 
+  onSubmit() {
+    alert("dklf");
+  }
 }

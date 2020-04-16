@@ -1,156 +1,15 @@
 <div class=" landing-content">
-  <div class="row-header">
-    <h5 class=" card-category"><img src="../../../assets/img/favicon-32x32.png"/></h5>
-    <h1>Total Corona Virus Cases in Ethiopia:</h1>
-  </div>
-  <div class="row-header">
-    <h1  style="font-family:verdana; font-size:50px; color:lightgrey">{{totalCase}}</h1>
-  </div>
+<div class="row-header">
   <div class=" row">
     <div class=" col-12">
       <div class=" card card-chart">
         <div class=" card-header">
-
           <div class=" row">
-            <div class=" col-lg-12 col-md-20">
-              <div class=" card card-tasks">
-                <div class=" card-header">
-                  <h3 class=" title d-inline">RECENT CASES</h3>
-                  <!--          <p class=" card-category d-inline">today</p>-->
-                  <div ngbDropdown>
-                    <button
-                      class=" btn btn-link btn-icon"
-                      data-toggle="dropdown"
-                      ngbDropdownToggle
-                      type="button"
-                    >
-                      <i class=" tim-icons icon-settings-gear-63"> </i>
-                    </button>
-                    <div aria-labelledby="dropdownMenuLink" class=" dropdown-menu-right" ngbDropdownMenu>
-                      <a href="javascript:void(0)" ngbDropdownItem> Registered PUI 1 </a>
-                      <a href="javascript:void(0)" ngbDropdownItem> PUI 2 recovered </a>
-                      <a href="javascript:void(0)" ngbDropdownItem> PUI 3 in CRITICAL CONDITION </a>
-                    </div>
-                  </div>
-                </div>
-                <div class=" card-body">
-                  <div class=" table-responsive">
-
-                    <div class="mat-elevation-z8">
-                      <table mat-table [dataSource]="dataSource" matSort class="table tablesorter">
-                        <!-- Report Date Column -->
-                        <ng-container matColumnDef="reportDate">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Report Date </th>
-                          <td mat-cell *matCellDef="let case"> {{case.reportDate}} </td>
-                        </ng-container>
-
-                        <!-- Total Cases Column -->
-                        <ng-container matColumnDef="totalCases">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Cases </th>
-                          <td mat-cell *matCellDef="let case"> {{case.totalCases}} </td>
-                        </ng-container>
-
-                        <!-- New Cases Column -->
-                        <ng-container matColumnDef="newCases">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> New Cases </th>
-                          <td mat-cell *matCellDef="let case">
-                            <span *ngIf="case.newCases===0"></span>
-                            <span *ngIf="case.newCases!==0" style="background-color: #fb6340">+{{case.newCases}}</span>
-                          </td>
-                        </ng-container>
-
-                        <!-- Total Deaths Column -->
-                        <ng-container matColumnDef="totalDeaths">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Deaths </th>
-                          <td mat-cell *matCellDef="let case"> {{case.totalDeaths}} </td>
-                        </ng-container>
-
-                        <!-- New Deaths Column -->
-                        <ng-container matColumnDef="newDeaths">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> New Deaths </th>
-                          <td mat-cell *matCellDef="let case">
-                            <span *ngIf="case.newDeaths===0"></span>
-                            <span *ngIf="case.newDeaths!==0" style="background-color: #ec250d">+{{case.newDeaths}}</span>
-                          </td>
-                        </ng-container>
-
-                        <!-- Active cases Column -->
-                        <ng-container matColumnDef="activeCases">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Active Cases </th>
-                          <td mat-cell *matCellDef="let case"> {{case.activeCases}} </td>
-                        </ng-container>
-
-                        <!-- Serious critical  Column -->
-                        <ng-container matColumnDef="criticalCases">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Serious Critical </th>
-                          <td mat-cell *matCellDef="let case"> {{case.criticalCases}} </td>
-                        </ng-container>
-
-                        <!-- Total recovered Column -->
-                        <ng-container matColumnDef="recovered">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Recovered </th>
-                          <td mat-cell *matCellDef="let case"> {{case.recovered}} </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                      </table>
-<!--                      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>-->
-                    </div>
-
-
-                    <!--                    <table class=" table tablesorter" id="" >-->
-<!--                      <thead class=" text-primary">-->
-<!--                      <tr>-->
-<!--                        <th>-->
-<!--                          <a href="#"  (click)="sortType = 'reportDate'; sortReverse = !sortReverse">-->
-<!--                            report Date-->
-<!--                            <span ng-show="sortType == 'reportDate' && !sortReverse" class="fa fa-caret-down"></span>-->
-<!--                            <span ng-show="sortType == 'reportDate' && sortReverse" class="fa fa-caret-up"></span>-->
-<!--                          </a>-->
-<!--                        </th>-->
-<!--                        <th>Total Cases</th>-->
-<!--                        <th>New Cases</th>-->
-<!--                        <th>Total Deaths</th>-->
-<!--                        <th>New Deaths</th>-->
-<!--                        <th>Active Cases</th>-->
-<!--                        <th>Serious Critical</th>-->
-<!--                        <th>Recovered</th>-->
-<!--                        &lt;!&ndash;                <th class=" text-center">Salary</th>&ndash;&gt;-->
-<!--                      </tr>-->
-<!--                      </thead>-->
-<!--                      <tbody>-->
-<!--                      <tr *ngFor="let case of caseStats">-->
-<!--                        <td>{{case.reportDate}}</td>-->
-<!--                        <td>{{case.totalCases}}</td>-->
-<!--                        <td> <span *ngIf="case.newCases===0"></span>-->
-<!--                          <span *ngIf="case.newCases!==0" style="background-color: #fb6340">+{{case.newCases}}</span></td>-->
-<!--                        <td>{{case.totalDeaths}}</td>-->
-<!--                        <td><span *ngIf="case.newDeaths===0"></span>-->
-<!--                          <span *ngIf="case.newDeaths!==0" style="background-color: #ec250d">+{{case.newDeaths}}</span></td>-->
-<!--                        <td>{{case.activeCases}}</td>-->
-<!--                        <td>{{case.criticalCases}}</td>-->
-<!--                        <td>{{case.recovered}}</td>-->
-
-<!--                      </tr>-->
-
-<!--                      </tbody>-->
-<!--                    </table>-->
-
-
-
-
-                  </div>
-                </div>
-              </div>
+            <div class=" col-sm-12 text-center">
+              <h5 class=" card-category"><img src="../../../assets/img/favicon-32x32.png"/></h5>
+              <h2 class=" card-title" style="font-family: 'Helvetica Neue'">Total Corona virus Cases: <strong>{{totalCase}}</strong></h2>
             </div>
-          </div>
-
-          <div class=" row">
-            <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Total Corona virus Cases</h2>
-            </div>
-            <div class=" col-sm-6">
+            <div class=" col-sm-12">
               <div class=" btn-group btn-group-toggle float-right" data-toggle="buttons">
                 <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[0];updateOptions();clicked=true;clicked1=false;clicked2=false" [ngClass]="{'active':clicked===true}">
                   <input checked="checked" name="options" type="radio" />
@@ -171,18 +30,18 @@
                     <i class="fa fa-line-chart" aria-hidden="true" style="color:red"> </i>
                   </span>
                 </label>
-<!--                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[2];updateOptions();clicked=false;clicked1=false;clicked2=true" [ngClass]="{'active':clicked2===true}">-->
-<!--                  <input class=" d-none" name="options" type="radio" />-->
+                <!--                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[2];updateOptions();clicked=false;clicked1=false;clicked2=true" [ngClass]="{'active':clicked2===true}">-->
+                <!--                  <input class=" d-none" name="options" type="radio" />-->
 
-<!--                  <span-->
-<!--                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"-->
-<!--                  >-->
-<!--                    Sessions-->
-<!--                  </span>-->
-<!--                  <span class=" d-block d-sm-none">-->
-<!--                    <i class=" tim-icons icon-tap-02"> </i>-->
-<!--                  </span>-->
-<!--                </label>-->
+                <!--                  <span-->
+                <!--                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"-->
+                <!--                  >-->
+                <!--                    Sessions-->
+                <!--                  </span>-->
+                <!--                  <span class=" d-block d-sm-none">-->
+                <!--                    <i class=" tim-icons icon-tap-02"> </i>-->
+                <!--                  </span>-->
+                <!--                </label>-->
               </div>
             </div>
           </div>
@@ -193,6 +52,7 @@
       </div>
     </div>
   </div>
+
 
   <div class=" row">
     <div class=" col-lg-4">
@@ -236,5 +96,86 @@
     </div>
   </div>
 
+  <div class=" row">
+    <div class=" col-lg-12 col-md-20">
+<!--      <div class=" card card-tasks">-->
 
+          <h6 >Recent Cases</h6>
+
+        <div class=" card-body">
+<!--          <div class=" table-responsive">-->
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource" matSortDirection="desc" matSortActive="reportDate" matSort class="table tablesorter">
+                <!-- Report Date Column -->
+                <ng-container matColumnDef="reportDate">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Report Date </th>
+                  <td mat-cell *matCellDef="let case">  {{convertDate(case.reportDate) }} </td>
+                </ng-container>
+
+                <!-- Total Cases Column -->
+                <ng-container matColumnDef="totalCases">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Cases </th>
+                  <td mat-cell *matCellDef="let case"> {{case.totalCases}} </td>
+                </ng-container>
+
+                <!-- New Cases Column -->
+                <ng-container matColumnDef="newCases">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> New Cases </th>
+                  <td mat-cell *matCellDef="let case">
+                    <span *ngIf="case.newCases===0"></span>
+                    <span *ngIf="case.newCases!==0" style="background-color: #fb6340">+{{case.newCases}}</span>
+                  </td>
+                </ng-container>
+
+                <!-- Total Deaths Column -->
+                <ng-container matColumnDef="totalDeaths">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Deaths </th>
+                  <td mat-cell *matCellDef="let case">
+                    <span *ngIf="case.totalDeaths===0"></span>
+                    <span *ngIf="case.totalDeaths!==0" style="color: #ec250d"><strong>{{case.totalDeaths}}</strong></span>
+                </ng-container>
+
+                <!-- New Deaths Column -->
+                <ng-container matColumnDef="newDeaths">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> New Deaths </th>
+                  <td mat-cell *matCellDef="let case">
+                    <span *ngIf="case.newDeaths===0"></span>
+                    <span *ngIf="case.newDeaths!==0" style="background-color: #ec250d">+{{case.newDeaths}}</span>
+                  </td>
+                </ng-container>
+
+                <!-- Active cases Column -->
+                <ng-container matColumnDef="activeCases">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Active Cases </th>
+                  <td mat-cell *matCellDef="let case"> {{case.activeCases}} </td>
+                </ng-container>
+
+                <!-- Serious critical  Column -->
+                <ng-container matColumnDef="criticalCases">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Serious Critical </th>
+                  <td mat-cell *matCellDef="let case"> {{case.criticalCases}} </td>
+                </ng-container>
+
+                <!-- Total recovered Column -->
+                <ng-container matColumnDef="recovered">
+
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Recovered </th>
+                  <td mat-cell *matCellDef="let case">
+                    <span *ngIf="case.recovered===0"></span>
+                    <span *ngIf="case.recovered!==0" style="color:green"><strong>{{case.recovered}}</strong></span> </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            <mat-paginator  [pageSize]=10 showFirstLastButtons></mat-paginator>
+            </div>
+
+        </div>
+<!--      </div>-->
+    </div>
+
+  </div>
 </div>
+</div>
+<!--<app-footer></app-footer>-->
