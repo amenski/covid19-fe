@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {BASE_URL} from '../helpers/constants'
 import { User } from '../models/user';
 import {JwtResponse} from "../models/jwtResponse";
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -12,6 +13,7 @@ export class AuthenticationService {
   jwtResponse: JwtResponse;
   private currentUserSubject: BehaviorSubject<string>;
   public currentUser: Observable<string>;
+  helper = new JwtHelperService();
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('currentUser')));
@@ -62,5 +64,10 @@ export class AuthenticationService {
       .pipe(map(res => {
         return this.user;
       }));
+  }
+
+  isLoggedIn() {
+    const token = localStorage.getItem('currentUser');
+    return this.helper.isTokenExpired(token);
   }
 }
