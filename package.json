@@ -40,6 +40,7 @@
     "@angular/platform-browser": "9.0.5",
     "@angular/platform-browser-dynamic": "9.0.5",
     "@angular/router": "9.0.5",
+    "@auth0/angular-jwt": "^4.0.0",
     "@ng-bootstrap/ng-bootstrap": "6.0.0",
     "@ng-select/ng-select": "^3.7.3",
     "@openapitools/openapi-generator-cli": "^1.0.12-4.3.0",

@@ -24,8 +24,11 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService
   ) {
     // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
+    if (this.authenticationService.currentUserValue && this.authenticationService.isLoggedIn()) {
       this.router.navigate(['/admin/dashboard']);
+    } else {
+      this.logout();
+      this.router.navigate(['']);
     }
   }
 
@@ -61,6 +64,5 @@ export class LoginComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('currentUser');
-    //alert("LoggedOut");
   }
 }
