@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { ToastrModule } from 'ngx-toastr';
@@ -26,13 +26,22 @@ import { RumorListComponent } from './pages/rumors/rumor-list/rumor-list.compone
 import { ScreeningComponent } from './pages/screening/screening.component';
 import { RumorInvestigationComponent } from './pages/rumors/rumor-investigation/rumor-investigation.component';
 
-
+// import ngx-translate and the http loader
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 @NgModule({
     imports: [
         BrowserAnimationsModule,
         FormsModule,
         HttpClientModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        }),
         ComponentsModule,
         NgbModule,
         RouterModule,
@@ -52,3 +61,7 @@ import { RumorInvestigationComponent } from './pages/rumors/rumor-investigation/
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

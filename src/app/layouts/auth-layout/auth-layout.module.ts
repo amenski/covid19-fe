@@ -7,13 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {LoginComponent} from "../../pages/login/login.component";
 import {RegisterUserComponent} from "../../pages/register/register-user.component";
+import {TranslateModule} from "@ngx-translate/core";
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   declarations: [
     LoginComponent, RegisterUserComponent

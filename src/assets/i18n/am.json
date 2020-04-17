@@ -1,0 +1,52 @@
+{
+  "Login": "ይግቡ",
+  "Report-rumor": "የጠረጠሩትን ያመልክቱ",
+  "choose-language": "ቋንቋ ይምረጡ",
+  "total-cases": "ጠቅላላ በኮሮና ቫይረስ የተያዘ: ",
+  "total-deaths": "ጠቅላላ የሞተ",
+  "daily-cases": "በየእለት የሚያዝ",
+  "max": "ከፍተኛው",
+  "currently-infected": "በአሁኑ ጊዜ በቫይረሱ የተያዙ",
+  "linear": "መስመራዊ",
+  "logarithmic": "ሎጋሪዝም",
+
+  "RECENT-CASES": "አጠቃላይ ኬዞች",
+  "report-date": "የሪፖርት ቀን",
+  "daily-total": "አጠቃላይ የኬዞች ብዛት",
+  "daily-new": "አዲስ ኬዞች",
+  "daily-total-deaths": "አጠቃላይ የሞቱ",
+  "daily-new-deaths": "አዲስ የሞቱ",
+  "daily-active": "በአሁኑ ሰአት የታመሙ",
+  "daily-serious": "በጽኑ የታመሙ",
+  "daily-total-recovered": "ከህመም ያገገሙ",
+
+  "login-header": "የኢትዮጵያ ኮ-19 ጉዳይ ሪፖርት ማቅረቢያ እና የእውቂያ መከታተያ ፓናል",
+  "login-title-or-button": "ይግቡ",
+  "login-username": "ኢሜይል ወይም የተጠቃሚ ስም",
+  "login-password": "የይለፍ ቃል",
+
+  "Suspected Person INFO": "የጠረጠሩት ሰው መረጃ",
+  "suspect-name": "የጠረጠሩት ሰው ስም",
+  "gender": "ፆታ",
+  "address": "አድራሻ",
+  "report-date-to-rrt": "የሪፖርት ቀን",
+  "symptoms-shown": "የታዩ ምልክቶች",
+  "fever": "ትኩሳት",
+  "headache": "ራስ ምታት",
+  "cough": "ሳል",
+  "symptoms-duration": "የሕመም ምልክቶች ቆይታ",
+
+  "Reporting Person INFO": "የጠቋሚ ሰው መረጃ",
+  "Reporting Person Name": "የጠቋሚ ሰው ስም",
+  "relation-with-suspect": "ተጠርጣሪው ጋር ያለው ግንኙነት",
+  "phone-number1": "ስልክ ቁጥር 1",
+  "phone-number2": "ስልክ ቁጥር 2",
+  "report-suspect-button": "ጥቆማውን ያስተላልፉ",
+  "option-yes": "አለ",
+  "option-no": "የለም",
+  "option-male": "ወንድ",
+  "option-female": "ሴት",
+  "fields-marked-label": "*  ምልክት የተደረገባቸው የግቤት ጽሑፍ መስኮች ብቻ ግዴታ ናቸው"
+
+
+}

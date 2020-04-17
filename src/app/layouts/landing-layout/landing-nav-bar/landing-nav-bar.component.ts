@@ -5,6 +5,7 @@ import {User} from "../../../models/user";
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ROUTES} from "../../../components/sidebar/sidebar.component";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-landing-nav-bar',
@@ -26,7 +27,7 @@ export class LandingNavBarComponent implements OnInit, OnDestroy {
     location: Location,
     private element: ElementRef,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal, private translate: TranslateService
   ) {
     this.location = location;
     this.sidebarVisible = false;

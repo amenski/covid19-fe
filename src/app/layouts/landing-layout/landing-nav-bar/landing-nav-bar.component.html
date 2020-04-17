@@ -24,11 +24,20 @@
     <!-- Links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/auth/login">Login</a>
+        <a class="nav-link" routerLink="/auth/login" >{{'Login' | translate}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/report-rumor">Report a rumor</a>
+        <a class="nav-link" routerLink="/report-rumor" > {{'Report-rumor' | translate}}</a>
       </li>
+      <label>
+        <li class="nav-item">
+        {{ 'choose-language' | translate }}
+        <select #langSelect (change)="translate.use(langSelect.value)">
+          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang" >{{
+            lang }}</option>
+        </select>
+      </label>
+
     </ul>
     </div>
   </div>

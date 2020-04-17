@@ -6,21 +6,21 @@
 <!--      Suspected Person INFO-->
       <div class=" card">
         <div class=" card-header">
-          <h3 class=" title d-inline">Suspected Person INFO</h3>
+          <h3 class=" title d-inline">{{'Suspected Person INFO' | translate}}</h3>
         </div>
         <div class=" card-body">
 
           <div class=" row">
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label> Suspect Name *</label>
+                <label> {{'suspect-name' | translate}} *</label>
                 <input formControlName="suspectName" class=" form-control" placeholder="የተጠርጣሪ ስም" type="text" required/>
               </div>
             </div>
 
             <div class=" col-md-6 px-md-1">
               <div class=" form-group">
-                <label> Gender </label>
+                <label> {{'gender' | translate}} </label>
                 <input type="text" formControlName="gender" placeholder="ፆታ"
                        [matAutocomplete]="gAuto" class = "form-control" >
                 <mat-autocomplete autoActiveFirstOption #gAuto="matAutocomplete">
@@ -36,14 +36,14 @@
           <div class=" row">
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label> Address *</label>
+                <label> {{'address' | translate}} *</label>
                 <input formControlName="address" class=" form-control" placeholder="የተጠርጣሪ አድራሻ" type="text" required/>
               </div>
             </div>
 
             <div class=" col-md-6 px-md-1">
               <div class=" form-group">
-                 <label>Report Date to RRT </label>
+                 <label>{{'report-date-to-rrt' | translate}}</label>
                 <div class="input-group-append">
                   <input class="form-control" matInput [matDatepicker]="dor" formControlName="reportDate" [formControl]="date">
                   <mat-datepicker-toggle matSuffix [for]="dor"></mat-datepicker-toggle>
@@ -60,7 +60,7 @@
       <!--      SYMPTOMS SHOWN-->
       <div class=" card">
         <div class=" card-header">
-          <h3 class=" title d-inline">SYMPTOMS SHOWN</h3>
+          <h3 class=" title d-inline">{{'symptoms-shown' | translate}}</h3>
         </div>
         <div class=" card-body">
 
@@ -68,10 +68,10 @@
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
                  <section class="symptoms-section">
-                  <label class="symptoms-margin">Fever: </label>
+                  <label class="symptoms-margin">{{'fever' | translate}}: </label>
                   <mat-radio-group [(ngModel)]="fever" formControlName="fever">
-                    <mat-radio-button class="symptoms-margin" value="after">Yes</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="before">No</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="after">{{'option-yes' | translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="before">{{'option-no' | translate}}</mat-radio-button>
                   </mat-radio-group>
                 </section>
               </div>
@@ -80,10 +80,10 @@
             <div class=" col-md-6 px-md-1">
               <div class=" form-group">
                 <section class="symptoms-section">
-                  <label class="symptoms-margin">Headache: </label>
+                  <label class="symptoms-margin">{{'headache' | translate}}: </label>
                   <mat-radio-group [(ngModel)]="headache" formControlName="headache">
-                    <mat-radio-button class="symptoms-margin" value="after">Yes</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="before">No</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="after">{{'option-yes' | translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="before">{{'option-no' | translate}}</mat-radio-button>
                   </mat-radio-group>
                 </section>
               </div>
@@ -95,10 +95,10 @@
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
                 <section class="symptoms-section">
-                  <label class="symptoms-margin">Cough: </label>
+                  <label class="symptoms-margin">{{'cough' | translate}}: </label>
                   <mat-radio-group [(ngModel)]="cough" formControlName="cough">
-                    <mat-radio-button class="symptoms-margin" value="after">Yes</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="before">No</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="after">{{'option-yes' | translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="before">{{'option-no' | translate}}</mat-radio-button>
                   </mat-radio-group>
                 </section>
               </div>
@@ -106,7 +106,7 @@
 
             <div class=" col-md-6 px-md-1">
               <div class=" form-group">
-                <label>Duration of Symptoms: </label>
+                <label>{{'symptoms-duration' | translate}}: </label>
                 <input type="text" formControlName="symptomsDuration" placeholder="የሕመም ምልክቶች ቆይታ"
                        [matAutocomplete]="durAuto" class = "form-control" >
                 <mat-autocomplete autoActiveFirstOption #durAuto="matAutocomplete">
@@ -125,21 +125,21 @@
       <!--  Reporting Person INFO   -->
       <div class=" card">
         <div class=" card-header">
-          <h3 class=" title d-inline">Reporting Person INFO</h3>
+          <h3 class=" title d-inline">{{'Reporting Person INFO' | translate}}</h3>
         </div>
         <div class=" card-body">
 
           <div class=" row">
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label >Name: *</label>
+                <label >{{'Reporting Person Name' | translate}}: *</label>
                 <input type="text" formControlName="reportingPersonName" placeholder="ሪፖርት ያደረገው የሰው ስም" class = "form-control" >
               </div>
             </div>
 
             <div class=" col-md-6 px-md-1">
               <div class=" form-group">
-                <label >Relation with the suspect: </label>
+                <label >{{'relation-with-suspect' | translate}} : </label>
                 <input type="text" formControlName="relationWithSuspect" placeholder="ተጠርጣሪው ጋር ያሎት ግንኙነት" class = "form-control" >
               </div>
             </div>
@@ -149,15 +149,15 @@
           <div class=" row">
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label >Phone Number 1 : *</label>
+                <label >{{'phone-number1' | translate}} : *</label>
                 <input type="text" formControlName="phoneNumber1" placeholder="ስልክ ቁጥር 1: *" class = "form-control" >
               </div>
             </div>
 
             <div class=" col-md-6 px-md-1">
               <div class=" form-group">
-                <label >Phone Number 2 : </label>
-                <input type="text" formControlName="phoneNumber2" placeholder="ስልክ ቁጥር 2: *" class = "form-control" >
+                <label >{{'phone-number2' | translate}} : </label>
+                <input type="text" formControlName="phoneNumber2" placeholder="ስልክ ቁጥር 2: " class = "form-control" >
               </div>
             </div>
           </div>
@@ -169,10 +169,10 @@
 
   </div>
   <alert></alert>
-  Only Fields Marked with * are Mandatory
+  {{'fields-marked-label' | translate}}
 
     <div id="footer">
-      <button [disabled]="loading" class=" btn btn-fill btn-primary" type="submit"><i class="fas fa-ambulance"></i> Report Rumor</button>
+      <button [disabled]="loading" class=" btn btn-fill btn-primary" type="submit"><i class="fas fa-ambulance"></i> {{'report-suspect-button' | translate}}</button>
       <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
     </div>
   </div>

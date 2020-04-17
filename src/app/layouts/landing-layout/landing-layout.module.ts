@@ -22,6 +22,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatRadioModule} from "@angular/material/radio";
 import {AlertModule} from "../../components/alert/alert.module";
+import {TranslateModule} from "@ngx-translate/core";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
 
 
 
@@ -38,7 +41,10 @@ import {AlertModule} from "../../components/alert/alert.module";
     MatAutocompleteModule,
     MatDatepickerModule,
     MatRadioModule,
-    AlertModule
+    AlertModule,
+    TranslateModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   declarations: [
     DashboardComponent,

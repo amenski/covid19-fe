@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -78,5 +78,7 @@ import {MatRadioModule} from "@angular/material/radio";
     ScreeningComponent
   ],
   providers: [ NativeDateAdapter],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+
 })
 export class AdminLayoutModule {}

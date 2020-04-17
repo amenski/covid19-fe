@@ -7,7 +7,7 @@
           <div class=" row">
             <div class=" col-sm-12 text-center">
               <h5 class=" card-category"><img src="../../../assets/img/favicon-32x32.png"/></h5>
-              <h2 class=" card-title" style="font-family: 'Helvetica Neue'">Total Corona virus Cases: <strong>{{totalCase}}</strong></h2>
+              <h2 class=" card-title" style="font-family: 'Helvetica Neue'">{{'total-cases' | translate}} <strong>{{totalCase}}</strong></h2>
             </div>
             <div class=" col-sm-12">
               <div class=" btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -15,7 +15,7 @@
                   <input checked="checked" name="options" type="radio" />
 
                   <span class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                    Linear
+                    {{'linear' | translate}}
                   </span>
                   <span class=" d-block d-sm-none">
                     <i class=" tim-icons icon-single-02"> </i>
@@ -24,7 +24,7 @@
                 <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[0];updateOptions();clicked=false;clicked1=true;clicked2=false" [ngClass]="{'active':clicked1===true}">
                   <input class=" d-none d-sm-none" name="options" type="radio"/>
                   <span class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                    Logarithmic
+                    {{'logarithmic' | translate}}
                   </span>
                   <span class=" d-block d-sm-none">
                     <i class="fa fa-line-chart" aria-hidden="true" style="color:red"> </i>
@@ -47,7 +47,7 @@
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Total Deaths</h5>
+          <h5 class=" card-category">{{'total-deaths' | translate}}</h5>
           <h3 class=" card-title">
             <i class=" tim-icons icon-bell-55 text-danger-states"> </i> {{totalDeath}}
           </h3>
@@ -60,9 +60,9 @@
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Daily Cases</h5>
+          <h5 class=" card-category">{{'daily-cases' | translate}}</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-delivery-fast text-info"> </i> Max = {{maxNewCase}}
+            <i class=" tim-icons icon-delivery-fast text-info"> </i> {{'max' | translate}} = {{maxNewCase}}
           </h3>
         </div>
         <div class=" card-body">
@@ -73,7 +73,7 @@
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Currently Infected</h5>
+          <h5 class=" card-category">{{'currently-infected' | translate}}</h5>
           <h3 class=" card-title">
             <i class=" tim-icons icon-send text-success"> </i> {{totalActiveCase}}
           </h3>
@@ -89,7 +89,7 @@
     <div class=" col-lg-12 col-md-20">
 <!--      <div class=" card card-tasks">-->
 
-          <h6 >Recent Cases</h6>
+          <h6 >{{'RECENT-CASES' | translate}}</h6>
 
         <div class=" card-body">
           <div class=" table-responsive">
@@ -97,19 +97,19 @@
               <table mat-table [dataSource]="dataSource" matSortDirection="desc" matSortActive="reportDate" matSort class="table tablesorter">
                 <!-- Report Date Column -->
                 <ng-container matColumnDef="reportDate">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Report Date </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'report-date' | translate}} </th>
                   <td mat-cell *matCellDef="let case">  {{convertDate(case.reportDate) }} </td>
                 </ng-container>
 
                 <!-- Total Cases Column -->
                 <ng-container matColumnDef="totalCases">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Cases </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-total' | translate}} </th>
                   <td mat-cell *matCellDef="let case"> {{case.totalCases}} </td>
                 </ng-container>
 
                 <!-- New Cases Column -->
                 <ng-container matColumnDef="newCases">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> New Cases </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-new' | translate}} </th>
                   <td mat-cell *matCellDef="let case">
                     <span *ngIf="case.newCases===0"></span>
                     <span *ngIf="case.newCases!==0" style="background-color: #fb6340">+{{case.newCases}}</span>
@@ -118,7 +118,7 @@
 
                 <!-- Total Deaths Column -->
                 <ng-container matColumnDef="totalDeaths">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Deaths </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-total-deaths' | translate}} </th>
                   <td mat-cell *matCellDef="let case">
                     <span *ngIf="case.totalDeaths===0"></span>
                     <span *ngIf="case.totalDeaths!==0" style="color: #ec250d"><strong>{{case.totalDeaths}}</strong></span>
@@ -126,7 +126,7 @@
 
                 <!-- New Deaths Column -->
                 <ng-container matColumnDef="newDeaths">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> New Deaths </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-new-deaths' | translate}} </th>
                   <td mat-cell *matCellDef="let case">
                     <span *ngIf="case.newDeaths===0"></span>
                     <span *ngIf="case.newDeaths!==0" style="background-color: #ec250d">+{{case.newDeaths}}</span>
@@ -135,20 +135,20 @@
 
                 <!-- Active cases Column -->
                 <ng-container matColumnDef="activeCases">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Active Cases </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-active' | translate}} </th>
                   <td mat-cell *matCellDef="let case"> {{case.activeCases}} </td>
                 </ng-container>
 
                 <!-- Serious critical  Column -->
                 <ng-container matColumnDef="criticalCases">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Serious Critical </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-serious' | translate}} </th>
                   <td mat-cell *matCellDef="let case"> {{case.criticalCases}} </td>
                 </ng-container>
 
                 <!-- Total recovered Column -->
                 <ng-container matColumnDef="recovered">
 
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Recovered </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-total-recovered' | translate}} </th>
                   <td mat-cell *matCellDef="let case">
                     <span *ngIf="case.recovered===0"></span>
                     <span *ngIf="case.recovered!==0" style="color:green"><strong>{{case.recovered}}</strong></span> </td>
