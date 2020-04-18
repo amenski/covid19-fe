@@ -27,7 +27,7 @@ export class LandingNavBarComponent implements OnInit, OnDestroy {
     location: Location,
     private element: ElementRef,
     private router: Router,
-    private modalService: NgbModal, private translate: TranslateService
+    private modalService: NgbModal, public translate: TranslateService
   ) {
     this.location = location;
     this.sidebarVisible = false;
