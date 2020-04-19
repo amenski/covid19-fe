@@ -6,6 +6,8 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {ResponseBase} from "../models/responseBase";
 import {RequestSaveQuestionnier} from "../models/requestSaveQuestionnier";
+import {ResponseQuestionnaireList} from "../models/responseQuestionnaireList";
+import {RequestSaveQuestionnaire} from "../models/requestSaveQuestionnaire";
 
 
 @Injectable({
@@ -14,13 +16,12 @@ import {RequestSaveQuestionnier} from "../models/requestSaveQuestionnier";
 export class QuestionControlService {
   constructor(private httpClient: HttpClient) { }
 
-  getAllQuestions():  Observable<ResponseQuestionnierList>{
+  getAllQuestions():  Observable<ResponseQuestionnaireList>{
     let questionsUrl = BASE_URL+"/v1/questionnaire/all";
-    // @ts-ignore
-    return this.httpClient.get<ResponseQuestionnierList>(questionsUrl);
+    return this.httpClient.get<ResponseQuestionnaireList>(questionsUrl);
   }
 
-  addQuestion(requestSaveQuestionnier: RequestSaveQuestionnier): Observable<ResponseBase> {
+  addQuestion(requestSaveQuestionnier: RequestSaveQuestionnaire): Observable<ResponseBase> {
     let questionsUrl = BASE_URL+"/v1/api/questionnaire";
     return this.httpClient.put<ResponseBase>(questionsUrl, requestSaveQuestionnier)
   }

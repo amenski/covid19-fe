@@ -34,7 +34,7 @@
   "fever": "ትኩሳት",
   "headache": "ራስ ምታት",
   "cough": "ሳል",
-  "symptoms-duration": "የሕመም ምልክቶች ቆይታ",
+  "symptoms-duration": "የሕመም ምልክቶች ቆይታ በቀናት",
 
   "Reporting Person INFO": "የጠቋሚ ሰው መረጃ",
   "Reporting Person Name": "የጠቋሚ ሰው ስም",
@@ -46,7 +46,17 @@
   "option-no": "የለም",
   "option-male": "ወንድ",
   "option-female": "ሴት",
-  "fields-marked-label": "*  ምልክት የተደረገባቸው የግቤት ጽሑፍ መስኮች ብቻ ግዴታ ናቸው"
+  "fields-marked-label": "*  ምልክት የተደረገባቸው የግቤት ጽሑፍ መስኮች ብቻ ግዴታ ናቸው",
+  "rumor-success-message": "ጥቆማው ሪፖርት ተደርጓል ፣ በተቻለን ፍጥነት እናገኝዎታለን ፡፡",
+
+  "sidebar-title": "የኮቪድ -19 ኬዞች መዘገቢያ",
+  "sidebar-dashboard": "ዳሽቦርድ",
+  "sidebar-cases": "የኮቪድ -19 ኬዞች",
+  "sidebar-community-inspection": "የማኅበረሰብ ምርመራ",
+  "sidebar-questionnaire": "መጠይቅ",
+  "sidebar-rumor-investigation": "የጥቆማዎች ምርመራ",
+  "sidbar-health-factilities": "የጤና ተቋማት",
+  "sidebar-user-profile": "የተጠቃሚው መረጃዎች"
 
 
 }

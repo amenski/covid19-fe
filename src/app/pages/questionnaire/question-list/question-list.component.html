@@ -1,26 +1,20 @@
 <div >
   QUESTIONNAIRE
+
   <ul>
     <li *ngFor="let question of questions">
       <label [attr.for]="question.id">{{question.question}}</label>
+      <label [attr.for]="question.id">{{question.options}}</label>
+
+
         <div [ngSwitch]="question.category">
 
           <input *ngSwitchCase="'PUI_INFO'" [formControlName]="question.id"
                  [id]="question.id" [type]="question.category">
 
-          <input *ngSwitchCase="'EXISTING_CONDITION'" [formControlName]="question.id"
-                 [id]="question.id" [type]="question.category">
-
-          <select [id]="question.id" *ngSwitchCase="'SYMPTOMS'" [formControlName]="question.id">
-            <option *ngFor="let opt of question.options" [value]="opt">{{opt}}</option>
-          </select>
 
         </div>
     </li>
   </ul>
-<!--  <label [attr.for]="question.key">{{question.label}}</label>-->
 
-
-
-<!--  <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>-->
 </div>

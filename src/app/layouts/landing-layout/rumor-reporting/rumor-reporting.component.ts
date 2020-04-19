@@ -5,6 +5,7 @@ import {map, startWith} from "rxjs/operators";
 import {RumorsService} from "../../../services/rumors.service";
 import {RequestSaveRumor} from "../../../models/requestSaveRumor";
 import {AlertService} from "../../../services/alert.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-rumor-reporting',
@@ -21,12 +22,12 @@ export class RumorReportingComponent implements OnInit {
   cough: 'Yes' | 'No' = 'No';
   headache: 'Yes' | 'No' = 'No';
 
-  genders: string[] = ['Male', 'Female'];
-  duration: string[] = ['1 day', '2 days', 'More than 2 days', '1 week', 'More than a week'];
+  genders: string[] = ['M', 'F'];
+  duration: number[] = [1, 2, 3, 4, 5];
   relation: string[] = ['Family', 'Friend', 'Relative', 'Neighbour', 'Dont want to specify'];
 
   genderOptions: Observable<string[]>;
-  durationOptions: Observable<string[]>;
+  durationOptions: Observable<number[]>;
   relationOptions: Observable<string[]>;
   rumor: RequestSaveRumor;
 
@@ -36,9 +37,8 @@ export class RumorReportingComponent implements OnInit {
     keepAfterRouteChange: false
   };
     loading: boolean = false;
-
-  constructor(public fb: FormBuilder, private rumorsService: RumorsService, private alertService: AlertService) {
-
+  constructor(public fb: FormBuilder, private rumorsService: RumorsService, private alertService: AlertService,
+              public translate: TranslateService) {
 
     this.rumorForm = this.fb.group({
       suspectName: '', gender: '',
@@ -46,7 +46,7 @@ export class RumorReportingComponent implements OnInit {
       fever: '', headache: '',
       cough: '', symptomsDuration: '',
       reportingPersonName: '', relationWithSuspect: '',
-      phoneNumber1: '', phoneNumber2: '',
+      phoneNumber1: '', phoneNumber2: '', status: ''
     })
 
   }
@@ -59,7 +59,6 @@ export class RumorReportingComponent implements OnInit {
     );
 
     this.durationOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
       map(value => this._filterDuration(value))
     );
 
@@ -73,9 +72,8 @@ export class RumorReportingComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.genders.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
-  private _filterDuration(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.duration.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  private _filterDuration(value: number): number[] {
+    return this.duration.filter(option => option === value);
   }
   private _filterRelation(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -97,17 +95,15 @@ export class RumorReportingComponent implements OnInit {
       relationWithSuspect: this.rumorForm.get('relationWithSuspect').value,
       phoneNumber1: this.rumorForm.get('phoneNumber1').value,
       phoneNumber2: this.rumorForm.get('phoneNumber2').value,
+      status: {id: 1080, value: "PENDING"}
     }
     this.rumorsService.reportRumor(this.rumor).subscribe(result=>{
       // if(result.message==='error'){
       //   this.alertService.error(result.message, this.options);
       //   return;
       // }
-      this.alertService.success("Rumor has been reported, We will get back to you as soon as possible", this.options);
+      this.alertService.success(this.translate.instant('rumor-success-message'), this.options);
     });
   }
 
-  onSubmit() {
-    alert("dklf");
-  }
 }

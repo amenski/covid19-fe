@@ -38,6 +38,8 @@ import {ScreeningComponent} from "../../pages/screening/screening.component";
 import {MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatRadioModule} from "@angular/material/radio";
+import {TranslateModule} from "@ngx-translate/core";
+import {RumorInvestigationComponent} from "../../pages/rumors/rumor-investigation/rumor-investigation.component";
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import {MatRadioModule} from "@angular/material/radio";
         MatSortModule,
         MatFormFieldModule,
         MatInputModule,
-        MatRadioModule
+        MatRadioModule,
+        TranslateModule
     ],
   declarations: [
     AdminDashboardComponent,
@@ -68,6 +71,7 @@ import {MatRadioModule} from "@angular/material/radio";
     CasesComponent,
     CaseListComponent,
     AddCasesComponent,
+    RumorInvestigationComponent,
     FollowUpComponent,
     HealthFacilitiesComponent,
     HealthFacilityListComponent,

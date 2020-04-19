@@ -34,7 +34,7 @@
   "fever": "Fever",
   "headache": "Headache",
   "cough": "Cough",
-  "symptoms-duration": "Duration of Symptoms",
+  "symptoms-duration": "Duration of Symptoms in days",
 
   "Reporting Person INFO": "Reporting Person INFO",
   "Reporting Person Name": "Reporting Person Name",
@@ -46,5 +46,15 @@
   "option-no": "No",
   "option-male": "Male",
   "option-female": "Female",
-  "fields-marked-label": " Only Fields Marked with * are Mandatory"
+  "fields-marked-label": " Only Fields Marked with * are Mandatory",
+  "rumor-sucdess-message": "Rumor has been reported, We will get back to you as soon as possible",
+
+  "sidebar-title": "Covid-19 Case Report",
+  "sidebar-dashboard": "Dashboard",
+  "sidebar-cases": "Covid-19 Cases",
+  "sidebar-community-inspection": "Community Inspection",
+  "sidebar-questionnaire": "Questionnaire",
+  "sidebar-rumor-investigation": "Rumor Investigation",
+  "sidbar-health-factilities": "Health Facilities",
+  "sidebar-user-profile": "User Profile"
 }

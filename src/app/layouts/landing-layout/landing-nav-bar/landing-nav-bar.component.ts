@@ -44,6 +44,8 @@ export class LandingNavBarComponent implements OnInit, OnDestroy {
       navbar.classList.add('navbar-transparent');
     }
   };
+  clicked1: boolean = true;
+  clicked2: boolean = false;
   ngOnInit() {
     window.addEventListener("resize", this.updateColor);
     this.listTitles = ROUTES.filter(listTitle => listTitle);

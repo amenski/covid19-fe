@@ -8,10 +8,11 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { AlertComponent } from './alert/alert.component';
 import {AccordionModule} from "ngx-bootstrap/accordion";
+import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
-    imports: [CommonModule, RouterModule, NgbModule, AccordionModule],
+    imports: [CommonModule, RouterModule, NgbModule, AccordionModule, TranslateModule.forChild()],
   declarations: [FooterComponent, NavbarComponent, SidebarComponent],
   exports: [FooterComponent, NavbarComponent, SidebarComponent]
 })

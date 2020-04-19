@@ -11,7 +11,9 @@
             </div>
             <div class=" col-sm-12">
               <div class=" btn-group btn-group-toggle float-right" data-toggle="buttons">
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[0];updateOptions();clicked=true;clicked1=false;clicked2=false" [ngClass]="{'active':clicked===true}">
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="myChartData.options = this.gradientChartOptionsLinearConfiguration;
+                myChart1.options = this.gradientChartOptionsLinearConfiguration; myChart2.options = this.gradientChartOptionsLinearConfiguration;
+                myChartData.update(); myChart1.update(); myChart2.update(); clicked1=true;clicked2=false" [ngClass]="{'active':clicked1===true}">
                   <input checked="checked" name="options" type="radio" />
 
                   <span class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
@@ -21,7 +23,9 @@
                     <i class=" tim-icons icon-single-02"> </i>
                   </span>
                 </label>
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[0];updateOptions();clicked=false;clicked1=true;clicked2=false" [ngClass]="{'active':clicked1===true}">
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="myChartData.options = this.gradientChartOptionsLogarithmicConfiguration;
+                myChart1.options = this.gradientChartOptionsLogarithmicConfiguration;  myChart2.options = this.gradientChartOptionsLogarithmicConfiguration;
+                myChartData.update(); myChart1.update(); myChart2.update();  clicked1=false;clicked2=true" [ngClass]="{'active':clicked2===true}">
                   <input class=" d-none d-sm-none" name="options" type="radio"/>
                   <span class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
                     {{'logarithmic' | translate}}
@@ -36,7 +40,7 @@
           </div>
         </div>
         <div class=" card-body">
-          <div class=" chart-area"><canvas id="chartBig1"> </canvas></div>
+          <div class=" chart-area"><canvas id="totalCaseChart"> </canvas></div>
         </div>
       </div>
     </div>
@@ -53,7 +57,7 @@
           </h3>
         </div>
         <div class=" card-body">
-          <div class=" chart-area"><canvas id="chartLineRed"> </canvas></div>
+          <div class=" chart-area"><canvas id="totalDeathChart"> </canvas></div>
         </div>
       </div>
     </div>
@@ -66,7 +70,7 @@
           </h3>
         </div>
         <div class=" card-body">
-          <div class=" chart-area"><canvas id="CountryChart"> </canvas></div>
+          <div class=" chart-area"><canvas id="dailyNewCaseChart"> </canvas></div>
         </div>
       </div>
     </div>
@@ -79,7 +83,7 @@
           </h3>
         </div>
         <div class=" card-body">
-          <div class=" chart-area"><canvas id="chartLineGreen"> </canvas></div>
+          <div class=" chart-area"><canvas id="activeCaseChart"> </canvas></div>
         </div>
       </div>
     </div>
@@ -167,4 +171,3 @@
   </div>
 </div>
 </div>
-<!--<app-footer></app-footer>-->

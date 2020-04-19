@@ -2,6 +2,7 @@
   <div class=" container-fluid">
     <div class=" navbar-wrapper">
       <div class=" navbar-toggle d-inline">
+
         <button class=" navbar-toggler" type="button" (click)="sidebarToggle()">
           <span class=" navbar-toggler-bar bar1"> </span>
           <span class=" navbar-toggler-bar bar2"> </span>
@@ -9,6 +10,7 @@
         </button>
       </div>
       <a class=" navbar-brand" href="javascript:void(0)"> {{ getTitle() }} </a>
+
     </div>
     <button
       aria-label="Toggle navigation"
@@ -37,6 +39,7 @@
             <span class=" d-lg-none d-md-block"> Search a case by Case code or PUI name </span>
           </button>
         </li>
+
 
 <!------------------------------------------HEADER DROPDOWN-------------------------------------->
 <!----------------------------------------------------------------------------------------------->
@@ -74,7 +77,16 @@
           </ul>
         </li>
         <li class=" separator d-lg-none"></li>
+
       </ul>
+      <label>
+        <li class="nav-item">
+          {{ 'choose-language' | translate }}
+          <select #langSelect (change)="translate.use(langSelect.value)">
+            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang" >{{
+              lang }}</option>
+          </select>
+      </label>
     </div>
   </div>
 </nav>

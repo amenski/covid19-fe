@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import {TranslateService} from "@ngx-translate/core";
 
 declare interface RouteInfo {
   path: string;
@@ -9,7 +10,7 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   {
     path: "/admin/dashboard",
-    title: "Dashboard",
+    title: "",
     icon: "icon-chart-pie-36",
     class: ""
   },
@@ -50,6 +51,7 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-single-02",
     class: ""
   }
+
 ];
 
 @Component({
@@ -60,7 +62,7 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor() {}
+  constructor(public translate: TranslateService) {}
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);

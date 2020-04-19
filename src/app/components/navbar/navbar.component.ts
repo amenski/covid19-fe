@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import {BehaviorSubject} from "rxjs";
 import {User} from '../../models/user';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: "app-navbar",
@@ -26,7 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     location: Location,
     private element: ElementRef,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,  public translate: TranslateService
   ) {
     this.location = location;
     this.sidebarVisible = false;

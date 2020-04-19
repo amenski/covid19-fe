@@ -15,13 +15,23 @@ import {MatPaginator} from "@angular/material/paginator";
 export class AdminDashboardComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  /*Chart variables*/
   public canvas : any;
   public ctx;
   public datasets: any;
   public data: any;
   public myChartData;
-  public clicked: boolean = true;
-  public clicked1: boolean = false;
+
+  public myChart1;
+  public myChart2;
+  public myChart3;
+  public myChart4;
+  public gradientChartOptionsLogarithmicConfiguration: any;
+  public gradientChartOptionsLinearConfiguration: any;
+
+  /*variables to toggle between linear and logarithmic scales*/
+  public clicked1: boolean = true;
   public clicked2: boolean = false;
 
   public totalDeath: number;
@@ -34,18 +44,13 @@ export class AdminDashboardComponent implements OnInit {
   public dailyTotalCases: number[] = [];
   public dailyNewCases: number[] = [];
   public dailyActiveCases: number[] = [];
-  sortType: string;
-  sortReverse: boolean;
 
-  displayedColumns: string[] = ['reportDate', 'totalCases', 'newCases', 'totalDeaths', 'newDeaths',
-    'activeCases', 'criticalCases', 'recovered'];
-  dataSource: any;
+  displayedColumns: string[] = ['reportDate', 'totalCases', 'newCases', 'totalDeaths', 'newDeaths', 'activeCases', 'criticalCases', 'recovered'];
+  dataSource: any; /*holds cases stat data from BE*/
 
   constructor(private dailyStatusService: DailyStatusService) {
     this.dailyStatusService.getAllCaseStats().subscribe(result=>{
-      //this.caseStats = result;
-      this.caseStats = result.returnValue.list
-      // console.log("REsult: "+ res);
+      this.caseStats = result.returnValue.list;
 
       this.dataSource =  new MatTableDataSource(this.caseStats);
       this.dataSource.sort = this.sort;
@@ -165,7 +170,7 @@ export class AdminDashboardComponent implements OnInit {
         }
       };
 
-      let gradientChartOptionsConfigurationWithTooltipRed: any = {
+      this.gradientChartOptionsLinearConfiguration = {
         maintainAspectRatio: false,
         legend: {
           display: false
@@ -184,6 +189,57 @@ export class AdminDashboardComponent implements OnInit {
         responsive: true,
         scales: {
           yAxes: [{
+            type: 'linear',
+            barPercentage: 1.6,
+            gridLines: {
+              drawBorder: false,
+              color: 'rgba(29,140,248,0.0)',
+              zeroLineColor: "transparent",
+            },
+            ticks: {
+              suggestedMin: 60,
+              suggestedMax: 125,
+              padding: 20,
+              fontColor: "#9a9a9a"
+            }
+          }],
+
+          xAxes: [{
+            barPercentage: 1.6,
+            gridLines: {
+              drawBorder: false,
+              color: 'rgba(233,32,16,0.1)',
+              zeroLineColor: "transparent",
+            },
+            ticks: {
+              padding: 20,
+              fontColor: "#9a9a9a"
+            }
+          }]
+        }
+      };
+
+
+      this.gradientChartOptionsLogarithmicConfiguration = {
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+
+        tooltips: {
+          backgroundColor: '#f5f5f5',
+          titleFontColor: '#333',
+          bodyFontColor: '#666',
+          bodySpacing: 4,
+          xPadding: 12,
+          mode: "nearest",
+          intersect: 0,
+          position: "nearest"
+        },
+        responsive: true,
+        scales: {
+          yAxes: [{
+            type: 'logarithmic',
             barPercentage: 1.6,
             gridLines: {
               drawBorder: false,
@@ -358,7 +414,7 @@ export class AdminDashboardComponent implements OnInit {
         }
       };
 
-      this.canvas = document.getElementById("chartLineRed");
+      this.canvas = document.getElementById("totalDeathChart");
       this.ctx = this.canvas.getContext("2d");
 
       let gradientStroke1 = this.ctx.createLinearGradient(0, 10, 0, 5);
@@ -369,12 +425,12 @@ export class AdminDashboardComponent implements OnInit {
 
       /*****************************************TOTAL DEATHS****************************************************/
 
-      console.log("total cases: "+ this.dailyTotalCases);
       let data1 = {
         labels: ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
           'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
           'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
-          'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18'],
+          'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
+          'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25'],
         datasets: [{
           label: "Total Deaths Stat",
           fill: true,
@@ -389,21 +445,20 @@ export class AdminDashboardComponent implements OnInit {
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
-          pointRadius: 4,
+          pointRadius: 1,
           //data: [80, 100, 70, 80, 120, 80],
           data: this.dailyTotalDeaths,
         }]
       };
-      let myChart1 = new Chart(this.ctx, {
+      this.myChart1 = new Chart(this.ctx, {
         type: 'line',
         data: data1,
-        options: gradientChartOptionsConfigurationWithTooltipRed
+        options: this.gradientChartOptionsLinearConfiguration
       });
 
 
-
       /**************************************************CURRENTLY INFECTED************************************************/
-      this.canvas = document.getElementById("chartLineGreen");
+      this.canvas = document.getElementById("activeCaseChart");
       this.ctx = this.canvas.getContext("2d");
 
 
@@ -417,7 +472,8 @@ export class AdminDashboardComponent implements OnInit {
         labels: ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
           'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
           'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
-          'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18'],
+          'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
+          'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25'],
         datasets: [{
           label: "Currently active cases",
           fill: true,
@@ -432,26 +488,24 @@ export class AdminDashboardComponent implements OnInit {
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
-          pointRadius: 4,
+          pointRadius: 1,
           data: this.dailyActiveCases,
         }]
       };
 
-      let myChart2 = new Chart(this.ctx, {
+      /*****************************************TOTAL COVID-19 CASES****************************************************/
+      this.myChart2 = new Chart(this.ctx, {
         type: 'line',
         data: data2,
         options: gradientChartOptionsConfigurationWithTooltipGreen
 
       });
 
-
-
-      /*****************************************TOTAL COVID-19 CASES****************************************************/
-
       let chart_labels = ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
         'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
         'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
-        'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18'];
+        'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
+        'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25'];
       this.datasets = [
         [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
         [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
@@ -460,7 +514,7 @@ export class AdminDashboardComponent implements OnInit {
       //  this.data = this.datasets[0];
       this.data = this.dailyTotalCases;
 
-      this.canvas = document.getElementById("chartBig1");
+      this.canvas = document.getElementById("totalCaseChart");
       this.ctx = this.canvas.getContext("2d");
 
       let gradientStroke3 = this.ctx.createLinearGradient(0, 230, 0, 50);
@@ -469,7 +523,10 @@ export class AdminDashboardComponent implements OnInit {
       gradientStroke3.addColorStop(0.4, 'rgba(233,32,16,0.0)');
       gradientStroke3.addColorStop(0, 'rgba(233,32,16,0)'); //red colors
 
-      let config = {
+      // let config = {
+      //
+      // };
+      this.myChartData = new Chart(this.ctx, {
         type: 'line',
         data: {
           type: 'category',
@@ -488,17 +545,15 @@ export class AdminDashboardComponent implements OnInit {
             pointBorderWidth: 20,
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
-            pointRadius: 4,
+            pointRadius: 1,
             data: this.data,
           }]
         },
-        options: gradientChartOptionsConfigurationWithTooltipRed
-      };
-      this.myChartData = new Chart(this.ctx, config);
+        options: this.gradientChartOptionsLinearConfiguration});
 
 
       /*********************************************DAILY NEW CASES********************************************/
-      this.canvas = document.getElementById("CountryChart");
+      this.canvas = document.getElementById("dailyNewCaseChart");
       this.ctx  = this.canvas.getContext("2d");
       let gradientStroke4 = this.ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -507,7 +562,7 @@ export class AdminDashboardComponent implements OnInit {
       gradientStroke4.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
 
 
-      let myChart3 = new Chart(this.ctx, {
+      this.myChart3 = new Chart(this.ctx, {
         type: 'bar',
         responsive: true,
         legend: {
@@ -517,7 +572,8 @@ export class AdminDashboardComponent implements OnInit {
           labels: ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
             'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
             'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
-            'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18'],
+            'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
+            'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25'],
           datasets: [{
             label: "New cases",
             fill: true,
@@ -539,12 +595,24 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
 
-
+  convertDate(date: string){
+    return new Date(date).toDateString();
   }
   public updateOptions() {
-    this.myChartData.data.datasets[0].data =  this.data;
-    //this.myChartData.update();
+  //   alert("updating scale: "+this.myChart1.options.scales.yAxes.type);
+  //
+  //  // if( this.myChart2.options===this.gradientChartOptionsLinearConfiguration){
+  //     this.myChart2.options = this.gradientChartOptionsLogarithmicConfiguration;
+  // ///  }
+  //  // if( this.myChart2.options===this.gradientChartOptionsLogarithmicConfiguration){
+  //    // this.myChart2.options = this.gradientChartOptionsLinearConfiguration;
+  //  // }
+  //
+  //   this.myChart2.update();
+  //  this.myChartData.data.datasets[0].data =  this.data;
+  //  this.myChartData.update();
   }
 
 }

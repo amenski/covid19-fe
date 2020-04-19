@@ -24,7 +24,6 @@ import { LandingLayoutComponent } from './layouts/landing-layout/landing-layout.
 import {LandingLayoutModule} from "./layouts/landing-layout/landing-layout.module";
 import { RumorListComponent } from './pages/rumors/rumor-list/rumor-list.component';
 import { ScreeningComponent } from './pages/screening/screening.component';
-import { RumorInvestigationComponent } from './pages/rumors/rumor-investigation/rumor-investigation.component';
 
 // import ngx-translate and the http loader
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -53,7 +52,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
         AccordionModule.forRoot(),
         LandingLayoutModule
     ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LandingLayoutComponent, RumorInvestigationComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LandingLayoutComponent],
   providers: [
     NativeDateAdapter,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {QuestionControlService} from "../../../services/question-control.service";
 import {ModelQuestionnier} from "../../../models/modelQuestionnier";
+import {ModelQuestionnaire} from "../../../models/modelQuestionnaire";
+import {AttributesService} from "../../../services/attributes.service";
+import {ModelAttribute} from "../../../models/modelAttribute";
 
 @Component({
   selector: 'app-question-list',
@@ -11,12 +14,13 @@ import {ModelQuestionnier} from "../../../models/modelQuestionnier";
 export class QuestionListComponent implements OnInit {
   questionnaireForm: FormGroup;
 
-  questions: ModelQuestionnier[];
+  questions: ModelQuestionnaire[];
 
   constructor(private questionControlService: QuestionControlService){
 
   }
   ngOnInit() {
+
     this.questionControlService.getAllQuestions().subscribe(result=>{
       this.questions = result.returnValue.questions;
     });

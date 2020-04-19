@@ -8,6 +8,10 @@ import {ModelEnumIdValue} from "../../../models/modelEnumIdValue";
 import {Option} from "../../../models/option";
 import {RequestSaveQuestionnier} from "../../../models/requestSaveQuestionnier";
 import {AlertService} from "../../../services/alert.service";
+import {AttributesService} from "../../../services/attributes.service";
+import {ModelAttribute} from "../../../models/modelAttribute";
+import {RequestSaveQuestionnaire} from "../../../models/requestSaveQuestionnaire";
+import get = Reflect.get;
 
 @Component({
   selector: 'app-add-questions',
@@ -22,36 +26,23 @@ export class AddQuestionsComponent implements OnInit {
     autoClose: false,
     keepAfterRouteChange: false
   };
-  categories =  {
-    "category": [
-      {
-        "id": "1040",
-        "value": "PUI_INFO"
-      },
-      {
-        "id": "1041",
-        "value": "SYMPTOMS"
-      },
-      {
-        "id": "1042",
-        "value": "EXISTING_CONDITION"
-      }
-    ]
-  }
+  categories = ["PUI_INFO", "SYMPTOMS", "EXISTING_CONDITION"];
+
   arrayItems: Option[] = [];
   firstOption: Option;
-  requestSaveQuestion: RequestSaveQuestionnier;
+  requestSaveQuestion: RequestSaveQuestionnaire;
   questionnaireControl = new FormControl();
-  categoryOptions: Observable<({ id: string; value: string } | { id: string; value: string } | { id: string; value: string })[]>;
+  categoryOptions: Observable<string[]>;
   constructor(public fb: FormBuilder, private questionnaireService: QuestionControlService,
-              private alertService: AlertService) {
+              private alertService: AlertService, private attributesService: AttributesService) {
     this.questionsForm = this.fb.group({
-      question: '', options: this.fb.array([], this.minInputFields()),
+      question: '', options: this.fb.array([]),
       category: '', parentId: '',
       description: '', modifiedBy: '',
       insertDate: '', modifiedDate: '',
     })
   }
+  attributes: ModelAttribute[];
 
   get options() {
     return this.questionsForm.get('options') as FormArray;
@@ -63,15 +54,19 @@ export class AddQuestionsComponent implements OnInit {
       startWith(''),
       map(value => this._filterCategory(value))
     );
+
+    this.attributesService.getAllAttributes().subscribe(result=>{
+      this.attributes = result.returnValue.attributes;
+    });
+
   }
 
-  minInputFields(): ValidatorFn {
-    const validator: ValidatorFn = (formArray: FormArray) => {
-      const totalCount = formArray.controls.map(control => control.value).reduce((prev, next) => next ? prev + next : prev, 0);
-      return totalCount >= 1 ? null : {notSelected: true};
-    };
-    return validator;
+  getAttribute(name: string): ModelAttribute{
+    let attr;
+    attr =  this.attributes.filter(attr => attr.attName===name);
+    return attr;
   }
+
 
   addQuestion() {
     // let formData: any = new FormData();
@@ -83,12 +78,15 @@ export class AddQuestionsComponent implements OnInit {
     // formData.append("modifiedBy", this.questionsForm.get('modifiedBy').value);
     // formData.append("insertDate", this.questionsForm.get('insertDate').value);
     // formData.append("modifiedDate", this.questionsForm.get('modifiedDate').value);
-    //alert("Category: "+this.questionsForm.get('category').value);
+
+
+    alert("Category: "+this.getAttribute('PUI_INFO'));
+
     this.requestSaveQuestion = {
       question: this.questionsForm.get('question').value,
-      options: this.questionsForm.get('options').value.toString(),
+      options: this.questionsForm.get('options').value,
       // category:  this.questionsForm.get('category').value,
-      category: {id: 1040},
+      category: {id: 1040, value: this.questionsForm.get('category').value},
       parentId:  this.questionsForm.get('parentId').value,
       description:  this.questionsForm.get('description').value,
       modifiedBy:  this.questionsForm.get('modifiedBy').value,
@@ -104,7 +102,7 @@ export class AddQuestionsComponent implements OnInit {
 
   private _filterCategory(value: string) {
     const filterValue = value.toLowerCase();
-    return this.categories.category;
+    return this.categories;
   }
 
   removeOption(arrayItem: Option) {
