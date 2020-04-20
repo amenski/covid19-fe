@@ -16,7 +16,7 @@ export class RumorListComponent implements OnInit {
   @ViewChild(MatSort) matSort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
    rumors: ModelRumor[] = [];
-   displayedColumns: string[] = ['reportDate', 'suspectName', 'reportingPersonName', 'relationWithSuspect', 'phoneNumber1', 'phoneNumber2', 'extra'];
+   displayedColumns: string[] = ['reportDate', 'suspectName', 'reportingPersonName', 'relationWithSuspect', 'phoneNumber1', 'extra'];
 
   dataSource: any;
 

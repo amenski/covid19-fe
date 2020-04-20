@@ -9,12 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ModelRumor } from './modelRumor';
+import { ResponseBase } from './responseBase';
 
 
-export interface ModelAttribute { 
-    attName?: string;
-    attType?: string;
-    attCode?: string;
-    attLabel?: string;
-    attDesc?: string;
+export interface ResponseModelRumorSingle extends ResponseBase { 
+    returnValue?: ModelRumor;
 }

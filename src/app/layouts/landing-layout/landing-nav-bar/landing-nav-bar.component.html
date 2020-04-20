@@ -32,7 +32,7 @@
       <label>
         <li class="nav-item">
         {{ 'choose-language' | translate }}
-        <select #langSelect (change)="translate.use(langSelect.value)">
+        <select #langSelect (change)="translate.use(langSelect.value)" class="form-control">
           <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang" >{{
             lang }}</option>
         </select>

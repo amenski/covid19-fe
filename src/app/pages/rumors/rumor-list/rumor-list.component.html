@@ -32,16 +32,10 @@
             <td mat-cell *matCellDef="let rumor">{{rumor.phoneNumber1}}</td>
           </ng-container>
 
-          <!-- Phone Number 2 -->
-          <ng-container matColumnDef="phoneNumber2">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number 2 </th>
-            <td mat-cell *matCellDef="let rumor"> {{rumor.phoneNumber2}} </td>
-          </ng-container>
-
           <!-- Extra Column -->
           <ng-container matColumnDef="extra">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Investigate </th>
-            <td mat-cell *matCellDef="let rumor">  </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+            <td mat-cell *matCellDef="let rumor"> <a href="#">Investigate</a> </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -40,6 +40,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatRadioModule} from "@angular/material/radio";
 import {TranslateModule} from "@ngx-translate/core";
 import {RumorInvestigationComponent} from "../../pages/rumors/rumor-investigation/rumor-investigation.component";
+import {ContactTracingComponent} from "../../pages/contact-tracing/contact-tracing.component";
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import {RumorInvestigationComponent} from "../../pages/rumors/rumor-investigatio
     CasesComponent,
     CaseListComponent,
     AddCasesComponent,
+    ContactTracingComponent,
     RumorInvestigationComponent,
     FollowUpComponent,
     HealthFacilitiesComponent,

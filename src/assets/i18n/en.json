@@ -50,11 +50,57 @@
   "rumor-sucdess-message": "Rumor has been reported, We will get back to you as soon as possible",
 
   "sidebar-title": "Covid-19 Case Report",
-  "sidebar-dashboard": "Dashboard",
-  "sidebar-cases": "Covid-19 Cases",
-  "sidebar-community-inspection": "Community Inspection",
-  "sidebar-questionnaire": "Questionnaire",
-  "sidebar-rumor-investigation": "Rumor Investigation",
+  "Dashboard": "Dashboard",
+  "Covid-19 Cases": "Covid-19 Cases",
+  "Contact Tracing": "Contact Tracing",
+  "Community Inspection": "Community Inspection",
+  "Questionnaire": "Questionnaire",
+  "Rumors Investigation": "Rumor Investigation",
   "sidbar-health-factilities": "Health Facilities",
-  "sidebar-user-profile": "User Profile"
+  "User Profile": "User Profile",
+
+  "add-case-pui-basic-info": "BASIC PATIENT UNDER INVESTIGATION (PUI) INFO",
+  "add-case-pui-case-code": "CASE CODE",
+  "add-case-name": "First name",
+  "add-case-last-name": "Last name",
+  "add-case-gender": "Gender",
+  "add-case-birth-date": "Birth Date",
+  "add-case-phone": "Phone number",
+  "add-case-passport-num": "Passport / ID Number",
+  "add-case-nationality": "Nationality",
+  "add-case-occupation": "Occupation",
+  "add-case-incident1": "Incident Phone 1",
+  "add-case-incident2": "Incident Phone 2",
+
+  "add-case-pui-res-info": "RESIDENTIAL INFO",
+  "add-case-cor": "Country of Residence",
+  "add-case-coo": "Country of Origin",
+  "add-case-region": "Region",
+  "add-case-subcity": "Subcity / Zone",
+  "add-case-woreda": "Woreda",
+  "add-case-kebele": "Kebele",
+  "add-case-street-name": "Street Name",
+  "add-case-house-no": "House No.",
+  "add-case-latitude": "Latitude",
+  "add-case-longitude": "Longitude",
+
+  "add-case-general": "GENERAL",
+  "add-case-travel-history": "Travel History",
+  "add-case-admitted-to-facility": "Admitted To Facility",
+
+  "add-case-pui-status-result": "PUI STATUS AND RESULT",
+  "add-case-pui-current-status": "PUI Current Status",
+  "add-case-pui-parent-case-code": "Parent Case code",
+  "add-case-pui-presumptive-result": "Presumptive Result",
+  "add-case-pui-confirmed-result": "Confirmed Result",
+
+  "add-case-report-info": "REPORT INFO",
+  "add-case-identified-by": "Case Identified By.",
+  "add-case-modified-by": "Case Last Modified By",
+  "add-case-report-date": "Report Date",
+  "add-case-modified-date": "Modified Date",
+
+  "add-case-register-button": "Register Case",
+  "case-follow-up-link": "Follow up"
+
 }

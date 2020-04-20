@@ -1,4 +1,4 @@
-<form ngNativeValidate [formGroup]="followupForm" (ngSubmit) = SearchPUI()>
+<form ngNativeValidate [formGroup]="followupForm" (ngSubmit)="onSubmit()">
 
 <div class=" content">
   <div class=" row">
@@ -12,26 +12,65 @@
         <div class=" card-body">
 
           <div class="row">
-            <div class=" col-sm-6 text-left">
-              <mat-form-field>
-                <mat-icon matPrefix>search</mat-icon>
-                <input matInput type="search" formControlName="searchTerm" placeholder="Enter {{this.followupForm.get('criteria').value}}" class="search-input" required>
-              </mat-form-field>
-              <button type="submit" class="form-control">Search</button>
-            </div>
-            <div class=" col-sm-6 text-left">
+            <div class=" col-md-6 text-left">
               <div class=" form-group">
                 <section class="criteria-section">
-                  <strong><label class="criteria-margin">Search By: </label></strong>
+                  <strong><label class="criteria-margin">Search PUI By: </label></strong>
                   <mat-radio-group [(ngModel)]="searchCriteria" formControlName="criteria">
-                    <mat-radio-button class="symptoms-margin" value="Case Code">Case Code</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="Region">Region</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="Result">Result</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="Status">Status</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="Recent Travel">Recent Travel</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Case code"  >Case Code</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Other" [checked]="true">Other</mat-radio-button>
                   </mat-radio-group>
                 </section>
               </div>
+            </div>
+
+          </div>
+
+<!--          SEARCH BY OTHER CRITERIA-->
+          <div class="row" *ngIf="searchCriteria==='Other'">
+              <div class=" col-sm-3 text-left">
+                 <input type="text" formControlName="region" placeholder="Region"
+                       [matAutocomplete]="rAuto" class=" form-control" (ngModelChange)="_searchRegion(this.followupForm.get('region').value)">
+                  <mat-autocomplete autoActiveFirstOption #rAuto="matAutocomplete">
+                    <mat-option *ngFor="let region of regionsFilteredOptions | async" [value]="region">
+                      {{region}}
+                    </mat-option>
+                  </mat-autocomplete>
+              </div>
+              <div class="col-sm-3 text-left">
+
+                <input type="text" formControlName="recentTravelTo" placeholder="Recent Travel To"
+                       [matAutocomplete]="crAuto" class=" form-control" (ngModelChange)="_searchCountry(this.followupForm.get('recentTravelTo').value)">
+                <mat-autocomplete autoActiveFirstOption #crAuto="matAutocomplete">
+                  <mat-option *ngFor="let countryR of countriesFilteredOptions | async" [value]="countryR">
+                    {{countryR}}
+                  </mat-option>
+                </mat-autocomplete>
+              </div>
+
+                <div class="col-sm-3 text-left">
+<!--                  <input type="text" formControlName="testResultId" placeholder="Test Result ID" class="form-control" >-->
+                  <select  class="form-control" formControlName="testResultId" >
+                    <option *ngFor="let result of results" [value]="result.attCode" class="form-control" placeholder="Test Result">
+                      {{result.attName }}</option>
+                  </select>
+                </div>
+                <div class="col-sm-3 text-left">
+<!--                  <input type="text" formControlName="statusId" placeholder="Status ID" class="form-control" >-->
+                  <select  class="form-control" formControlName="statusId" >
+                    <option *ngFor="let stat of status" [value]="stat.attCode" class="form-control" placeholder="Current Status">
+                      {{stat.attName }}</option>
+                  </select>
+                </div>
+
+            <button type="submit" class="form-control" (click)="onByCodeClick()">Search PUI</button>
+          </div>
+          <alert></alert>
+<!--          SEARCH BY CASE CODE-->
+          <div class="row" *ngIf="searchCriteria==='Case code'">
+            <div class=" col-sm-6 text-left">
+                <input type="text" class="form-control" formControlName="caseCode" placeholder="Enter Case code" required>
+              <button type="submit" class="form-control" (click)="onByOtherClick()">Search PUI</button>
             </div>
           </div>
 
@@ -39,7 +78,45 @@
       </div>
     </div>
 
-    <div class=" col-md-12" *ngIf="showSearchResult" >
+    <!--    SEARCH RESULT - BY CRITERIA-->
+    <div class=" col-md-12" *ngIf="showByOtherSearchResult && caseSearchResult.length!=0" >
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">SEARCH RESULT</h4>
+        </div>
+        <div class=" card-body">
+          <alert></alert>
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+              <tr>
+                <th>{{'add-case-pui-case-code' | translate}}</th>
+                <th>{{'add-case-pui-presumptive-result' | translate}}</th>
+                <th>{{'add-case-pui-confirmed-result' | translate}}</th>
+                <!--          <th>{{'add-case-pui-current-status' | translate}}</th>-->
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let case of caseSearchResult">
+                <td>{{case.caseCode}}</td>
+                <td>{{case.presumptiveResult.value}}</td>
+                <td>{{case.confirmedResult.value}}</td>
+                <!--          <td>{{case.status.value}}</td>-->
+                <td><a href="#">{{'case-follow-up-link' | translate}}</a></td>
+
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+<!--    SEARCH RESULT - BY CASE CODE-->
+    <div class=" col-md-12" *ngIf="showByCodeSearchResult" >
       <div class=" card">
         <div class=" card-header">
           <h4 class=" card-title">SEARCH RESULT</h4>
@@ -47,32 +124,35 @@
         <div class=" card-body">
           <div class="row">
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Case code {{caseFollowUp.caseCode}}  </h2>
+              <h2 class=" card-title">Case code {{caseInfo.caseCode}}  </h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Name {{caseFollowUp.firstName}} {{caseFollowUp.lastName}}</h2>
-              <h2 class=" card-title"> {{caseFollowUp.lastName}}</h2>
+              <h2 class=" card-title">Name {{caseInfo.firstName}} {{caseInfo.lastName}}</h2>
+              <h2 class=" card-title"> {{caseInfo.lastName}}</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Status ({{caseFollowUp.status.value}})</h2>
+              <h2 class=" card-title">Status ({{caseInfo.status.value}})</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Parent Case code ({{caseFollowUp.parentCaseCode}})</h2>
+              <h2 class=" card-title">Parent Case code ({{caseInfo.parentCaseCode}})</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Presumptive Result ({{caseFollowUp.presumptiveResult.value}})</h2>
+              <h2 class=" card-title">Presumptive Result ({{caseInfo.presumptiveResult.value}})</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Confirmed Result ({{caseFollowUp.confirmedResult.value}})</h2>
+              <h2 class=" card-title">Confirmed Result ({{caseInfo.confirmedResult.value}})</h2>
             </div>
           </div>
+          <alert></alert>
         </div>
+
       </div>
+
     </div>
 
   </div>
 
-  <alert></alert>
+
 </div>
 
 

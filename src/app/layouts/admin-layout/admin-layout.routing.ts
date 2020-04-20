@@ -12,6 +12,7 @@ import {AdminDashboardComponent} from "../../pages/admin-dashboard/admin-dashboa
 import {RumorListComponent} from "../../pages/rumors/rumor-list/rumor-list.component";
 import {ScreeningComponent} from "../../pages/screening/screening.component";
 import {RumorInvestigationComponent} from "../../pages/rumors/rumor-investigation/rumor-investigation.component";
+import {ContactTracingComponent} from "../../pages/contact-tracing/contact-tracing.component";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
@@ -19,6 +20,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: '', redirectTo: "dashboard", pathMatch: "full" },
   { path: 'dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard]},
   { path: 'cases', component: CasesComponent, canActivate: [AuthGuard]},
+  { path: 'contact-tracing', component: ContactTracingComponent, canActivate: [AuthGuard]},
   { path: 'health-facilities', component: HealthFacilitiesComponent, canActivate: [AuthGuard]},
   { path: 'rumor-list', component: RumorListComponent, canActivate: [AuthGuard]},
   { path: 'investigate-rumor', component: RumorInvestigationComponent, canActivate: [AuthGuard]},

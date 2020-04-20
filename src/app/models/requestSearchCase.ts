@@ -11,10 +11,9 @@
  */
 
 
-export interface ModelAttribute { 
-    attName?: string;
-    attType?: string;
-    attCode?: string;
-    attLabel?: string;
-    attDesc?: string;
+export interface RequestSearchCase { 
+    testResultId?: number;
+    statusId?: number;
+    region?: string;
+    recentTravelTo?: string;
 }

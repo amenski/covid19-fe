@@ -5,25 +5,22 @@
       <table class=" table tablesorter" id="">
         <thead class=" text-primary">
         <tr>
-          <th>ID</th>
-          <th>CASE CODE</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Presumptive Result</th>
-          <th>Confirmed Result</th>
-          <th>Status</th>
+          <th>{{'add-case-pui-case-code' | translate}}</th>
+          <th>{{'add-case-pui-presumptive-result' | translate}}</th>
+          <th>{{'add-case-pui-confirmed-result' | translate}}</th>
+          <th>{{'add-case-region' | translate}}</th>
+<!--          <th>{{'add-case-pui-current-status' | translate}}</th>-->
           <th></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let case of cases">
-          <td>{{case.id}}</td>
           <td>{{case.caseCode}}</td>
-          <td>{{case.firstName}}</td>
-          <td>{{case.lastName}}</td>
-          <td>{{case.presumptiveResult}}</td>
-          <td>{{case.confirmedResult}}</td>
-          <td>{{case.status}}</td>
+          <td>{{case.presumptiveResult.value}}</td>
+          <td>{{case.confirmedResult.value}}</td>
+          <td>{{case.region}}</td>
+<!--          <td>{{case.status.value}}</td>-->
+          <td><a href="#">{{'case-follow-up-link' | translate}}</a></td>
 
         </tr>
         </tbody>

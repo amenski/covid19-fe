@@ -31,7 +31,7 @@ export class AddCasesComponent implements OnInit {
   result: string[] = ['TEST_PENDING', 'TEST_NEGATIVE', 'TEST_POSITIVE'];
 
 
-  genders: string[] = ['Male', 'Female'];
+  genders: string[] = ['M', 'F'];
 
   myControl = new FormControl();
   regions: string[] =
@@ -279,6 +279,7 @@ export class AddCasesComponent implements OnInit {
     }
 
     this.casesService.createNewCase(this.requestSave).subscribe(result=>{
+      alert(result.message);
       this.alertService.success("Case Registered!", this.options)
      // alert("Case Registered with code: " + result.toString());
 

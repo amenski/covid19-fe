@@ -28,6 +28,7 @@ import { ScreeningComponent } from './pages/screening/screening.component';
 // import ngx-translate and the http loader
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { ContactTracingComponent } from './pages/contact-tracing/contact-tracing.component';
 
 @NgModule({
     imports: [

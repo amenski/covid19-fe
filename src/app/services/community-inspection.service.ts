@@ -7,6 +7,8 @@ import {RequestSaveFacility} from "../models/requestSaveFacility";
 import {ResponseBase} from "../models/responseBase";
 import {ResponsePuiFollowUpSingle} from "../models/responsePuiFollowUpSingle";
 import {ResponseCaseSingle} from "../models/responseCaseSingle";
+import {RequestSearchCase} from "../models/requestSearchCase";
+import {ResponseCaseList} from "../models/responseCaseList";
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +24,13 @@ export class CommunityInspectionService {
     return this.httpClient.get<ResponseCaseSingle>(followUpUrl,{params: params})
   }
 
-  // createNewFacility(requestSaveFacility: RequestSaveFacility): Observable<ResponseBase>{
-  //   const url = BASE_URL+'/v1/api/facility';
-  //   // let puiCase = {};
-  //   // formData.forEach((value, key) => {
-  //   //   puiCase[key] = value;
-  //   //
-  //   //   console.log(key+" : "+value);
-  //   // });
-  //   // let json = JSON.stringify(puiCase);
-  //   return this.httpClient.put<ResponseBase>(url, requestSaveFacility);
-  // }
+  getCaseFollowUp(caseCode: string): Observable<ResponsePuiFollowUpSingle>{
+    let followUpUrl = BASE_URL+"/v1/follow-up/"+caseCode;
+    return this.httpClient.get<ResponsePuiFollowUpSingle>(followUpUrl);
+  }
+
+  searchCaseByCriteria(searchCase: RequestSearchCase):  Observable<ResponseCaseList> {
+    let followUpUrl = BASE_URL+"/v1/case/";
+    return this.httpClient.post<ResponseCaseList>(followUpUrl, searchCase);
+  }
 }
