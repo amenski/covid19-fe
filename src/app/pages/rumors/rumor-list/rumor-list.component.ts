@@ -6,9 +6,10 @@ import {MatPaginator} from "@angular/material/paginator";
 import {ModelRumor} from "../../../models/modelRumor";
 import {FormGroup} from "@angular/forms";
 import {AlertService} from "../../../services/alert.service";
+import {NavigationExtras, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-rumor-investigation',
+  selector: 'app-rumor-list',
   templateUrl: './rumor-list.component.html',
   styleUrls: ['./rumor-list.component.scss']
 })
@@ -19,8 +20,11 @@ export class RumorListComponent implements OnInit {
    displayedColumns: string[] = ['reportDate', 'suspectName', 'reportingPersonName', 'relationWithSuspect', 'phoneNumber1', 'extra'];
 
   dataSource: any;
+  showInvestigate: boolean = false;
+  rumorToInvestigate: ModelRumor;
 
-  constructor(private rumorsService: RumorsService, private alertService: AlertService) {
+  constructor(private rumorsService: RumorsService, private alertService: AlertService,
+              private router: Router) {
     this.rumorsService.getAllRumors().subscribe(result=>{
 
       this.rumors = result.returnValue.list;
@@ -34,4 +38,8 @@ export class RumorListComponent implements OnInit {
 
   }
 
+  investigateRumor(rumor: any) {
+    this.rumorToInvestigate = rumor;
+    this.showInvestigate = true;
+  }
 }

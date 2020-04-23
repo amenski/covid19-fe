@@ -1,3 +1,35 @@
+<form ngNativeValidate [formGroup]="tracingForm"  (ngSubmit)="getContacts()">
 <div class=" content">
-  <p>contact-tracing works!</p>
+  <div class=" row">
+
+    <!--    CONTROLS-->
+    <div class=" col-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">{{ "Trace Contacts of Confirmed Cases" | uppercase}}</h4>
+
+        </div>
+        <div class=" card-body">
+
+          <div class="row">
+            <div class=" col-md-6 text-left">
+              <div class=" form-group">
+                <label>Case code:</label>
+                <input type="text" class="form-control"  formControlName="caseCode" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" required/>
+              </div>
+            </div>
+
+          </div>
+
+          <alert></alert>
+            <button type="submit" class="form-control" >GET CASE CONTACTS</button>
+          <hr/>
+          <hr/>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

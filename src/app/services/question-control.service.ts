@@ -3,7 +3,7 @@ import {BASE_URL} from "../helpers/constants";
 import {ResponseHealthFacilityList} from "../models/responseHealthFacilityList";
 import {ResponseQuestionnierList} from "../models/responseQuestionnierList";
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {ResponseBase} from "../models/responseBase";
 import {RequestSaveQuestionnier} from "../models/requestSaveQuestionnier";
 import {ResponseQuestionnaireList} from "../models/responseQuestionnaireList";
@@ -17,8 +17,10 @@ export class QuestionControlService {
   constructor(private httpClient: HttpClient) { }
 
   getAllQuestions():  Observable<ResponseQuestionnaireList>{
+    let params = new HttpParams();
+    params = params.append('page', '2');
     let questionsUrl = BASE_URL+"/v1/questionnaire/all";
-    return this.httpClient.get<ResponseQuestionnaireList>(questionsUrl);
+    return this.httpClient.get<ResponseQuestionnaireList>(questionsUrl, {params: params});
   }
 
   addQuestion(requestSaveQuestionnier: RequestSaveQuestionnaire): Observable<ResponseBase> {

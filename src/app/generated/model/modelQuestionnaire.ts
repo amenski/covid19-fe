@@ -15,10 +15,7 @@ import { ModelEnumIdValue } from './modelEnumIdValue';
 export interface ModelQuestionnaire { 
     id?: number;
     question: string;
-    /**
-     * Should be a valid json data
-     */
-    options: string;
+    options: Array<string>;
     category: ModelEnumIdValue;
     parentId?: number;
     description?: string;

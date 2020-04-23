@@ -115,7 +115,7 @@
                 <!-- Report Date Column -->
                 <ng-container matColumnDef="reportDate">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'report-date' | translate}} </th>
-                  <td mat-cell *matCellDef="let case">{{convertDate(case.reportDate) }} </td>
+                  <td mat-cell *matCellDef="let case">{{convertDate(case.reportDate) | date }} </td>
                 </ng-container>
 
                 <!-- Total Cases Column -->

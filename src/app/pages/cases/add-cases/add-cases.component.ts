@@ -283,7 +283,7 @@ export class AddCasesComponent implements OnInit {
       this.alertService.success("Case Registered!", this.options)
      // alert("Case Registered with code: " + result.toString());
 
-    })
+    }, error => this.alertService.error("Error registering case, Contact the Admin", this.options))
 
   }
 

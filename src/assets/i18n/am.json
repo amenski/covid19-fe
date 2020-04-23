@@ -24,8 +24,10 @@
   "login-title-or-button": "ይግቡ",
   "login-username": "ኢሜይል ወይም የተጠቃሚ ስም",
   "login-password": "የይለፍ ቃል",
+  "login-error-msg": "የተሳሳተ የተጠቃሚ ስም ወይም የይለፍ ቃል!",
 
   "Suspected Person INFO": "የጠረጠሩት ሰው መረጃ",
+  "rumor-id": "የጥቆማ መለያ ቁጥር",
   "suspect-name": "የጠረጠሩት ሰው ስም",
   "gender": "ፆታ",
   "address": "አድራሻ",
@@ -48,6 +50,8 @@
   "option-female": "ሴት",
   "fields-marked-label": "*  ምልክት የተደረገባቸው የግቤት ጽሑፍ መስኮች ብቻ ግዴታ ናቸው",
   "rumor-success-message": "ጥቆማው ሪፖርት ተደርጓል ፣ በተቻለን ፍጥነት እናገኝዎታለን ፡፡",
+  "rumor-error-message": "“ጥቆማ ሪፖርት የማድረግ ስህተት አለ፣ እባክዎ እንደገና ይሞክሩ ፡፡",
+  "rumor-status": "ጥቆማው ያለበት ሁኔታ",
 
   "sidebar-title": "የኮቪድ -19 ኬዞች መዘገቢያ",
   "Dashboard": "ዳሽቦርድ",
@@ -101,6 +105,7 @@
   "add-case-modified-date": "መጨረሻ የተስተካከለበት ቀን",
 
   "add-case-register-button": "ኬዙን ይመዝግቡ",
-  "case-follow-up-link": "የህመምተኛ ክትትል"
+  "case-follow-up-link": "የህመምተኛ ክትትል",
+  "add-case-pui-parent-case": "የአስተላላፊው ኬዝ ኮድ"
 
 }

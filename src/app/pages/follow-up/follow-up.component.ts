@@ -12,6 +12,8 @@ import {AttributesService} from "../../services/attributes.service";
 import {ModelAttribute} from "../../models/modelAttribute";
 import {ModelEnumIdValue} from "../../models/modelEnumIdValue";
 import {RequestSearchCase} from "../../models/requestSearchCase";
+import {ActivatedRoute, Router} from "@angular/router";
+import {RequestSaveFollowUp} from "../../models/requestSaveFollowUp";
 
 @Component({
   selector: "app-follow-up",
@@ -85,16 +87,33 @@ export class FollowUpComponent implements OnInit {
   codeClicked: boolean = false;
 
   searchCase: RequestSearchCase;
-  caseSearchResult: ModelCase[]=[];
+  caseSearchResult: ModelCase[]=[]; /*store search results from for search by criteria*/
+  caseToFollow: ModelCase; /*follow up request from case list*/
+  requestSaveFollowUp: RequestSaveFollowUp;
+  /*Alert options*/
+  alertOptions = {
+    autoClose: true,
+    keepAfterRouteChange: false
+  };
   constructor(public fb: FormBuilder, private alertService: AlertService,
-              private communityInspectionService: CommunityInspectionService, private attributesService: AttributesService) {
+              private communityInspectionService: CommunityInspectionService,
+              private attributesService: AttributesService,
+              private route: ActivatedRoute, private router: Router) {
     this.followupForm = this.fb.group({
       caseCode: '',
       criteria: '',
       testResultId: '', statusId: '', region: '', recentTravelTo: ''
     });
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.caseToFollow = this.router.getCurrentNavigation().extras.state.caseToFollow;
+      }
+    });
   }
 
+
+/*****************************************************************************************************/
+/*****************************************************************************************************/
   ngOnInit() {
 
     this.attributesService.getAllAttributes().subscribe(result=>{
@@ -106,8 +125,8 @@ export class FollowUpComponent implements OnInit {
         return (parseInt(r.attCode)>=1001 && parseInt(r.attCode)<=1003)
       })
     });
-
-
+/*****************************************************************************************************/
+/*****************************************************************************************************/
     this.regionsFilteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filterRegions(value)),
@@ -160,7 +179,6 @@ export class FollowUpComponent implements OnInit {
     );
   }
 
-
   searchPUIByCaseCode() {
     alert("Searching PUI by case code");
     this.communityInspectionService.getPUIByCaseCode(this.followupForm.get('caseCode').value).subscribe(result=>{
@@ -212,5 +230,33 @@ export class FollowUpComponent implements OnInit {
 
   onByOtherClick() {
     this.codeClicked = false;
+  }
+
+  addQuestionToFollowUp(puiCaseCode: string, qId: number, selectedOption: string){
+    let modelPuiFollowUp: ModelPuiFollowUp= new class implements ModelPuiFollowUp {
+      description: string;
+      insertDate: Date;
+      modifiedBy: number;
+      puiCaseCode: string;
+      qId: number;
+      question: string;
+      selectedOption: string;
+    };
+    modelPuiFollowUp.puiCaseCode = puiCaseCode;
+    modelPuiFollowUp.qId = qId;
+    modelPuiFollowUp.selectedOption = selectedOption;
+
+    this.requestSaveFollowUp.list.push(modelPuiFollowUp);
+  }
+  registerFollowUp() {
+    this.communityInspectionService.registerNewFollow(this.requestSaveFollowUp).subscribe(result=>{
+      this.alertService.success("PUI Follow up updated!", this.alertOptions)
+    }, error => this.alertService.error("Error Updating PUI Follow up!", this.alertOptions));
+  }
+
+  showFollowUp(followUpCase: ModelCase) {
+    this.caseSearchResult = [];
+    this.caseToFollow = followUpCase;
+
   }
 }

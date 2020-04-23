@@ -598,7 +598,8 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   convertDate(date: string){
-    return new Date(date).toDateString();
+    let d =  new Date(date);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
   }
   public updateOptions() {
   //   alert("updating scale: "+this.myChart1.options.scales.yAxes.type);

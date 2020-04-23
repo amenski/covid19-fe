@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, OnDestroy } from "@angular/core";
+import {Component, OnInit, ElementRef, OnDestroy, Input} from "@angular/core";
 import { ROUTES } from "../sidebar/sidebar.component";
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
@@ -6,6 +6,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import {BehaviorSubject} from "rxjs";
 import {User} from '../../models/user';
 import {TranslateService} from "@ngx-translate/core";
+import {ModelRumor} from "../../models/modelRumor";
 
 @Component({
   selector: "app-navbar",
@@ -13,6 +14,9 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+
+  @Input() username: string;
+
   private listTitles: any[];
   location: Location;
   mobile_menu_visible: any = 0;

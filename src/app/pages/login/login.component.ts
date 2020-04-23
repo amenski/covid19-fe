@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {AlertService} from '../../services/alert.service';
 import {AuthenticationService} from '../../services/authentication.service';
 import {first} from 'rxjs/operators';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-login',
@@ -15,13 +16,19 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  /*Alert options*/
+  alertOptions = {
+    autoClose: true,
+    keepAfterRouteChange: false
+  };
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private translateService: TranslateService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue && this.authenticationService.isLoggedIn()) {
@@ -54,15 +61,24 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
+    let navigationExtras: NavigationExtras = {
+      state: {
+        username: this.f.username.value,
+      }
+    };
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        });
+      .subscribe(data => {
+          this.router.navigate([this.returnUrl], navigationExtras);
+        }, error => this.showErrorAndReset() );
   }
 
   logout() {
     localStorage.removeItem('currentUser');
+  }
+
+  private showErrorAndReset() {
+    this.loading=false;
+    this.alertService.error(this.translateService.instant('login-error-msg'), this.alertOptions)
   }
 }

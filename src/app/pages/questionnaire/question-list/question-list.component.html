@@ -1,20 +1,17 @@
-<div >
+<form ngNativeValidate [formGroup]="questionnaireForm" >
+  <div >
   QUESTIONNAIRE
 
-  <ul>
-    <li *ngFor="let question of questions">
-      <label [attr.for]="question.id">{{question.question}}</label>
-      <label [attr.for]="question.id">{{question.options}}</label>
+  <div *ngFor="let question of questions">
+    <div>
+      <label class="symptoms-margin"><strong>{{question.id}}. {{question.question}}: </strong></label>
+    </div>
 
+      <mat-radio-group  [(ngModel)]="question.options"  formControlName="options" *ngFor="let op of question.options">
+        <mat-radio-button  class="symptoms-margin" >{{op}}</mat-radio-button>
+      </mat-radio-group>
 
-        <div [ngSwitch]="question.category">
-
-          <input *ngSwitchCase="'PUI_INFO'" [formControlName]="question.id"
-                 [id]="question.id" [type]="question.category">
-
-
-        </div>
-    </li>
-  </ul>
+  </div>
 
 </div>
+</form>

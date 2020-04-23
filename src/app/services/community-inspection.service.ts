@@ -9,6 +9,7 @@ import {ResponsePuiFollowUpSingle} from "../models/responsePuiFollowUpSingle";
 import {ResponseCaseSingle} from "../models/responseCaseSingle";
 import {RequestSearchCase} from "../models/requestSearchCase";
 import {ResponseCaseList} from "../models/responseCaseList";
+import {RequestSaveFollowUp} from "../models/requestSaveFollowUp";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,10 @@ export class CommunityInspectionService {
   searchCaseByCriteria(searchCase: RequestSearchCase):  Observable<ResponseCaseList> {
     let followUpUrl = BASE_URL+"/v1/case/";
     return this.httpClient.post<ResponseCaseList>(followUpUrl, searchCase);
+  }
+
+  registerNewFollow(requestSaveFollowUp: RequestSaveFollowUp): Observable<ResponseBase>{
+    let followUpUrl = BASE_URL+"/v1/api/follow-up/";
+    return this.httpClient.put<ResponseBase>(followUpUrl, requestSaveFollowUp);
   }
 }

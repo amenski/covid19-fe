@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn} from "@angular/forms";
 import {CasesService} from "../../../services/cases.service";
 import {QuestionControlService} from "../../../services/question-control.service";
-import {map, startWith} from "rxjs/operators";
+import {catchError, map, startWith} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {ModelEnumIdValue} from "../../../models/modelEnumIdValue";
 import {Option} from "../../../models/option";
@@ -12,6 +12,8 @@ import {AttributesService} from "../../../services/attributes.service";
 import {ModelAttribute} from "../../../models/modelAttribute";
 import {RequestSaveQuestionnaire} from "../../../models/requestSaveQuestionnaire";
 import get = Reflect.get;
+import {DOCUMENT} from "@angular/common";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-questions',
@@ -19,35 +21,25 @@ import get = Reflect.get;
   styleUrls: ['./add-questions.component.scss']
 })
 export class AddQuestionsComponent implements OnInit {
+
   questionsForm: FormGroup;
   insertDate= new FormControl(new Date());
   /*Alert options*/
   alertOptions = {
-    autoClose: false,
+    autoClose: true,
     keepAfterRouteChange: false
   };
   categories = ["PUI_INFO", "SYMPTOMS", "EXISTING_CONDITION"];
 
-  arrayItems: Option[] = [];
-  firstOption: Option;
+  arrayItems: string[] = [];
+  index: number = 0; /*to dynamically assign form control names to options*/
   requestSaveQuestion: RequestSaveQuestionnaire;
   questionnaireControl = new FormControl();
   categoryOptions: Observable<string[]>;
-  constructor(public fb: FormBuilder, private questionnaireService: QuestionControlService,
-              private alertService: AlertService, private attributesService: AttributesService) {
-    this.questionsForm = this.fb.group({
-      question: '', options: this.fb.array([]),
-      category: '', parentId: '',
-      description: '', modifiedBy: '',
-      insertDate: '', modifiedDate: '',
-    })
-  }
+
   attributes: ModelAttribute[];
-
-  get options() {
-    return this.questionsForm.get('options') as FormArray;
-  }
-
+  last: number;
+  private returnUrl: any;
   ngOnInit() {
    // this.addOption({id: 0, title: "Option ", addDisabled: true, removeDisabled: true});
     this.categoryOptions = this.questionnaireControl.valueChanges.pipe(
@@ -58,35 +50,55 @@ export class AddQuestionsComponent implements OnInit {
     this.attributesService.getAllAttributes().subscribe(result=>{
       this.attributes = result.returnValue.attributes;
     });
-
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/admin/questionnaire';
   }
 
-  getAttribute(name: string): ModelAttribute{
-    let attr;
-    attr =  this.attributes.filter(attr => attr.attName===name);
-    return attr;
+  private _filterCategory(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.categories;
   }
 
+  constructor(public fb: FormBuilder, private questionnaireService: QuestionControlService,
+              private alertService: AlertService, private attributesService: AttributesService,
+              private router: Router,     private route: ActivatedRoute) {
+    this.questionsForm = this.fb.group({
+      question: '', options: new FormArray([new FormControl('')]),
+      category: '', parentId: '',
+      description: '', modifiedBy: '',
+      insertDate: '', modifiedDate: '',
+    })
+    // this.addOption(0);
+  }
+
+  get options(): FormArray {
+    return this.questionsForm.get('options') as FormArray;
+  }
+
+  removeOption() {
+    this.arrayItems.pop();
+    this.options.removeAt(this.options.length - 1);
+  }
+
+  addOption(i: any) {
+    this.last = i;
+    // if(i>=1){
+    //   alert("options"+ this.options.at(i).value);
+    // }
+    this.options.push(this.fb.control(false));
+    this.arrayItems.push(this.options.at(i).value);
+  }
 
   addQuestion() {
-    // let formData: any = new FormData();
-    // formData.append("question", this.questionsForm.get('question').value);
-    // formData.append("options", this.questionsForm.get('options').value);
-    // formData.append("category", this.questionsForm.get('category').value);
-    // formData.append("parentId", this.questionsForm.get('parentId').value);
-    // formData.append("description", this.questionsForm.get('description').value);
-    // formData.append("modifiedBy", this.questionsForm.get('modifiedBy').value);
-    // formData.append("insertDate", this.questionsForm.get('insertDate').value);
-    // formData.append("modifiedDate", this.questionsForm.get('modifiedDate').value);
-
-
-    alert("Category: "+this.getAttribute('PUI_INFO'));
+    this.addOption(this.last+1);
+    // this.arrayItems.map(item=>{
+    //   alert("Options: "+item);
+    // })
 
     this.requestSaveQuestion = {
       question: this.questionsForm.get('question').value,
-      options: this.questionsForm.get('options').value,
+      options: this.arrayItems,
       // category:  this.questionsForm.get('category').value,
-      category: {id: 1040, value: this.questionsForm.get('category').value},
+      category: {id: 1040},
       parentId:  this.questionsForm.get('parentId').value,
       description:  this.questionsForm.get('description').value,
       modifiedBy:  this.questionsForm.get('modifiedBy').value,
@@ -94,24 +106,9 @@ export class AddQuestionsComponent implements OnInit {
       modifiedDate:  this.questionsForm.get('modifiedDate').value,
     }
     this.questionnaireService.addQuestion(this.requestSaveQuestion).subscribe(result=>{
-      this.alertService.success("Question Added!", this.options)
-
-    });
-  }
-
-
-  private _filterCategory(value: string) {
-    const filterValue = value.toLowerCase();
-    return this.categories;
-  }
-
-  removeOption(arrayItem: Option) {
-    this.arrayItems.pop();
-    this.options.removeAt(this.options.length - 1);
-  }
-
-  addOption(option: Option) {
-    this.arrayItems.push(option);
-    this.options.push(this.fb.control(false));
+      this.alertService.success("Question Added!", this.alertOptions)
+    }, err => this.alertService.error("Error Creating Question!", this.alertOptions));
+    this.questionsForm.reset();
+    this.router.navigate([this.returnUrl])
   }
 }

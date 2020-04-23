@@ -1,5 +1,9 @@
-<div class=" card-body">
- COVID-19 CASE REPORT
+<div class="card">
+  <div class="card-header">
+    <h2>COVID-19 CASE REPORT</h2>
+    <input type="text" class="form-control" [(ngModel)]="searchVal" (ngModelChange)='checkSearchVal()'
+           placeholder="Search&hellip;" >
+  </div>
   <div class=" card-body">
     <div class=" table-responsive">
       <table class=" table tablesorter" id="">
@@ -8,26 +12,25 @@
           <th>{{'add-case-pui-case-code' | translate}}</th>
           <th>{{'add-case-pui-presumptive-result' | translate}}</th>
           <th>{{'add-case-pui-confirmed-result' | translate}}</th>
-          <th>{{'add-case-region' | translate}}</th>
-<!--          <th>{{'add-case-pui-current-status' | translate}}</th>-->
+          <th>{{'add-case-pui-parent-case' | translate}}</th>
+<!--          <th>{{'add-case-region' | translate}}</th>-->
+  <!--          <th>{{'add-case-pui-current-status' | translate}}</th>-->
           <th></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let case of cases">
           <td>{{case.caseCode}}</td>
-          <td>{{case.presumptiveResult.value}}</td>
-          <td>{{case.confirmedResult.value}}</td>
-          <td>{{case.region}}</td>
-<!--          <td>{{case.status.value}}</td>-->
-          <td><a href="#">{{'case-follow-up-link' | translate}}</a></td>
+          <td>{{case.presumptiveResult.value | uppercase}}</td>
+          <td>{{case.confirmedResult.value | uppercase}}</td>
+          <td>{{case.parentCaseCode}}</td>
+<!--          <td>{{case.region}}</td>-->
+  <!--          <td>{{case.status.value}}</td>-->
+          <td><button class="form-control" type="button" (click)="followUp(case)">{{'case-follow-up-link' | translate}}</button></td>
 
         </tr>
         </tbody>
       </table>
     </div>
   </div>
-
 </div>
-
-

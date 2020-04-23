@@ -3,6 +3,7 @@
 <div class=" content">
   <div class=" row">
 
+    <!--    CONTROLS-->
     <div class=" col-12">
       <div class=" card">
         <div class=" card-header">
@@ -69,7 +70,7 @@
 <!--          SEARCH BY CASE CODE-->
           <div class="row" *ngIf="searchCriteria==='Case code'">
             <div class=" col-sm-6 text-left">
-                <input type="text" class="form-control" formControlName="caseCode" placeholder="Enter Case code" required>
+                <input type="text" class="form-control" formControlName="caseCode" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" required>
               <button type="submit" class="form-control" (click)="onByOtherClick()">Search PUI</button>
             </div>
           </div>
@@ -103,7 +104,7 @@
                 <td>{{case.presumptiveResult.value}}</td>
                 <td>{{case.confirmedResult.value}}</td>
                 <!--          <td>{{case.status.value}}</td>-->
-                <td><a href="#">{{'case-follow-up-link' | translate}}</a></td>
+                <td><button type="button" (click)="showFollowUp(case)" href="#">{{'case-follow-up-link' | translate}}</button></td>
 
               </tr>
               </tbody>
@@ -115,7 +116,7 @@
 
     </div>
 
-<!--    SEARCH RESULT - BY CASE CODE-->
+    <!--    SEARCH RESULT - BY CASE CODE-->
     <div class=" col-md-12" *ngIf="showByCodeSearchResult" >
       <div class=" card">
         <div class=" card-header">
@@ -144,12 +145,61 @@
             </div>
           </div>
           <alert></alert>
+          <hr/>
+          <hr/>
+          <app-question-list></app-question-list>
+          <hr/>
+          <hr/>
         </div>
 
       </div>
-
+      <button type="submit" class="form-control" (click)="registerFollowUp()">Update PUI Followup</button>
     </div>
 
+    <!--CASE TO FOLLOW - REQUESTED FROM CASES PAGE-->
+    <div class="col-md-12" *ngIf="caseToFollow!==null && caseToFollow!==undefined">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">CASE TO FOLLOW</h4>
+        </div>
+        <div class=" card-body">
+          <div class="row">
+            <div class=" col-sm-6 text-left">
+              <h2>Case code:</h2>  <h2 style="color: rgba(37,138,0,0.86);"> <strong>{{caseToFollow.caseCode}}</strong>  </h2>
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Name {{caseToFollow.firstName}} {{caseToFollow.lastName}}</h2>
+              <h2 class=" card-title"> {{caseToFollow.lastName}}</h2>
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Parent Case code: ({{caseToFollow.parentCaseCode}})</h2>
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Presumptive Result: ({{caseToFollow.presumptiveResult.value}})</h2>
+              <input type="text" class="form-control"  placeholder="Change Result" value='{{caseToFollow.presumptiveResult.value}}'/>
+
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Confirmed Result ({{caseToFollow.confirmedResult.value}})</h2>
+              <input type="text" class="form-control"  placeholder="Change Result" value='{{caseToFollow.confirmedResult.value}}'/>
+
+            </div>
+            <div class=" col-sm-6 text-left">
+              <h2 class=" card-title">Status ({{caseToFollow.status.value}})</h2>
+              <input type="text" class="form-control"  placeholder="Change status" value='{{caseToFollow.status.value}}'/>
+            </div>
+          </div>
+          <alert></alert>
+          <hr/>
+          <hr/>
+          <app-question-list></app-question-list>
+          <hr/>
+          <hr/>
+        </div>
+        <button type="submit" class="form-control" (click)="registerFollowUp()">Update PUI Followup</button>
+        <hr/>
+      </div>
+    </div>
   </div>
 
 

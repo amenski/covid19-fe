@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 import {BASE_URL} from '../helpers/constants'
 import { User } from '../models/user';
 import {JwtResponse} from "../models/jwtResponse";
 import {JwtHelperService} from '@auth0/angular-jwt';
+
+import { catchError } from 'rxjs/operators';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -43,8 +46,13 @@ export class AuthenticationService {
           localStorage.setItem('currentUser', JSON.stringify( this.jwtResponse.jwtToken));
           this.currentUserSubject.next(this.jwtResponse.jwtToken);
         return this.jwtResponse;
-      }));
+      }), catchError(err => { return this.errorHandler(err)}));
   }
+
+  errorHandler(error: HttpErrorResponse) {
+    return Observable.throw(error.message || "server error.");
+  }
+
   public get currentUserValue(): string {
     //alert("token to request: "+this.user.token)
     return this.currentUserSubject.value;
