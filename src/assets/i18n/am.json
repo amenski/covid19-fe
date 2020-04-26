@@ -52,6 +52,13 @@
   "rumor-success-message": "ጥቆማው ሪፖርት ተደርጓል ፣ በተቻለን ፍጥነት እናገኝዎታለን ፡፡",
   "rumor-error-message": "“ጥቆማ ሪፖርት የማድረግ ስህተት አለ፣ እባክዎ እንደገና ይሞክሩ ፡፡",
   "rumor-status": "ጥቆማው ያለበት ሁኔታ",
+  "rumor-investigate-button": "ይመርምሩ",
+  "rumor-report-isolate-pui-button": "ሪፖርት ወይም ለይቶ ማቆያ ይላኩ",
+  "rumor-report-pui-button": "ሪፖርት ይላኩ",
+  "rumor-isolate-pui-button": "ለይቶ ማቆያ ይላኩ",
+  "rumor-mark-approval-button": "ጥቆማውን ምልክት ያድርጉበት",
+  "rumor-change-status-success-message": "የጥቆማውን ሁኔታ በተሳካ መልኩ ተስተካክሏል!",
+  "rumor-change-status-error-message": "የጥቆማውን ሁኔታ ማስተካከል አልተቻለም: የድህረ ገጹን አስተዳዳሪ ያነጋግሩ",
 
   "sidebar-title": "የኮቪድ -19 ኬዞች መዘገቢያ",
   "Dashboard": "ዳሽቦርድ",

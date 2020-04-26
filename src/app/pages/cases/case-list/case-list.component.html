@@ -9,21 +9,24 @@
       <table class=" table tablesorter" id="">
         <thead class=" text-primary">
         <tr>
-          <th>{{'add-case-pui-case-code' | translate}}</th>
+<!--          <th>{{'add-case-pui-case-code' | translate}}</th>-->
+          <th>{{'add-case-name' | translate}}</th>
+          <th>{{'add-case-last-name' | translate}}</th>
           <th>{{'add-case-pui-presumptive-result' | translate}}</th>
-          <th>{{'add-case-pui-confirmed-result' | translate}}</th>
           <th>{{'add-case-pui-parent-case' | translate}}</th>
-<!--          <th>{{'add-case-region' | translate}}</th>-->
+          <th>{{'add-case-region' | translate}}</th>
   <!--          <th>{{'add-case-pui-current-status' | translate}}</th>-->
           <th></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let case of cases">
-          <td>{{case.caseCode}}</td>
-          <td>{{case.presumptiveResult.value | uppercase}}</td>
+<!--          <td>{{case.caseCode}}</td>-->
+          <td>{{case.firstName}}</td>
+          <td>{{case.lastName}}</td>
           <td>{{case.confirmedResult.value | uppercase}}</td>
           <td>{{case.parentCaseCode}}</td>
+          <td>{{case.region}}</td>
 <!--          <td>{{case.region}}</td>-->
   <!--          <td>{{case.status.value}}</td>-->
           <td><button class="form-control" type="button" (click)="followUp(case)">{{'case-follow-up-link' | translate}}</button></td>

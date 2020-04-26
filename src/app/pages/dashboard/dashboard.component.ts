@@ -59,6 +59,9 @@ export class DashboardComponent implements OnInit {
       //this.caseStats = result;
       this.caseStats = result.returnValue.list;
 
+      this.caseStats.map(c=>{
+        console.log(c.totalCases+" , ");
+      })
       this.dataSource =  new MatTableDataSource(this.caseStats);
       this.dataSource.sort = this.sort;
 

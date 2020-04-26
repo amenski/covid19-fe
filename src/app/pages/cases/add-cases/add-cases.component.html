@@ -272,8 +272,16 @@
           <div class=" col-md-8 pr-md-1">
             <div class=" form-group">
               <label>{{'add-case-admitted-to-facility' | translate}}</label>
-              <!--              <input type="text" class=" form-control" placeholder="የቅርብ ጊዜ ጉዞዎች"/>-->
-              <input formControlName="admittedToFacility" class=" form-control" placeholder=""/>
+<!--              <input formControlName="admittedToFacility" class=" form-control" placeholder=""/>-->
+              <label>{{'add-case-pui-current-status' | translate}}: </label>
+              <!--              <input formControlName="status" class=" form-control" placeholder="አሁን ያለበት ሁኔታ"/>-->
+              <input type="text" formControlName="admittedToFacility" placeholder=""
+                     [matAutocomplete]="atAuto" class = "form-control" ngModel>
+              <mat-autocomplete autoActiveFirstOption #atAuto="matAutocomplete">
+                <mat-option *ngFor="let status of statusOptions | async" [value]="status">
+                  {{status}}
+                </mat-option>
+              </mat-autocomplete>
             </div>
           </div>
 

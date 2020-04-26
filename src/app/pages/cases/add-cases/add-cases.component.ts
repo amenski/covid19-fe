@@ -271,12 +271,19 @@ export class AddCasesComponent implements OnInit {
     this.requestSave = {
       firstName :  this.caseForm.get('firstName').value,
       lastName : this.caseForm.get('lastName').value,
+      dob : this.caseForm.get('dob').value,
+      gender : this.caseForm.get('gender').value,
+      phoneNo : this.caseForm.get('phoneNo').value,
       passportNumber : this.caseForm.get('passportNumber').value,
       incidentContactPhone1 : this.caseForm.get('incidentPhone1').value,
       countryOfResidence : this.caseForm.get('countryOfResidence').value,
+      region : this.caseForm.get('region').value,
+      parentCaseCode : this.caseForm.get('parentCaseCode').value,
       identifiedBy : {id: 1020, value: this.caseForm.get('identifiedBy').value},
+      admittedToFacility : {id: 4},
       modifiedBy : this.caseForm.get('modifiedBy').value
     }
+
 
     this.casesService.createNewCase(this.requestSave).subscribe(result=>{
       alert(result.message);

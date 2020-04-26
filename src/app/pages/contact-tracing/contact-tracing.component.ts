@@ -13,7 +13,7 @@ export class ContactTracingComponent implements OnInit {
   tracingForm: FormGroup;
   /*Alert options*/
   alertOptions = {
-    autoClose: true,
+    autoClose: false,
     keepAfterRouteChange: false
   };
 
@@ -30,7 +30,7 @@ export class ContactTracingComponent implements OnInit {
   getContacts(){
     this.contactTracingService.getContactTrace(this.tracingForm.get('caseCode').value)
       .subscribe(result=>{
-        this.alertService.success("success", this.alertOptions);
+        this.alertService.success("CASE CONTACTS INFO: "+result.returnValue, this.alertOptions);
     }, error =>  this.alertService.error("Error getting trace", this.alertOptions))
   }
 

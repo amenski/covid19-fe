@@ -14,7 +14,7 @@ import {ModelEnumIdValue} from "./modelEnumIdValue";
 
 
 export interface ModelRumor {
-    rumorId?: number;
+    id?: number;
     suspectName: string;
     gender?: string;
     address?: string;

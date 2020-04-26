@@ -52,6 +52,14 @@
   "rumor-success-message": "Rumor has been reported, We will get back to you as soon as possible",
   "rumor-error-message": "Rumor reporting Error, Please try again",
   "rumor-status": "Rumor Status",
+  "rumor-investigate-button": "Investigate",
+  "rumor-report-isolate-pui-button": "Report or Isolate PUI",
+  "rumor-report-pui-button": "Report PUI",
+  "rumor-isolate-pui-button": "Isolate",
+  "rumor-mark-approval-button": "Mark Approval",
+  "rumor-change-status-success-message": "Successfully updated rumor status!",
+  "rumor-change-status-error-message": "Error updating rumor status. Contact your Admin.",
+
 
   "sidebar-title": "Covid-19 Case Report",
   "Dashboard": "Dashboard",

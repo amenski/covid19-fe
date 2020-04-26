@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ["./admin-layout.component.scss"]
 })
 export class AdminLayoutComponent implements OnInit {
-  public sidebarColor: string = "black";
+  public sidebarColor: string ;
   public username: string;
 
   constructor( private route: ActivatedRoute, private router: Router) {
@@ -18,8 +18,8 @@ export class AdminLayoutComponent implements OnInit {
     });
   }
   changeSidebarColor(color){
-    var sidebar = document.getElementsByClassName('sidebar')[0];
-    var mainPanel = document.getElementsByClassName('main-panel')[0];
+    let sidebar = document.getElementsByClassName('sidebar')[0];
+    let mainPanel = document.getElementsByClassName('main-panel')[0];
 
     this.sidebarColor = color;
 
@@ -31,7 +31,7 @@ export class AdminLayoutComponent implements OnInit {
     }
   }
   changeDashboardColor(color){
-    var body = document.getElementsByTagName('body')[0];
+    let body = document.getElementsByTagName('body')[0];
     if (body && color === 'white-content') {
         body.classList.add(color);
     }

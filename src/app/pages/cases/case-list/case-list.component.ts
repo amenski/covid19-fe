@@ -39,7 +39,8 @@ export class CaseListComponent implements OnInit {
 
       /*  FOR OF */
       for (let selectedCase of this.cases) {
-        if (selectedCase.caseCode.search(this.searchVal) != -1 ) {
+        if (selectedCase.firstName.search(this.searchVal) != -1 ||
+          selectedCase.lastName.search(this.searchVal) != -1) {
           filteredCases.push(selectedCase);
         }
       }

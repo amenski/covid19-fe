@@ -8,7 +8,7 @@
 
       <div class="row">
         <div class=" col-sm-6 text-left">
-          <h2 class=" card-title">{{'rumor-id' | translate}}: {{rumorToInvestigate.rumorId}}  </h2>
+          <h2 class=" card-title">{{'rumor-id' | translate}}: {{rumorToInvestigate.id}}  </h2>
         </div>
         <div class=" col-sm-6 text-left">
           <h2 class=" card-title">{{'report-date-to-rrt' | translate}}: {{rumorToInvestigate.reportDate}}  </h2>
@@ -53,7 +53,9 @@
         </div>
     </div>
       <alert></alert>
-      <button type="button" class="form-control">Mark approval</button>
+      <button (click)="markRumorApproval()" type="button" class="form-control">{{'rumor-mark-approval-button' | translate}}</button>
+      <button  type="button" class="form-control">{{'rumor-report-pui-button' | translate}}</button>
+      <button  type="button" class="form-control">{{'rumor-isolate-pui-button' | translate}}</button>
   </div>
 
 </div>

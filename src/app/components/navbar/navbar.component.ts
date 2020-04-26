@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   @Input() username: string;
 
+  loggedInUsername: string;
+
   private listTitles: any[];
   location: Location;
   mobile_menu_visible: any = 0;
@@ -49,6 +51,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
      }
    };
   ngOnInit() {
+    localStorage.setItem('username', this.username);
+    this.loggedInUsername = localStorage.getItem('username');
     window.addEventListener("resize", this.updateColor);
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
