@@ -6,7 +6,7 @@
     <div class=" col-12">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">{{ "Trace Contacts of Confirmed Cases" | uppercase}}</h4>
+          <h4 class=" card-title">{{ 'contact-tracing-header1' | translate}}</h4>
 
         </div>
         <div class=" card-body">
@@ -14,7 +14,7 @@
           <div class="row">
             <div class=" col-md-6 text-left">
               <div class=" form-group">
-                <label>Case code:</label>
+                <label>{{'add-case-pui-case-code'|translate}}:</label>
                 <input type="text" class="form-control"  formControlName="caseCode" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" required/>
               </div>
             </div>
@@ -22,7 +22,7 @@
           </div>
 
           <alert></alert>
-            <button type="submit" class="form-control" >GET CASE CONTACTS</button>
+            <button type="submit" class="form-control" >{{'contact-tracing-get-case-contacts-button' | translate}}</button>
           <hr/>
           <hr/>
 
@@ -33,3 +33,4 @@
     </div>
   </div>
 </div>
+</form>

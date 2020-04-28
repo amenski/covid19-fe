@@ -7,7 +7,7 @@
     <div class=" col-12">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">Search a PUI</h4>
+          <h4 class=" card-title">{{'community-inspection-header1' | translate}}</h4>
 
         </div>
         <div class=" card-body">
@@ -16,10 +16,10 @@
             <div class=" col-md-6 text-left">
               <div class=" form-group">
                 <section class="criteria-section">
-                  <strong><label class="criteria-margin">Search PUI By: </label></strong>
+                  <strong><label class="criteria-margin">{{'community-inspection-search-pui-by'|translate}}: </label></strong>
                   <mat-radio-group [(ngModel)]="searchCriteria" formControlName="criteria">
-                    <mat-radio-button class="symptoms-margin" value="Case code"  >Case Code</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="Other" [checked]="true">Other</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Case code"  >{{'add-case-pui-case-code'|translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Other" [checked]="true">{{'community-inspection-other-criteria'|translate}}</mat-radio-button>
                   </mat-radio-group>
                 </section>
               </div>
@@ -30,7 +30,8 @@
 <!--          SEARCH BY OTHER CRITERIA-->
           <div class="row" *ngIf="searchCriteria==='Other'">
               <div class=" col-sm-3 text-left">
-                 <input type="text" formControlName="region" placeholder="Region"
+                <lable>{{'add-case-region'|translate}}</lable>
+                 <input type="text" formControlName="region"
                        [matAutocomplete]="rAuto" class=" form-control" (ngModelChange)="_searchRegion(this.followupForm.get('region').value)">
                   <mat-autocomplete autoActiveFirstOption #rAuto="matAutocomplete">
                     <mat-option *ngFor="let region of regionsFilteredOptions | async" [value]="region">
@@ -39,8 +40,8 @@
                   </mat-autocomplete>
               </div>
               <div class="col-sm-3 text-left">
-
-                <input type="text" formControlName="recentTravelTo" placeholder="Recent Travel To"
+                <label>{{'add-case-travel-history'|translate}}</label>
+                <input type="text" formControlName="recentTravelTo"
                        [matAutocomplete]="crAuto" class=" form-control" (ngModelChange)="_searchCountry(this.followupForm.get('recentTravelTo').value)">
                 <mat-autocomplete autoActiveFirstOption #crAuto="matAutocomplete">
                   <mat-option *ngFor="let countryR of countriesFilteredOptions | async" [value]="countryR">
@@ -50,28 +51,30 @@
               </div>
 
                 <div class="col-sm-3 text-left">
+                  <label>{{'add-case-pui-status-result'|translate}}</label>
 <!--                  <input type="text" formControlName="testResultId" placeholder="Test Result ID" class="form-control" >-->
                   <select  class="form-control" formControlName="testResultId" >
-                    <option *ngFor="let result of results" [value]="result.attCode" class="form-control" placeholder="Test Result">
+                    <option *ngFor="let result of results" [value]="result.attCode" class="form-control" >
                       {{result.attName }}</option>
                   </select>
                 </div>
                 <div class="col-sm-3 text-left">
+                  <lable>{{'add-case-pui-current-status'|translate}}</lable>
 <!--                  <input type="text" formControlName="statusId" placeholder="Status ID" class="form-control" >-->
                   <select  class="form-control" formControlName="statusId" >
-                    <option *ngFor="let stat of status" [value]="stat.attCode" class="form-control" placeholder="Current Status">
+                    <option *ngFor="let stat of status" [value]="stat.attCode" class="form-control" >
                       {{stat.attName }}</option>
                   </select>
                 </div>
 
-            <button type="submit" class="form-control" (click)="onByCodeClick()">Search PUI</button>
+            <button type="submit" class="form-control" (click)="onByCodeClick()">{{'community-inspection-search-button'|translate}}</button>
           </div>
           <alert></alert>
 <!--          SEARCH BY CASE CODE-->
           <div class="row" *ngIf="searchCriteria==='Case code'">
             <div class=" col-sm-6 text-left">
                 <input type="text" class="form-control" formControlName="caseCode" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" required>
-              <button type="submit" class="form-control" (click)="onByOtherClick()">Search PUI</button>
+              <button type="submit" class="form-control" (click)="onByOtherClick()">{{'community-inspection-search-button'|translate}}</button>
             </div>
           </div>
 
@@ -83,7 +86,7 @@
     <div class=" col-md-12" *ngIf="showByOtherSearchResult && caseSearchResult.length!=0" >
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">SEARCH RESULT</h4>
+          <h4 class=" card-title">{{'community-inspection-criteria-search-result'|translate}}</h4>
         </div>
         <div class=" card-body">
           <alert></alert>
@@ -120,28 +123,27 @@
     <div class=" col-md-12" *ngIf="showByCodeSearchResult" >
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">SEARCH RESULT</h4>
+          <h4 class=" card-title">{{'community-inspection-search-result' | translate}}</h4>
         </div>
         <div class=" card-body">
           <div class="row">
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Case code {{caseInfo.caseCode}}  </h2>
+              <h2 class=" card-title">{{'add-case-pui-case-code'}} {{caseInfo.caseCode}}  </h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Name {{caseInfo.firstName}} {{caseInfo.lastName}}</h2>
-              <h2 class=" card-title"> {{caseInfo.lastName}}</h2>
+              <h2 class=" card-title">{{'add-case-name'|translate}} {{caseInfo.firstName}} {{caseInfo.lastName}}</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Status ({{caseInfo.status.value}})</h2>
+              <h2 class=" card-title">{{'add-case-pui-current-status'|translate}} ({{caseInfo.status.value}})</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Parent Case code ({{caseInfo.parentCaseCode}})</h2>
+              <h2 class=" card-title">{{'add-case-pui-parent-case-code'|translate}} ({{caseInfo.parentCaseCode}})</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Presumptive Result ({{caseInfo.presumptiveResult.value}})</h2>
+              <h2 class=" card-title">{{'add-case-pui-presumptive-result'|translate}} ({{caseInfo.presumptiveResult.value}})</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Confirmed Result ({{caseInfo.confirmedResult.value}})</h2>
+              <h2 class=" card-title">{{'add-case-pui-confirmed-result'|translate}} ({{caseInfo.confirmedResult.value}})</h2>
             </div>
           </div>
           <alert></alert>
@@ -153,39 +155,38 @@
         </div>
 
       </div>
-      <button type="submit" class="form-control" (click)="registerFollowUp()">Update PUI Followup</button>
+      <button type="submit" class="form-control" (click)="registerFollowUp()">{{'community-inspection-update-pui-button'|translate}}</button>
     </div>
 
     <!--CASE TO FOLLOW - REQUESTED FROM CASES PAGE-->
     <div class="col-md-12" *ngIf="caseToFollow!==null && caseToFollow!==undefined">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">CASE TO FOLLOW</h4>
+          <h4 class=" card-title">{{'community-inspection-case-to-followup'|translate}}</h4>
         </div>
         <div class=" card-body">
           <div class="row">
             <div class=" col-sm-6 text-left">
-              <h2>Case code:</h2>  <h2 style="color: rgba(37,138,0,0.86);"> <strong>{{caseToFollow.caseCode}}</strong>  </h2>
+              <h2>{{'add-case-pui-case-code'|translate}}:</h2>  <h2 style="color: rgba(37,138,0,0.86);"> <strong>{{caseToFollow.caseCode}}</strong>  </h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Name {{caseToFollow.firstName}} {{caseToFollow.lastName}}</h2>
-              <h2 class=" card-title"> {{caseToFollow.lastName}}</h2>
+              <h2 class=" card-title">{{'add-case-name'|translate}}: {{caseToFollow.firstName}} {{caseToFollow.lastName}}</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Parent Case code: ({{caseToFollow.parentCaseCode}})</h2>
+              <h2 class=" card-title">{{'add-case-pui-parent-case-code'|translate}}: ({{caseToFollow.parentCaseCode}})</h2>
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Presumptive Result: ({{caseToFollow.presumptiveResult.value}})</h2>
-              <input type="text" class="form-control"  placeholder="Change Result" value='{{caseToFollow.presumptiveResult.value}}'/>
+              <h2 class=" card-title">{{'add-case-pui-presumptive-result'|translate}}: ({{caseToFollow.presumptiveResult.value}})</h2>
+              <input type="text" class="form-control"  placeholder="" value='{{caseToFollow.presumptiveResult.value}}'/>
 
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Confirmed Result ({{caseToFollow.confirmedResult.value}})</h2>
+              <h2 class=" card-title">{{'add-case-pui-confirmed-result'|translate}} ({{caseToFollow.confirmedResult.value}})</h2>
               <input type="text" class="form-control"  placeholder="Change Result" value='{{caseToFollow.confirmedResult.value}}'/>
 
             </div>
             <div class=" col-sm-6 text-left">
-              <h2 class=" card-title">Status ({{caseToFollow.status.value}})</h2>
+              <h2 class=" card-title">{{'add-case-pui-current-status'|translate}} ({{caseToFollow.status.value}})</h2>
               <input type="text" class="form-control"  placeholder="Change status" value='{{caseToFollow.status.value}}'/>
             </div>
           </div>
@@ -196,7 +197,7 @@
           <hr/>
           <hr/>
         </div>
-        <button type="submit" class="form-control" (click)="registerFollowUp()">Update PUI Followup</button>
+        <button type="submit" class="form-control" (click)="registerFollowUp()">{{'community-inspection-update-pui-button'|translate}}</button>
         <hr/>
       </div>
     </div>

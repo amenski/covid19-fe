@@ -59,9 +59,6 @@ export class DashboardComponent implements OnInit {
       //this.caseStats = result;
       this.caseStats = result.returnValue.list;
 
-      this.caseStats.map(c=>{
-        console.log(c.totalCases+" , ");
-      })
       this.dataSource =  new MatTableDataSource(this.caseStats);
       this.dataSource.sort = this.sort;
 
@@ -82,7 +79,7 @@ export class DashboardComponent implements OnInit {
 
 
       this.totalCase = Math.max(...this.dailyTotalCases)
-      this.totalActiveCase = Math.max(...this.dailyActiveCases)
+      this.totalActiveCase = this.dailyActiveCases[this.dailyActiveCases.length-1];
       this.totalDeath = Math.max(...this.dailyTotalDeaths);
 
       let gradientChartOptionsConfigurationWithTooltipBlue: any = {
@@ -441,7 +438,8 @@ export class DashboardComponent implements OnInit {
           'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
           'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
           'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
-          'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25'],
+          'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25',
+          'APR 26', 'APR 27', 'APR 28', 'APR 29', 'APR 30', 'MAY 01', 'MAY 02', 'MAY 03', 'MAY 04'],
         datasets: [{
           label: "Total Deaths Stat",
           fill: true,
@@ -485,7 +483,8 @@ export class DashboardComponent implements OnInit {
           'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
           'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
           'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
-          'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25'],
+          'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25',
+          'APR 26', 'APR 27', 'APR 28', 'APR 29', 'APR 30', 'MAY 01', 'MAY 02', 'MAY 03', 'MAY 04'],
         datasets: [{
           label: "Currently active cases",
           fill: true,
@@ -520,7 +519,8 @@ export class DashboardComponent implements OnInit {
         'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
         'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
         'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
-        'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25'];
+        'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25',
+        'APR 26', 'APR 27', 'APR 28', 'APR 29', 'APR 30', 'MAY 01', 'MAY 02', 'MAY 03', 'MAY 04'];
       this.datasets = [
         [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
         [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
@@ -587,7 +587,8 @@ export class DashboardComponent implements OnInit {
             'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
             'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
             'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
-            'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25'],
+            'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25',
+            'APR 26', 'APR 27', 'APR 28', 'APR 29', 'APR 30', 'MAY 01', 'MAY 02', 'MAY 03', 'MAY 04'],
           datasets: [{
             label: "New cases",
             fill: true,

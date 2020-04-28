@@ -113,6 +113,31 @@
 
   "add-case-register-button": "ኬዙን ይመዝግቡ",
   "case-follow-up-link": "የህመምተኛ ክትትል",
-  "add-case-pui-parent-case": "የአስተላላፊው ኬዝ ኮድ"
+  "add-case-pui-parent-case": "የአስተላላፊው ኬዝ ኮድ",
+
+  "contact-tracing-header1": "የህሙማን ኬዞች ግንኙነት ማጣሪያ",
+  "contact-tracing-get-case-contacts-button": "የህመምተኛውን ግኑኝነቶች ያጣሩ",
+
+  "community-inspection-header1": "በምርመራ ላይ ያሉ ህሙማንን ይፈልጉ",
+  "community-inspection-search-pui-by": "የፍለጋ መስፈርቶች",
+  "community-inspection-other-criteria": "ሌላ መስፈርቶች",
+  "community-inspection-criteria-search-result": "የፍለጋ ውጤቶች",
+  "community-inspection-update-pui-button": "የህመምተኛውን ክትትል ሁኔታ ያስተካክሉ",
+
+  "community-inspection-case-to-followup": "ክትትል  የሚደረግለት ህመምተኛ መረጃ",
+  "community-inspection-search-button": "ህመምተኛውን ይፈልጉ",
+
+  "questionnaire-header1": "የህመምተኞች ክትትል መጠይቅ",
+  "questionnaire-header2": "አዲስ ጥያቄ ያስገቡ",
+  "questionnaire-question": "ጥያቄ",
+  "questionnaire-category": "የጥያቄው ምድብ",
+  "questionnaire-description": "የጥያቄው ማብራሪያ",
+  "questionnaire-options": "የጥያቄው አማራጮች",
+  "questionnaire-option": "አማራጭ",
+  "questionnaire-parent-question-id": "የጥያቄው የበላይ መለያ ቁጥር",
+  "questionnaire-modified-by": "ጥያቄውን ያስተካከለው ሰው",
+  "questionnaire-date-added": "ጥያቄው የተመዘገበበት ቀን",
+  "questionnaire-date-modified": "ጥያቄው የተስተካከለበት ቀን",
+  "questionnaire-add-question-button": "ጥያቄውን የክትትል መጠይቅ ውስጥ ያስገቡ"
 
 }

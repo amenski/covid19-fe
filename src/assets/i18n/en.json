@@ -114,5 +114,34 @@
 
   "add-case-register-button": "Register Case",
   "case-follow-up-link": "Follow up",
-  "add-case-pui-parent-case": "Parent Case Code"
+  "add-case-pui-parent-case": "Parent Case Code",
+
+  "contact-tracing-header1": "TRACE CONTACTS OF CONFIRMED CASES",
+  "contact-tracing-get-case-contacts-button": "GET CASE CONTACTS",
+
+  "community-inspection-header1": "Search a Patient Under Investigation (PUI)",
+  "community-inspection-search-pui-by": "Search PUI By",
+  "community-inspection-other-criteria": "Other",
+  "community-inspection-criteria-search-result": "SEARCH RESULT",
+  "community-inspection-update-pui-button": "Update PUI Followup",
+
+  "community-inspection-case-to-followup": "CASE TO FOLLOW",
+  "community-inspection-search-button": "Search PUI",
+
+  "questionnaire-header1": "QUESTIONNAIRE",
+  "questionnaire-header2": "ADD QUESTIONS",
+  "questionnaire-question": "Question",
+  "questionnaire-category": "Category",
+  "questionnaire-description": "Description",
+  "questionnaire-options": "Options",
+  "questionnaire-option": "Option",
+  "questionnaire-parent-question-id": "Parent Question ID",
+  "questionnaire-modified-by": "Modified By",
+  "questionnaire-date-added": "Date Added",
+  "questionnaire-date-modified": "Date Modified",
+  "questionnaire-add-question-button": "Add Question"
+
+
+
+
 }

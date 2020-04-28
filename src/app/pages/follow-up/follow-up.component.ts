@@ -206,10 +206,11 @@ export class FollowUpComponent implements OnInit {
     }
     this.communityInspectionService.searchCaseByCriteria(this.searchCase).subscribe(result=>{
       this.caseSearchResult = result.returnValue.cases;
+      if(this.caseSearchResult.length===0){
+        this.alertService.info("NO RESULTS WERE FOUND", this.options);
+      }
     })
-    if(this.caseSearchResult.length===0){
-      this.alertService.info("NO RESULTS WERE FOUND", this.options);
-    }
+
     if(this.caseSearchResult.length>0){
       this.alertService.success("Results found", this.options);
     }
