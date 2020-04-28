@@ -74,9 +74,10 @@
       </div>
     </div>
     <div class="row" *ngIf="showInvestigate">
-      <app-rumor-investigration [rumorToInvestigate]="rumorToInvestigate" [isReport]=isReport [isIsolate]=isIsolate>
+      <app-rumor-investigation [rumorToInvestigate]="rumorToInvestigate" [isToBeChangedToWaiting]=isToBeChangedToWaiting
+                                [isToBeRegistered]=isToBeRegistered>
 
-      </app-rumor-investigration>
+      </app-rumor-investigation>
     </div>
 
   </div>

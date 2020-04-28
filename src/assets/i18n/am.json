@@ -26,6 +26,7 @@
   "login-password": "የይለፍ ቃል",
   "login-error-msg": "የተሳሳተ የተጠቃሚ ስም ወይም የይለፍ ቃል!",
 
+  "rumor-investigate-header1": "የሚመረመረው ጥቆማ መረጃዎች",
   "Suspected Person INFO": "የጠረጠሩት ሰው መረጃ",
   "rumor-id": "የጥቆማ መለያ ቁጥር",
   "suspect-name": "የጠረጠሩት ሰው ስም",
@@ -138,6 +139,8 @@
   "questionnaire-modified-by": "ጥያቄውን ያስተካከለው ሰው",
   "questionnaire-date-added": "ጥያቄው የተመዘገበበት ቀን",
   "questionnaire-date-modified": "ጥያቄው የተስተካከለበት ቀን",
-  "questionnaire-add-question-button": "ጥያቄውን የክትትል መጠይቅ ውስጥ ያስገቡ"
+  "questionnaire-add-question-button": "ጥያቄውን የክትትል መጠይቅ ውስጥ ያስገቡ",
+
+  "footer-note": "የኢትዮጵያ የኮቪድ-19 ጉዳዮች ሪፖርት እና ልማት ቡድን"
 
 }

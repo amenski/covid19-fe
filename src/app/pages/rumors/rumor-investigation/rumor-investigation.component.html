@@ -1,17 +1,16 @@
 <div class="row">
   <div class="card">
     <div class="card-header">
-      <h2>RUMOR TO INVESTIGATE</h2>
+      <h2>{{'rumor-investigate-header1' | translate}}</h2>
     </div>
     <div class="card-body">
 
-
       <div class="row">
         <div class=" col-sm-6 text-left">
-          <h2 class=" card-title">{{'rumor-id' | translate}}: {{rumorToInvestigate.id}}  </h2>
+          <h2 class=" card-title">{{'rumor-id' | translate}}: <span style="color: green">{{rumorToInvestigate.id}}</span>  </h2>
         </div>
         <div class=" col-sm-6 text-left">
-          <h2 class=" card-title">{{'report-date-to-rrt' | translate}}: {{rumorToInvestigate.reportDate}}  </h2>
+          <h2 class=" card-title">{{'report-date-to-rrt' | translate }}: {{rumorToInvestigate.reportDate | date}}  </h2>
         </div>
         <div class=" col-sm-6 text-left">
           <h2 class=" card-title">{{'suspect-name' | translate}}: {{rumorToInvestigate.suspectName}} </h2>
@@ -49,13 +48,12 @@
           <h2 class=" card-title">{{'phone-number2' | translate}}: ({{rumorToInvestigate.phoneNumber2}})</h2>
         </div>
         <div class=" col-sm-6 text-left">
-          <h2 class=" card-title">{{'rumor-status' | translate}}: ({{rumorToInvestigate.status.value}})</h2>
+          <h2 class=" card-title" >{{'rumor-status' | translate}}: <span style="color: green">({{rumorToInvestigate.status.value}}) </span> </h2>
         </div>
     </div>
       <alert></alert>
-      <button (click)="markRumorApproval()" type="button" class="form-control">{{'rumor-mark-approval-button' | translate}}</button>
-      <button  type="button" class="form-control">{{'rumor-report-pui-button' | translate}}</button>
-      <button  type="button" class="form-control">{{'rumor-isolate-pui-button' | translate}}</button>
+      <button (click)="markRumorApproval()" *ngIf="isToBeChangedToWaiting" type="button" class="form-control">{{'rumor-mark-approval-button' | translate}}</button>
+      <button (click)="registerRumorAsCase()" type="button" *ngIf="isToBeRegistered" class="form-control">{{'rumor-report-pui-button' | translate}}</button>
   </div>
 
 </div>

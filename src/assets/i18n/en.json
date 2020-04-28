@@ -26,6 +26,7 @@
   "login-password": "Password",
   "login-error-msg": "Incorrect Username or Password",
 
+  "rumor-investigate-header1": "RUMOR TO INVESTIGATE",
   "Suspected Person INFO": "Suspected Person INFO",
   "rumor-id": "Rumor ID",
   "suspect-name": "Suspect Name",
@@ -139,7 +140,10 @@
   "questionnaire-modified-by": "Modified By",
   "questionnaire-date-added": "Date Added",
   "questionnaire-date-modified": "Date Modified",
-  "questionnaire-add-question-button": "Add Question"
+  "questionnaire-add-question-button": "Add Question",
+
+  "footer-note": "Ethio Covid19 Case Reporting and FollowUp Development Team"
+
 
 
 

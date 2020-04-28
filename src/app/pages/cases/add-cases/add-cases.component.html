@@ -15,7 +15,8 @@
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
                 <label> {{'add-case-name' | translate}} *</label>
-                <input formControlName="firstName" class=" form-control" placeholder="" type="text" required/>
+                <input placeholder="PUI Name" *ngIf="rumorToRegister===undefined" formControlName="firstName" class=" form-control"  type="text" required/>
+                <input  *ngIf="rumorToRegister!==undefined"  formControlName="firstName" class=" form-control"  type="text" required/>
               </div>
             </div>
 
@@ -54,7 +55,9 @@
                 <label> {{'add-case-gender' | translate}} </label>
 
                 <input type="text" formControlName="gender" placeholder=""
-                       [matAutocomplete]="gAuto" class = "form-control" >
+                       [matAutocomplete]="gAuto" class = "form-control" *ngIf="rumorToRegister===undefined">
+                <input type="text" formControlName="gender" placeholder=""
+                       [matAutocomplete]="gAuto" class = "form-control" *ngIf="rumorToRegister!==undefined">
                 <mat-autocomplete autoActiveFirstOption #gAuto="matAutocomplete">
                   <mat-option *ngFor="let gender of genderOptions | async" [value]="gender">
                     {{gender}}

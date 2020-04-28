@@ -28,8 +28,8 @@ export class RumorListComponent implements OnInit {
   dataSource: any;
   showInvestigate: boolean = false;
   rumorToInvestigate: ModelRumor;
-  isReport: boolean = false;
-  isIsolate: boolean;
+  isToBeChangedToWaiting: boolean = false;
+  isToBeRegistered: boolean;
 
   waitingResultLabel: string = RUMOR_WAITING_RESULT_STATUS_LABEL;
   pendingLabel: string = RUMOR_PENDING_STATUS_LABEL;
@@ -54,11 +54,14 @@ export class RumorListComponent implements OnInit {
 
   investigateRumor(rumor: any) {
     this.rumorToInvestigate = rumor;
+    this.isToBeChangedToWaiting = true;
     this.showInvestigate = true;
   }
 
   reportOrIsolate(rumor: any) {
-
+    this.rumorToInvestigate = rumor;
+    this.isToBeRegistered = true;
+    this.showInvestigate = true;
   }
 
   checkSearchVal() {

@@ -6,6 +6,8 @@ import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
 import {AlertService} from "../../../services/alert.service";
 import {RequestSaveCase} from "../../../models/requestSaveCase";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ModelRumor} from "../../../models/modelRumor";
 
 
 @Component({
@@ -124,8 +126,10 @@ export class AddCasesComponent implements OnInit {
 
   requestSave: RequestSaveCase;
 
+  rumorToRegister: ModelRumor;
+
   constructor(public fb: FormBuilder, private casesService: CasesService, private calendar: NgbCalendar,
-              private alertService: AlertService) {
+              private alertService: AlertService, private route: ActivatedRoute, private router: Router) {
     this.caseForm = this.fb.group({
       firstName: '', lastName: '',
       gender: '', dob: '',
@@ -146,10 +150,22 @@ export class AddCasesComponent implements OnInit {
       status: ''
 
     })
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.rumorToRegister = this.router.getCurrentNavigation().extras.state.rumorToRegister;
+        this.caseForm.get('firstName').setValue(this.rumorToRegister.suspectName);
+        this.caseForm.get('gender').setValue(this.rumorToRegister.gender);
+        this.caseForm.get('phoneNo').setValue(this.rumorToRegister.phoneNumber1);
+        this.caseForm.get('incidentPhone1').setValue(this.rumorToRegister.phoneNumber2);
+        this.caseForm.get('incidentPhone2').setValue(this.rumorToRegister.phoneNumber2);
+        this.caseForm.get('status').setValue(this.rumorToRegister.status.value);
+      }
+    });
   }
 
   ngOnInit() {
 
+    // alert(this.rumorToRegister.suspectName);
     this.resultOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filterResult(value))
