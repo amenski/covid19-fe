@@ -1,10 +1,10 @@
-<form ngNativeValidate [formGroup]="questionnaireForm" >
+<!--<form ngNativeValidate [formGroup]="questionnaireForm" >
   <div >
   {{'questionnaire-header1'|translate}}
 
   <div *ngFor="let question of questions">
     <div>
-      <label class="symptoms-margin"><strong>{{question.id}}. {{question.question}}: </strong></label>
+      <label class="symptoms-margin"><strong> {{question.question}}: </strong></label>
     </div>
 
       <mat-radio-group  [(ngModel)]="question.options"  formControlName="options" *ngFor="let op of question.options">
@@ -14,4 +14,15 @@
   </div>
 
 </div>
-</form>
+</form>-->
+
+<div class="container">
+  <span *ngFor="let question of questions">
+    <div>{{ question.question }}</div>
+    <div>
+      <mat-radio-group>
+        <mat-radio-button  *ngFor="let op of question.options"  [value]="op" (change)="onSelectionChange(question.id, question.question, op)" >{{op}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </span>  
+</div>
