@@ -18,9 +18,9 @@ export class RumorReportingComponent implements OnInit {
   myControl = new FormControl();
 
   date = new FormControl(new Date());
-  fever: boolean;
-  cough: boolean;
-  headache: boolean;
+  fever: 'Yes'|'No' = 'No';
+  cough: 'Yes'|'No' = 'No';
+  headache: 'Yes'|'No' = 'No';
 
   genders: string[] = ['M', 'F'];
   duration: number[] = [1, 2, 3, 4, 5];
@@ -98,10 +98,6 @@ export class RumorReportingComponent implements OnInit {
       status: {id: 1080, value: "PENDING"}
     }
     this.rumorsService.reportRumor(this.rumor).subscribe(result=>{
-      // if(result.message==='error'){
-      //   this.alertService.error(result.message, this.options);
-      //   return;
-      // }
       this.alertService.success(this.translate.instant('rumor-success-message'), this.options);
     }, error =>  this.alertService.error(this.translate.instant('rumor-error-message'), this.options));
   }

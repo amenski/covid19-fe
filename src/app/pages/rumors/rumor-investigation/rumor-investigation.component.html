@@ -52,8 +52,18 @@
         </div>
     </div>
       <alert></alert>
+      <div class="row">
+        <div class=" col-sm-6 text-left" *ngIf="isToBeRegistered">
+          <label>Tested +ve=> Send to Register as confirmed case</label>
+          <button (click)="registerRumorAsCase()" type="button"  class="form-control">{{'rumor-report-pui-button' | translate}}</button>
+
+        </div>
+        <div class=" col-sm-6 text-left" *ngIf="isToBeRegistered">
+          <label>Tested -ve => Send to Mandatory Quarantine and Register as unconfirmed case</label>
+          <button (click)="isolateAndRegisterCase()" type="button"  class="form-control">{{'rumor-isolate-pui-button' | translate}}</button>
+        </div>
+      </div>
       <button (click)="markRumorApproval()" *ngIf="isToBeChangedToWaiting" type="button" class="form-control">{{'rumor-mark-approval-button' | translate}}</button>
-      <button (click)="registerRumorAsCase()" type="button" *ngIf="isToBeRegistered" class="form-control">{{'rumor-report-pui-button' | translate}}</button>
   </div>
 
 </div>

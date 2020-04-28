@@ -70,8 +70,8 @@
                  <section class="symptoms-section">
                   <label class="symptoms-margin">{{'fever' | translate}}: </label>
                   <mat-radio-group [(ngModel)]="fever" formControlName="fever">
-                    <mat-radio-button class="symptoms-margin" value="after">{{'option-yes' | translate}}</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="before">{{'option-no' | translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Yes">{{'option-yes' | translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="No">{{'option-no' | translate}}</mat-radio-button>
                   </mat-radio-group>
                 </section>
               </div>
@@ -82,8 +82,8 @@
                 <section class="symptoms-section">
                   <label class="symptoms-margin">{{'headache' | translate}}: </label>
                   <mat-radio-group [(ngModel)]="headache" formControlName="headache">
-                    <mat-radio-button class="symptoms-margin" value="after">{{'option-yes' | translate}}</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" value="before">{{'option-no' | translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Yes">{{'option-yes' | translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="No">{{'option-no' | translate}}</mat-radio-button>
                   </mat-radio-group>
                 </section>
               </div>
@@ -97,8 +97,8 @@
                 <section class="symptoms-section">
                   <label class="symptoms-margin">{{'cough' | translate}}: </label>
                   <mat-radio-group [(ngModel)]="cough" formControlName="cough">
-                    <mat-radio-button class="symptoms-margin" >{{'option-yes' | translate}}</mat-radio-button>
-                    <mat-radio-button class="symptoms-margin" >{{'option-no' | translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="Yes">{{'option-yes' | translate}}</mat-radio-button>
+                    <mat-radio-button class="symptoms-margin" value="No">{{'option-no' | translate}}</mat-radio-button>
                   </mat-radio-group>
                 </section>
               </div>
@@ -140,7 +140,14 @@
             <div class=" col-md-6 px-md-1">
               <div class=" form-group">
                 <label >{{'relation-with-suspect' | translate}} : </label>
-                <input type="text" formControlName="relationWithSuspect" placeholder="ተጠርጣሪው ጋር ያሎት ግንኙነት" class = "form-control" >
+<!--                <input type="text" formControlName="relationWithSuspect" placeholder="ተጠርጣሪው ጋር ያሎት ግንኙነት" class = "form-control" >-->
+                <input type="text" formControlName="relationWithSuspect" placeholder="ተጠርጣሪው ጋር ያሎት ግንኙነት"
+                       [matAutocomplete]="rAuto" class = "form-control" >
+                <mat-autocomplete autoActiveFirstOption #rAuto="matAutocomplete">
+                  <mat-option *ngFor="let relation of relationOptions | async" [value]="relation">
+                    {{relation}}
+                  </mat-option>
+                </mat-autocomplete>
               </div>
             </div>
           </div>

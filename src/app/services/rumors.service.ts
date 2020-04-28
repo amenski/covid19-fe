@@ -25,9 +25,9 @@ export class RumorsService {
     return this.httpClient.put<ResponseBase>(rumorsUrl, requestSaveRumor)
   }
 
-  updateStatusToWaitingResult(rumorId: number): Observable<ResponseBase>{
+  updateStatus(rumorId: number, status: number): Observable<ResponseBase>{
     let rumorsUrl = BASE_URL+"/v1/api/rumor/"+rumorId+'/update-status';
-    return this.httpClient.post<ResponseBase>(rumorsUrl, RUMOR_WAITING_RESULT_STATUS_ID);
+    return this.httpClient.post<ResponseBase>(rumorsUrl, status);
 
   }
 }

@@ -267,11 +267,11 @@ export class FollowUpComponent implements OnInit {
     this.caseToFollow = followUpCase;
 
   }
-  
+
 /* questionnaire map and Emiter */
 selectedValuesMap = new Map();
 modelpuiFollowupList: ModelPuiFollowUp[];
-getSeletedQuestionOption(message: {id, question, option}) {
+getSelectedQuestionOption(message: {id, question, option}) {
   let modelPui: ModelPuiFollowUp = {
     puiCaseCode: this.followupForm.get('caseCode').value,
     qId: message.id,

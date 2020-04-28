@@ -8,9 +8,9 @@
           <ng-container matColumnDef="reportDate" >
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'report-date-to-rrt' | translate}} </th>
             <td mat-cell *matCellDef="let rumor" >
-              <span *ngIf="rumor.status.value===pendingLabel" style="color: orangered;">{{rumor.reportDate}} </span>
-              <span *ngIf="rumor.status.value===waitingResultLabel" style="color: yellow;">{{rumor.reportDate}} </span>
-              <span *ngIf="rumor.status.value===registeredLabel || rumor.status.value===inIsolationLabel" style="color: green;">{{rumor.reportDate}} </span>
+              <span *ngIf="rumor.status.value===pendingLabel" style="color: orangered;">{{rumor.reportDate | date}} </span>
+              <span *ngIf="rumor.status.value===waitingResultLabel" style="color: yellow;">{{rumor.reportDate | date}} </span>
+              <span *ngIf="rumor.status.value===registeredLabel || rumor.status.value===inIsolationLabel" style="color: green;">{{rumor.reportDate | date}} </span>
             </td>
           </ng-container>
 

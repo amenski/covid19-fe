@@ -8,3 +8,6 @@ export const RUMOR_PENDING_STATUS_LABEL = 'Rumor Status pending approval.';
 export const RUMOR_WAITING_RESULT_STATUS_LABEL = 'Rumor status waiting for clinical evaluation';
 export const RUMOR_REGISTERED_AS_CASE_STATUS_LABEL = 'Rumor status tested positive.';
 export const RUMOR_IN_ISOLATION_STATUS_LABEL = 'Rumor Status tested negative.';
+
+
+export const CASE_STATUS_IN_ISOLATION = 'PUI in Isolation.';
