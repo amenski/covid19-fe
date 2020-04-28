@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { ToastrService } from 'ngx-toastr';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {AlertService} from "../../services/alert.service";
@@ -233,7 +233,7 @@ export class FollowUpComponent implements OnInit {
     this.codeClicked = false;
   }
 
-  addQuestionToFollowUp(puiCaseCode: string, qId: number, selectedOption: string){
+  /*addQuestionToFollowUp(puiCaseCode: string, qId: number, selectedOption: string) {
     let modelPuiFollowUp: ModelPuiFollowUp= new class implements ModelPuiFollowUp {
       description: string;
       insertDate: Date;
@@ -248,9 +248,16 @@ export class FollowUpComponent implements OnInit {
     modelPuiFollowUp.selectedOption = selectedOption;
 
     this.requestSaveFollowUp.list.push(modelPuiFollowUp);
-  }
+  }*/
+
   registerFollowUp() {
-    this.communityInspectionService.registerNewFollow(this.requestSaveFollowUp).subscribe(result=>{
+    if(this.selectedValuesMap === null || this.selectedValuesMap.size < 1) {
+      this.alertService.error("Please check if all required fields are filled.", this.alertOptions);
+      return;
+    }
+    this.requestSaveFollowUp = {list: Array.from(this.selectedValuesMap.values())};
+    console.log(this.requestSaveFollowUp);
+    this.communityInspectionService.registerNewFollow(this.followupForm.get('caseCode').value, this.requestSaveFollowUp).subscribe(result=>{
       this.alertService.success("PUI Follow up updated!", this.alertOptions)
     }, error => this.alertService.error("Error Updating PUI Follow up!", this.alertOptions));
   }
@@ -260,4 +267,20 @@ export class FollowUpComponent implements OnInit {
     this.caseToFollow = followUpCase;
 
   }
+  
+/* questionnaire map and Emiter */
+selectedValuesMap = new Map();
+modelpuiFollowupList: ModelPuiFollowUp[];
+getSeletedQuestionOption(message: {id, question, option}) {
+  let modelPui: ModelPuiFollowUp = {
+    puiCaseCode: this.followupForm.get('caseCode').value,
+    qId: message.id,
+    question: message.question,
+    selectedOption: message.option
+  };
+
+  this.selectedValuesMap.set(message.id, modelPui);
+  // console.log(this.selectedValuesMap);
+}
+
 }
