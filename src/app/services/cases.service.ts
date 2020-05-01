@@ -23,4 +23,9 @@ export class CasesService {
     const url = BASE_URL+'/v1/api/case';
     return this.http.put<ResponseBase>(url, requestData);
   }
+
+  updateTestResult(caseCode: string, resultId: string): Observable<ResponseBase>{
+    const updateUrl = BASE_URL + '/v1/api/case/'+ caseCode+ '/update-result';
+    return this.http.post<ResponseBase>(updateUrl, resultId);
+  }
 }

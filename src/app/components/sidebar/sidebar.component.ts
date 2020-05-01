@@ -28,7 +28,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/admin/follow-up",
-    title: "Community Inspection",
+    title: "Community Surveillance",
     icon: "icon-pin",
     class: ""
   },

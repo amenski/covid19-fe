@@ -41,6 +41,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {TranslateModule} from "@ngx-translate/core";
 import {RumorInvestigationComponent} from "../../pages/rumors/rumor-investigation/rumor-investigation.component";
 import {ContactTracingComponent} from "../../pages/contact-tracing/contact-tracing.component";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {ContactTracingComponent} from "../../pages/contact-tracing/contact-traci
         MatFormFieldModule,
         MatInputModule,
         MatRadioModule,
-        TranslateModule
+        TranslateModule,
+        MatExpansionModule
     ],
   declarations: [
     AdminDashboardComponent,

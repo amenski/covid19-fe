@@ -1,9 +1,10 @@
   <div class="content">
     <div class="row">
       <div class="mat-elevation-z8">
+        <alert></alert>
         <input type="text" class="form-control" [(ngModel)]="searchVal" (ngModelChange)='checkSearchVal()'
                placeholder="Search&hellip;" >
-        <table mat-table [dataSource]="dataSource" matSort class="table tablesorter">
+        <table mat-table [dataSource]="dataSource" matSortDirection="desc" matSortActive="reportDate" matSort class="table tablesorter">
           <!-- Report Date Column -->
           <ng-container matColumnDef="reportDate" >
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'report-date-to-rrt' | translate}} </th>
@@ -64,6 +65,8 @@
               <button *ngIf="rumor.status.value===waitingResultLabel" type="button" class="form-control" (click)="reportOrIsolate(rumor)">
                 {{'rumor-report-isolate-pui-button' | translate}}
               </button>
+              <span *ngIf="rumor.status.value===registeredLabel" style="color: green">REGISTERED AS CONFIRMED CASE</span>
+              <span *ngIf="rumor.status.value===inIsolationLabel" style="color: green">REGISTERED AS UNCONFIRMED CASE (PATIENT IN ISOLATION)</span>
             </td>
           </ng-container>
 

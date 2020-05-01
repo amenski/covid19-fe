@@ -8,6 +8,8 @@ import {AlertService} from "../../../services/alert.service";
 import {RequestSaveCase} from "../../../models/requestSaveCase";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ModelRumor} from "../../../models/modelRumor";
+import {AttributesService} from "../../../services/attributes.service";
+import {ModelAttribute} from "../../../models/modelAttribute";
 
 
 @Component({
@@ -29,8 +31,8 @@ export class AddCasesComponent implements OnInit {
   };
   /*ENUMS*/
   identifiedBy: string[] = ['CLINICAL_EVALUATION', 'CONTACT_TRACING', 'COMMUNITY_SURVEILLANCE'];
-  status: string[] = ['STABLE', 'CRITICAL', 'DECEASED', 'RECOVERED', 'NA']
-  result: string[] = ['TEST_PENDING', 'TEST_NEGATIVE', 'TEST_POSITIVE'];
+  status: ModelAttribute[] = []
+  result: ModelAttribute[] = [];
 
 
   genders: string[] = ['M', 'F'];
@@ -119,17 +121,19 @@ export class AddCasesComponent implements OnInit {
   countriesFilteredOptions: Observable<string[]>;
   genderOptions: Observable<string[]>;
   /*ENUMS*/
-  resultOptions: Observable<string[]>;
-  statusOptions: Observable<string[]>;
+  resultOptions: Observable<ModelAttribute[]>;
+  statusOptions: Observable<ModelAttribute[]>;
   identifiedByOptions: Observable<string[]>;
   date = new FormControl(new Date());
 
   requestSave: RequestSaveCase;
 
   rumorToRegister: ModelRumor;
+  private attribs: Array<ModelAttribute>;
 
   constructor(public fb: FormBuilder, private casesService: CasesService, private calendar: NgbCalendar,
-              private alertService: AlertService, private route: ActivatedRoute, private router: Router) {
+              private alertService: AlertService, private route: ActivatedRoute, private router: Router,
+              private attributesService: AttributesService) {
     this.caseForm = this.fb.group({
       firstName: '', lastName: '',
       gender: '', dob: '',
@@ -164,6 +168,16 @@ export class AddCasesComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.attributesService.getAllAttributes().subscribe(data=>{
+      this.attribs = data.returnValue.attributes;
+      this.status = this.attribs.filter(attrib=>{
+        return (parseInt(attrib.attCode)>=1060 && parseInt(attrib.attCode)<=1065);
+      });
+      this.result = this.attribs.filter(attrib=>{
+        return (parseInt(attrib.attCode)>=1001 && parseInt(attrib.attCode)<=1003)
+      })
+    });
 
     // alert(this.rumorToRegister.suspectName);
     this.resultOptions = this.myControl.valueChanges.pipe(
@@ -302,7 +316,6 @@ export class AddCasesComponent implements OnInit {
 
 
     this.casesService.createNewCase(this.requestSave).subscribe(result=>{
-      alert(result.message);
       this.alertService.success("Case Registered!", this.options)
      // alert("Case Registered with code: " + result.toString());
 
@@ -310,14 +323,14 @@ export class AddCasesComponent implements OnInit {
 
   }
 
-  private _filterResult(value: string) : string[] {
-    const filterValue = value.toLowerCase();
-    return this.result.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  private _filterResult(value: string) :  ModelAttribute[] {
+    // const filterValue = value.toLowerCase();
+    return this.result;
   }
 
-  private _filterStatus(value: string) : string[] {
-    const filterValue = value.toLowerCase();
-    return this.status.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  private _filterStatus(value: string) :  ModelAttribute[] {
+    // const filterValue = value.toLowerCase();
+    return this.status;
   }
   private _filterIdentifiedBy(value: string) : string[] {
     const filterValue = value.toLowerCase();

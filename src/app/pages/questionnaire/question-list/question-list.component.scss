@@ -1,0 +1,25 @@
+
+.questions-margin {
+  margin: 0 15px;
+}
+mat-accordion
+mat-expansion-panel
+mat-expansion-panel-header {
+  font-size: 1.25em;
+  background-color: white;
+  //background: white;
+
+  color: #00838f;
+  font-weight: 500;
+}
+
+
+mat-accordion
+mat-expansion-panel
+.mat-expansion-panel-body {
+  background-color: white;
+  padding-top: 5px;
+}
+.mat-expansion-indicator::after {
+  color: #00838f;
+}

@@ -15,14 +15,28 @@
 
 </div>
 </form>-->
-
+<alert></alert>
 <div class="container">
   <span *ngFor="let question of questions">
-    <div>{{ question.question }}</div>
-    <div>
-      <mat-radio-group>
-        <mat-radio-button  *ngFor="let op of question.options"  [value]="op" (change)="onSelectionChange(question.id, question.question, op)" >{{op}}</mat-radio-button>
-      </mat-radio-group>
-    </div>
-  </span>  
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <i class="search-category-icon far fa-question-circle"></i>&nbsp;{{ question.question }}
+<!--         <i class="search-category-icon far fa-star"></i>-->
+      </mat-expansion-panel-header>
+
+       <div>
+        <mat-radio-group >
+          <mat-radio-button class="questions-margin" *ngFor="let op of question.options"  [value]="op" (change)="onSelectionChange(question.id, question.question, op)" >{{op}}</mat-radio-button>
+        </mat-radio-group>
+<!--        <div class="input-group-append" *ngIf="optionIsDate">-->
+<!--                <input class="form-control" matInput [matDatepicker]="qdate" [formControl]="today" (change)="onSelectionChange(question.id, question.question, $event.target)">-->
+<!--                <mat-datepicker-toggle matSuffix [for]="qdate"></mat-datepicker-toggle>-->
+<!--                <mat-datepicker #qdate></mat-datepicker>-->
+<!--        </div>-->
+     </div>
+
+    </mat-expansion-panel>
+
+  </span>
+
 </div>

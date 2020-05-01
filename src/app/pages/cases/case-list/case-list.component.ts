@@ -3,6 +3,7 @@ import {Case} from '../../../models/case';
 import {CasesService} from "../../../services/cases.service";
 import {ModelCase} from "../../../models/modelCase";
 import {NavigationExtras, Router} from "@angular/router";
+import {AlertService} from "../../../services/alert.service";
 
 @Component({
   selector: 'app-case-list',
@@ -14,12 +15,12 @@ export class CaseListComponent implements OnInit {
   searchVal: string = '';
 
 
-  constructor(private casesService: CasesService, private router: Router) {}
+  constructor(private casesService: CasesService, private router: Router, private alertService: AlertService) {}
 
   ngOnInit() {
     this.casesService.getAllCases().subscribe(result=>{
       this.cases = result.returnValue.cases;
-    })
+    }, error => this.alertService.warn("Error loading case report, Try Logout and Login"));
   }
 
   followUp(modelCase: ModelCase) {

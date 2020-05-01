@@ -65,7 +65,7 @@
   "Dashboard": "ዳሽቦርድ",
   "Covid-19 Cases": "የኮቪድ -19 ኬዞች",
   "Contact Tracing": "የህሙማን ግንኙነት መከታተያ",
-  "Community Inspection": "የማኅበረሰብ ምርመራ",
+  "Community Surveillance": "የማኅበረሰብ ክትትል እና ምርመራ",
   "Questionnaire": "መጠይቅ",
   "Rumors Investigation": "የጥቆማዎች ምርመራ",
   "Health Facilities": "የጤና ተቋማት",
@@ -104,7 +104,9 @@
   "add-case-pui-current-status": "አሁን ያለበት ሁኔታ",
   "add-case-pui-parent-case-code": "የአስተላላፊው ኬዝ ኮድ",
   "add-case-pui-presumptive-result": "የመጀመሪያ ውጤት",
+  "add-case-pui-presumptive-new-result": "አዲስ ግምታዊ ውጤት",
   "add-case-pui-confirmed-result": "የተረጋገጠ ውጤት",
+  "add-case-pui-confirmed-new-result": "አዲስ የተረጋገጠ ውጤት",
 
   "add-case-report-info": "የ ሪፖርት መረጃ",
   "add-case-identified-by": "የተለየበት ሁኔታ",

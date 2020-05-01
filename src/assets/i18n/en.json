@@ -66,7 +66,7 @@
   "Dashboard": "Dashboard",
   "Covid-19 Cases": "Covid-19 Cases",
   "Contact Tracing": "Contact Tracing",
-  "Community Inspection": "Community Inspection",
+  "Community Surveillance": "Community Surveillance",
   "Questionnaire": "Questionnaire",
   "Rumors Investigation": "Rumor Investigation",
   "sidbar-health-factilities": "Health Facilities",
@@ -105,7 +105,9 @@
   "add-case-pui-current-status": "PUI Current Status",
   "add-case-pui-parent-case-code": "Parent Case code",
   "add-case-pui-presumptive-result": "Presumptive Result",
+  "add-case-pui-presumptive-new-result": "Update Presumptive Result To",
   "add-case-pui-confirmed-result": "Confirmed Result",
+  "add-case-pui-confirmed-new-result": "Update Confirmed Result",
 
   "add-case-report-info": "REPORT INFO",
   "add-case-identified-by": "Case Identified By.",

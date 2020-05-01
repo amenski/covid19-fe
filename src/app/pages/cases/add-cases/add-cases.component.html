@@ -184,7 +184,7 @@
                      [matAutocomplete]="rAuto" class=" form-control" (ngModelChange)="_searchRegion(this.caseForm.get('region').value)">
               <mat-autocomplete autoActiveFirstOption #rAuto="matAutocomplete">
                 <mat-option *ngFor="let region of regionsFilteredOptions | async" [value]="region">
-                  {{region}}z
+                  {{region}}
                 </mat-option>
               </mat-autocomplete>
 

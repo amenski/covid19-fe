@@ -5,6 +5,7 @@ import Chart from 'chart.js';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
+import {AlertService} from "../../services/alert.service";
 
 
 @Component({
@@ -48,7 +49,7 @@ export class AdminDashboardComponent implements OnInit {
   displayedColumns: string[] = ['reportDate', 'totalCases', 'newCases', 'totalDeaths', 'newDeaths', 'activeCases', 'criticalCases', 'recovered'];
   dataSource: any; /*holds cases stat data from BE*/
 
-  constructor(private dailyStatusService: DailyStatusService) {
+  constructor(private dailyStatusService: DailyStatusService, private alertService: AlertService) {
     this.dailyStatusService.getAllCaseStats().subscribe(result=>{
       this.caseStats = result.returnValue.list;
 
@@ -595,7 +596,7 @@ export class AdminDashboardComponent implements OnInit {
 
 
 
-    })
+    }, error => this.alertService.warn("Error Loading Daily Status Data. Couldn't connect to server. Check your connection"))
   }
 
   ngOnInit() {

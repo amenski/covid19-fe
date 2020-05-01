@@ -14,6 +14,7 @@ import {ModelEnumIdValue} from "../../models/modelEnumIdValue";
 import {RequestSearchCase} from "../../models/requestSearchCase";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RequestSaveFollowUp} from "../../models/requestSaveFollowUp";
+import {CasesService} from "../../services/cases.service";
 
 @Component({
   selector: "app-follow-up",
@@ -22,12 +23,9 @@ import {RequestSaveFollowUp} from "../../models/requestSaveFollowUp";
 })
 export class FollowUpComponent implements OnInit {
 
+  loading = false;
   followupForm: FormGroup;
   /*Alert options*/
-  options = {
-    autoClose: true,
-    keepAfterRouteChange: false
-  };
   caseInfo: ModelCase;
   puiFollowUp: ModelPuiFollowUp;
 
@@ -92,17 +90,20 @@ export class FollowUpComponent implements OnInit {
   requestSaveFollowUp: RequestSaveFollowUp;
   /*Alert options*/
   alertOptions = {
-    autoClose: true,
+    autoClose: false,
     keepAfterRouteChange: false
   };
+
   constructor(public fb: FormBuilder, private alertService: AlertService,
               private communityInspectionService: CommunityInspectionService,
-              private attributesService: AttributesService,
+              private attributesService: AttributesService, private casesService: CasesService,
               private route: ActivatedRoute, private router: Router) {
     this.followupForm = this.fb.group({
       caseCode: '',
       criteria: '',
-      testResultId: '', statusId: '', region: '', recentTravelTo: ''
+      testResultId: '', statusId: '', region: '', recentTravelTo: '',
+      updatedByCodeConfirmedResult:'',
+      updatedByCriteriaConfirmedResult:''
     });
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -112,8 +113,8 @@ export class FollowUpComponent implements OnInit {
   }
 
 
-/*****************************************************************************************************/
-/*****************************************************************************************************/
+  /*****************************************************************************************************/
+  /*****************************************************************************************************/
   ngOnInit() {
 
     this.attributesService.getAllAttributes().subscribe(result=>{
@@ -125,8 +126,8 @@ export class FollowUpComponent implements OnInit {
         return (parseInt(r.attCode)>=1001 && parseInt(r.attCode)<=1003)
       })
     });
-/*****************************************************************************************************/
-/*****************************************************************************************************/
+    /*****************************************************************************************************/
+    /*****************************************************************************************************/
     this.regionsFilteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filterRegions(value)),
@@ -186,7 +187,7 @@ export class FollowUpComponent implements OnInit {
 
       }
     );
-    this.alertService.success("Follow Up", this.options);
+    this.alertService.success("Follow Up", this.alertOptions);
     this.showByCodeSearchResult = true;
 
   }
@@ -195,7 +196,7 @@ export class FollowUpComponent implements OnInit {
     // alert("Searching PUI by Criteria: "+ this.followupForm.get('region').value);
     if(this.followupForm.get('region').value==='' && this.followupForm.get('recentTravelTo').value==='' &&
       this.followupForm.get('testResultId').value==='' && this.followupForm.get('statusId').value==='') {
-      this.alertService.error("Specify at least one search filter", this.options);
+      this.alertService.warn("Specify at least one search filter", this.alertOptions);
       return;
     }
     this.searchCase = {
@@ -206,22 +207,21 @@ export class FollowUpComponent implements OnInit {
     }
     this.communityInspectionService.searchCaseByCriteria(this.searchCase).subscribe(result=>{
       this.caseSearchResult = result.returnValue.cases;
-      if(this.caseSearchResult.length===0){
-        this.alertService.info("NO RESULTS WERE FOUND", this.options);
-      }
-    })
+    }, error => this.alertService.warn("Error searching case"));
 
     if(this.caseSearchResult.length>0){
-      this.alertService.success("Results found", this.options);
+      this.alertService.success("Results found", this.alertOptions);
     }
     this.showByOtherSearchResult = true;
   }
 
   onSubmit() {
     if(!this.codeClicked) {
+      this.loading = true;
       this.searchPUIByCaseCode();
     }else {
-     this.searchPUIByCriteria();
+      this.loading = true;
+      this.searchPUIByCriteria();
     }
   }
 
@@ -252,14 +252,34 @@ export class FollowUpComponent implements OnInit {
 
   registerFollowUp() {
     if(this.selectedValuesMap === null || this.selectedValuesMap.size < 1) {
-      this.alertService.error("Please check if all required fields are filled.", this.alertOptions);
+      this.alertService.warn("Please check if all required fields are filled.", this.alertOptions);
       return;
     }
-    this.requestSaveFollowUp = {list: Array.from(this.selectedValuesMap.values())};
-    console.log(this.requestSaveFollowUp);
-    this.communityInspectionService.registerNewFollow(this.followupForm.get('caseCode').value, this.requestSaveFollowUp).subscribe(result=>{
-      this.alertService.success("PUI Follow up updated!", this.alertOptions)
-    }, error => this.alertService.error("Error Updating PUI Follow up!", this.alertOptions));
+    alert("Updating to result: "+this.followupForm.get('updatedByCriteriaConfirmedResult').value);
+    if(this.followupForm.get('updatedByCodeConfirmedResult').value !== ''){
+      this.casesService.updateTestResult(this.caseToFollow.caseCode, this.followupForm.get('updatedByCodeConfirmedResult').value).subscribe(
+        result=>{
+          this.requestSaveFollowUp = {list: Array.from(this.selectedValuesMap.values())};
+          // console.log(this.requestSaveFollowUp);
+          this.communityInspectionService.registerNewFollow(this.caseToFollow.caseCode, this.requestSaveFollowUp).subscribe(r=>{
+            this.alertService.success("PUI Follow up updated!", this.alertOptions)
+          }, error => this.alertService.warn("Error Updating PUI Follow up!", this.alertOptions));
+
+        })
+    }
+    if( this.followupForm.get('updatedByCriteriaConfirmedResult').value !== ''){
+      this.casesService.updateTestResult(this.caseToFollow.caseCode, this.followupForm.get('updatedByCriteriaConfirmedResult').value).subscribe(
+        result=>{
+          this.requestSaveFollowUp = {list: Array.from(this.selectedValuesMap.values())};
+          // console.log(this.requestSaveFollowUp);
+          this.communityInspectionService.registerNewFollow(this.caseToFollow.caseCode, this.requestSaveFollowUp).subscribe(r=>{
+            this.alertService.success("PUI Follow up updated!", this.alertOptions)
+          }, error => this.alertService.warn("Error Updating PUI Follow up!", this.alertOptions));
+        })
+    }
+
+
+
   }
 
   showFollowUp(followUpCase: ModelCase) {
@@ -268,19 +288,19 @@ export class FollowUpComponent implements OnInit {
 
   }
 
-/* questionnaire map and Emiter */
-selectedValuesMap = new Map();
-modelpuiFollowupList: ModelPuiFollowUp[];
-getSelectedQuestionOption(message: {id, question, option}) {
-  let modelPui: ModelPuiFollowUp = {
-    puiCaseCode: this.followupForm.get('caseCode').value,
-    qId: message.id,
-    question: message.question,
-    selectedOption: message.option
-  };
+  /* questionnaire map and Emitter */
+  selectedValuesMap = new Map();
+  // modelpuiFollowupList: ModelPuiFollowUp[];
+  getSelectedQuestionOption(message: {id, question, option}) {
+    let modelPui: ModelPuiFollowUp = {
+      puiCaseCode: this.followupForm.get('caseCode').value,
+      qId: message.id,
+      question: message.question,
+      selectedOption: message.option
+    };
 
-  this.selectedValuesMap.set(message.id, modelPui);
-  // console.log(this.selectedValuesMap);
-}
+    this.selectedValuesMap.set(message.id, modelPui);
+    // console.log(this.selectedValuesMap);
+  }
 
 }

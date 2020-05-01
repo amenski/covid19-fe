@@ -7,6 +7,7 @@ import {ModelDailyCaseStatus} from "../../models/modelDailyCaseStatus";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
+import {AlertService} from "../../services/alert.service";
 
 
 @Component({
@@ -54,7 +55,7 @@ export class DashboardComponent implements OnInit {
 
   dataSource: any;
 
-  constructor(private dailyStatusService: DailyStatusService) {
+  constructor(private dailyStatusService: DailyStatusService, private alertService: AlertService) {
     this.dailyStatusService.getAllCaseStats().subscribe(result=>{
       //this.caseStats = result;
       this.caseStats = result.returnValue.list;
@@ -606,7 +607,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-    })
+    }, error => this.alertService.warn("Error Loading Daily Status Data. Couldn't connect to server. Check your connection"))
   }
 
   ngOnInit() {

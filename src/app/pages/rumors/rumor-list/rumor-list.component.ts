@@ -44,7 +44,7 @@ export class RumorListComponent implements OnInit {
       this.rumors = result.returnValue.list;
       this.dataSource =  new MatTableDataSource(this.rumors);
       this.dataSource.sort = this.matSort;
-    })
+    }, error => this.alertService.warn("Couldn't fetch rumors. Error loading rumor list"));
 
   }
 
