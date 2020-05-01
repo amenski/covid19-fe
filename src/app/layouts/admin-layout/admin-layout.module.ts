@@ -41,10 +41,14 @@ import {MatRadioModule} from "@angular/material/radio";
 import {TranslateModule} from "@ngx-translate/core";
 import {RumorInvestigationComponent} from "../../pages/rumors/rumor-investigation/rumor-investigation.component";
 import {ContactTracingComponent} from "../../pages/contact-tracing/contact-tracing.component";
+import { OrganizationChartModule } from 'primeng/organizationchart';
+import { TreeModule } from 'primeng/tree';
 
 
 @NgModule({
     imports: [
+        OrganizationChartModule,
+        TreeModule,
         CommonModule,
         RouterModule.forChild(AdminLayoutRoutes),
         FormsModule,
@@ -63,7 +67,7 @@ import {ContactTracingComponent} from "../../pages/contact-tracing/contact-traci
         MatFormFieldModule,
         MatInputModule,
         MatRadioModule,
-        TranslateModule
+        TranslateModule,
     ],
   declarations: [
     AdminDashboardComponent,

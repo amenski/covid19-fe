@@ -22,12 +22,22 @@
           </div>
 
           <alert></alert>
-            <button type="submit" class="form-control" >{{'contact-tracing-get-case-contacts-button' | translate}}</button>
+          <button type="submit" class="form-control" >{{'contact-tracing-get-case-contacts-button' | translate}}</button>
           <hr/>
           <hr/>
-
-
-
+          
+          <div>
+              <p-organizationChart [value]="data" styleClass="company">
+                <ng-template let-node pTemplate="person">
+                    <div class="node-header ui-corner-top">{{node.data.resultStatus}}</div>
+                    <div class="node-content">
+                      <div>{{node.data.patientname}}</div>
+                        <div>{{node.data.code}}</div>
+                    </div>
+                </ng-template>
+            </p-organizationChart>
+          </div>
+          
         </div>
       </div>
     </div>
