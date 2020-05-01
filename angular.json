@@ -29,9 +29,12 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css",
+              "./node_modules/ngx-toastr/toastr.css",
               "src/assets/scss/black-dashboard.scss",
-              "src/assets/css/nucleo-icons.css"
+              "src/assets/css/nucleo-icons.css",
+              "./node_modules/font-awesome/css/font-awesome.min.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeng/resources/themes/luna-green/theme.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true

@@ -26,7 +26,7 @@
     "Ethio Covid19 Case Reporting and Followup"
   ],
   "dependencies": {
-    "@angular/animations": "9.0.5",
+    "@angular/animations": "^9.0.5",
     "@angular/cdk": "^9.2.0",
     "@angular/cli": "9.0.5",
     "@angular/common": "9.0.5",
@@ -49,9 +49,12 @@
     "chart.js": "2.8.0",
     "core-js": "3.6.4",
     "express": "^4.17.1",
+    "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^5.6.1",
     "ngx-toastr": "10.0.4",
     "path": "^0.12.7",
+    "primeicons": "^2.0.0",
+    "primeng": "^9.0.6",
     "rxjs": "^6.5.2",
     "survey-angular": "^1.5.19",
     "swagger-angular-generator": "^4.2.1",
