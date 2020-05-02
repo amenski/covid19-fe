@@ -14,6 +14,9 @@ export class CaseListComponent implements OnInit {
   cases: ModelCase[];
   searchVal: string = '';
 
+  value = 50;
+  displayProgressSpinner = false;
+  spinnerWithoutBackdrop = false;
 
   constructor(private casesService: CasesService, private router: Router, private alertService: AlertService) {}
 
@@ -24,12 +27,17 @@ export class CaseListComponent implements OnInit {
   }
 
   followUp(modelCase: ModelCase) {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        caseToFollow: modelCase,
-      }
-    };
-    this.router.navigate(['admin/follow-up'], navigationExtras);
+    alert("overlay");
+    this.displayProgressSpinner = true;
+    setTimeout(() => {
+      this.displayProgressSpinner = false;
+    }, 30000);
+    // let navigationExtras: NavigationExtras = {
+    //   state: {
+    //     caseToFollow: modelCase,
+    //   }
+    // };
+    // this.router.navigate(['admin/follow-up'], navigationExtras);
   }
 
 

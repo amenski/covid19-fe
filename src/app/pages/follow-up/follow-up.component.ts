@@ -187,7 +187,8 @@ export class FollowUpComponent implements OnInit {
 
       }
     );
-    this.alertService.success("Follow Up", this.alertOptions);
+    this.alertService.success("Found Case", this.alertOptions);
+    this.loading = false;
     this.showByCodeSearchResult = true;
 
   }
@@ -207,11 +208,13 @@ export class FollowUpComponent implements OnInit {
     }
     this.communityInspectionService.searchCaseByCriteria(this.searchCase).subscribe(result=>{
       this.caseSearchResult = result.returnValue.cases;
-    }, error => this.alertService.warn("Error searching case"));
 
-    if(this.caseSearchResult.length>0){
-      this.alertService.success("Results found", this.alertOptions);
-    }
+    }, error => this.alertService.warn("Error searching case, Couldn't connect to server. Check your internet connection"));
+
+    // if(this.caseSearchResult.length>0){
+    //   this.alertService.success("Results found", this.alertOptions);
+    // }
+    this.loading = false;
     this.showByOtherSearchResult = true;
   }
 
@@ -257,7 +260,8 @@ export class FollowUpComponent implements OnInit {
     }
     alert("Updating to result: "+this.followupForm.get('updatedByCriteriaConfirmedResult').value);
     if(this.followupForm.get('updatedByCodeConfirmedResult').value !== ''){
-      this.casesService.updateTestResult(this.caseToFollow.caseCode, this.followupForm.get('updatedByCodeConfirmedResult').value).subscribe(
+
+      this.casesService.updateTestResult(this.caseToFollow.caseCode, parseInt(this.followupForm.get('updatedByCodeConfirmedResult').value) ).subscribe(
         result=>{
           this.requestSaveFollowUp = {list: Array.from(this.selectedValuesMap.values())};
           // console.log(this.requestSaveFollowUp);
@@ -277,15 +281,11 @@ export class FollowUpComponent implements OnInit {
           }, error => this.alertService.warn("Error Updating PUI Follow up!", this.alertOptions));
         })
     }
-
-
-
   }
 
   showFollowUp(followUpCase: ModelCase) {
     this.caseSearchResult = [];
     this.caseToFollow = followUpCase;
-
   }
 
   /* questionnaire map and Emitter */

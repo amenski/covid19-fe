@@ -18,7 +18,8 @@ export class ContactTracingComponent implements OnInit {
     autoClose: true,
     keepAfterRouteChange: false
   };
-  
+  loading: boolean = false;
+
   constructor(private alertService: AlertService, private fb: FormBuilder,
               private contactTracingService: ContactTracingService) {
     this.tracingForm = this.fb.group({
@@ -30,6 +31,7 @@ export class ContactTracingComponent implements OnInit {
   }
 
   getContacts(){
+    this.loading = true;
     this.contactTracingService.getContactTrace(this.tracingForm.get('caseCode').value)
       .subscribe(result => {
         this.data = []; //clear
@@ -43,5 +45,6 @@ export class ContactTracingComponent implements OnInit {
           this.alertService.error('Error: ' + (result.message || result.errors || ''), this.alertOptions);
         }
     }, error =>  this.alertService.error('Error getting data.', this.alertOptions));
+    this.loading = false;
   }
 }

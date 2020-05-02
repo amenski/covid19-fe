@@ -130,6 +130,7 @@ export class AddCasesComponent implements OnInit {
 
   rumorToRegister: ModelRumor;
   private attribs: Array<ModelAttribute>;
+  loading: boolean = false;
 
   constructor(public fb: FormBuilder, private casesService: CasesService, private calendar: NgbCalendar,
               private alertService: AlertService, private route: ActivatedRoute, private router: Router,
@@ -267,37 +268,7 @@ export class AddCasesComponent implements OnInit {
   }
 
   addCase() {
-  //  console.log("Adding a new Case "+ this.caseForm.get('caseCode').value);
-  //   let formData: any = new FormData();
-    // formData.append("firstName", this.caseForm.get('firstName').value);
-    // formData.append("lastName", this.caseForm.get('lastName').value);
-    // formData.append("dob", this.caseForm.get('dob').value);
-    // formData.append("gender", this.caseForm.get('gender').value);
-    // formData.append("phoneNo", this.caseForm.get('phoneNo').value);
-    // formData.append("passportNumber", this.caseForm.get('passportNumber').value);
-    // formData.append("nationality", this.caseForm.get('nationality').value);
-    // formData.append("occupation", this.caseForm.get('occupation').value);
-
-    // formData.append("region", this.caseForm.get('region').value);
-    // formData.append("subcityOrZone", this.caseForm.get('subcityOrZone').value);
-    // formData.append("woreda", this.caseForm.get('woreda').value);
-    // formData.append("kebele", this.caseForm.get('kebele').value);
-    // //formData.append("streetName", this.caseForm.get('streetName').value);
-    // formData.append("houseNo", this.caseForm.get('houseNo').value);
-    // formData.append("latitude", this.caseForm.get('latitude').value);
-    // formData.append("longitude", this.caseForm.get('longitude').value);
-    //
-    // formData.append("recentTravelTo", this.caseForm.get('recentTravelTo').value);
-    // formData.append("admittedToFacility", this.caseForm.get('admittedToFacility').value);
-    //
-    // formData.append("identifiedBy", this.caseForm.get('identifiedBy').value);
-    // formData.append("modifiedBy", this.caseForm.get('modifiedBy').value);
-    // formData.append("reportDate", this.caseForm.get('reportDate').value);
-    // formData.append("modifiedDate", this.caseForm.get('modifiedDate').value);
-    //
-    // formData.append("status", this.caseForm.get('status').value);
-    // formData.append("parentCaseCode", this.caseForm.get('parentCaseCode').value);
-
+    this.loading = true;
     this.requestSave = {
       firstName :  this.caseForm.get('firstName').value,
       lastName : this.caseForm.get('lastName').value,
@@ -317,8 +288,7 @@ export class AddCasesComponent implements OnInit {
 
     this.casesService.createNewCase(this.requestSave).subscribe(result=>{
       this.alertService.success("Case Registered!", this.options)
-     // alert("Case Registered with code: " + result.toString());
-
+      this.loading = false;
     }, error => this.alertService.error("Error registering case, Contact the Admin", this.options))
 
   }

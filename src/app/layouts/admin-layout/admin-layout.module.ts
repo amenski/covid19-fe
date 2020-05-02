@@ -1,11 +1,9 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import { AdminLayoutRoutes } from "./admin-layout.routing";
-import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 import { CasesComponent } from "../../pages/cases/cases.component";
 import { HealthFacilitiesComponent } from "../../pages/health-facilities/health-facilities.component";
 import { FollowUpComponent } from "../../pages/follow-up/follow-up.component";
@@ -19,10 +17,8 @@ import {HealthFacilityListComponent} from "../../pages/health-facilities/health-
 import {AddHealthFacilityComponent} from "../../pages/health-facilities/add-health-facility/add-health-facility.component";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-//import {authInterceptorProviders} from "../../helpers/jwt.interceptor";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import {NativeDateAdapter} from "@angular/material/core";
 import {AddQuestionsComponent} from "../../pages/questionnaire/add-questions/add-questions.component";
 import {QuestionListComponent} from "../../pages/questionnaire/question-list/question-list.component";
@@ -44,35 +40,41 @@ import {ContactTracingComponent} from "../../pages/contact-tracing/contact-traci
 import {MatExpansionModule} from "@angular/material/expansion";
 import { OrganizationChartModule } from 'primeng/organizationchart';
 import { TreeModule } from 'primeng/tree';
+import {AccordionModule, ButtonModule, ProgressSpinnerModule, RadioButtonModule} from "primeng";
+import {ProgressSpinnerComponent} from "../../components/progress-spinner/progress-spinner.component";
 
 
 @NgModule({
-    imports: [
-        OrganizationChartModule,
-        TreeModule,
-        CommonModule,
-        RouterModule.forChild(AdminLayoutRoutes),
-        FormsModule,
-        NgbModule,
-        ReactiveFormsModule,
-        NgSelectModule,
-        MatAutocompleteModule,
-        ScrollingModule,
-        MatDatepickerModule,
-        MatIconModule,
-        ComponentsModule,
-        AlertModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatRadioModule,
-        TranslateModule,
+  imports: [
+    OrganizationChartModule,
+    TreeModule,
+    CommonModule,
+    RouterModule.forChild(AdminLayoutRoutes),
+    FormsModule,
+    NgbModule,
+    ReactiveFormsModule,
+    NgSelectModule,
+    MatAutocompleteModule,
+    ScrollingModule,
+    MatDatepickerModule,
+    MatIconModule,
+    ComponentsModule,
+    AlertModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    TranslateModule,
 
-        MatExpansionModule
+    MatExpansionModule,
+    AccordionModule,
+    RadioButtonModule,
+    ButtonModule,
+    ProgressSpinnerModule,
 
-    ],
+  ],
   declarations: [
     AdminDashboardComponent,
     UserComponent,
@@ -89,7 +91,8 @@ import { TreeModule } from 'primeng/tree';
     AddQuestionsComponent,
     QuestionListComponent,
     RumorListComponent,
-    ScreeningComponent
+    ScreeningComponent,
+    ProgressSpinnerComponent
   ],
   providers: [ NativeDateAdapter],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

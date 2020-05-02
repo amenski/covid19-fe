@@ -40,6 +40,7 @@ export class AddQuestionsComponent implements OnInit {
   attributes: ModelAttribute[];
   last: number;
   private returnUrl: any;
+  loading: boolean = false;
   ngOnInit() {
    // this.addOption({id: 0, title: "Option ", addDisabled: true, removeDisabled: true});
     this.categoryOptions = this.questionnaireControl.valueChanges.pipe(
@@ -89,6 +90,7 @@ export class AddQuestionsComponent implements OnInit {
   }
 
   addQuestion() {
+    this.loading = true;
     this.addOption(this.last+1);
     // this.arrayItems.map(item=>{
     //   alert("Options: "+item);
@@ -109,6 +111,7 @@ export class AddQuestionsComponent implements OnInit {
       this.alertService.success("Question Added!", this.alertOptions)
     }, err => this.alertService.error("Error Creating Question!", this.alertOptions));
     this.questionsForm.reset();
+    this.loading = false;
     this.router.navigate([this.returnUrl])
   }
 }

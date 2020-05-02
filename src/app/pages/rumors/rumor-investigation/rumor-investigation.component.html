@@ -55,15 +55,26 @@
       <div class="row">
         <div class=" col-sm-6 text-left" *ngIf="isToBeRegistered">
           <label>Tested +ve=> Send to Register as confirmed case</label>
-          <button (click)="registerRumorAsCase()" type="button"  class="form-control">{{'rumor-report-pui-button' | translate}}</button>
-
+<!--          <button (click)="registerRumorAsCase()" type="button"  class="form-control">{{'rumor-report-pui-button' | translate}}</button>-->
+          <button pButton type="submit" label="{{'rumor-report-pui-button' | translate}}" [disabled]="reportLoading"
+                  class="form-control ui-button-rounded ui-button-info" (click)="registerRumorAsCase()">
+            <p-progressSpinner *ngIf="reportLoading" [style]="{width: '30px', height: '30px'}" strokeWidth="4"  ></p-progressSpinner>
+          </button>
         </div>
         <div class=" col-sm-6 text-left" *ngIf="isToBeRegistered">
           <label>Tested -ve => Send to Mandatory Quarantine and Register as unconfirmed case</label>
-          <button (click)="isolateAndRegisterCase()" type="button"  class="form-control">{{'rumor-isolate-pui-button' | translate}}</button>
+<!--          <button (click)="isolateAndRegisterCase()" type="button"  class="form-control">{{'rumor-isolate-pui-button' | translate}}</button>-->
+          <button pButton  type="submit" label="{{'rumor-isolate-pui-button' | translate}}" [disabled]="reportLoading"
+                  class="form-control ui-button-rounded ui-button-info" (click)="isolateAndRegisterCase()">
+            <p-progressSpinner *ngIf="reportLoading" [style]="{width: '30px', height: '30px'}" strokeWidth="4"  ></p-progressSpinner>
+          </button>
         </div>
       </div>
-      <button (click)="markRumorApproval()" *ngIf="isToBeChangedToWaiting" type="button" class="form-control">{{'rumor-mark-approval-button' | translate}}</button>
+      <button pButton *ngIf="isToBeChangedToWaiting" type="submit" label="{{'rumor-mark-approval-button' | translate}}" [disabled]="approvalLoading"
+              class="form-control ui-button-rounded ui-button-info" (click)="markRumorApproval()">
+        <p-progressSpinner *ngIf="approvalLoading" [style]="{width: '30px', height: '30px'}" strokeWidth="4"  ></p-progressSpinner>
+      </button>
+<!--      <button (click)="markRumorApproval()" *ngIf="isToBeChangedToWaiting" type="button" class="form-control">{{'rumor-mark-approval-button' | translate}}</button>-->
   </div>
 
 </div>

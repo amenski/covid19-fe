@@ -9,6 +9,7 @@ import {LoginComponent} from "../../pages/login/login.component";
 import {RegisterUserComponent} from "../../pages/register/register-user.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {AlertModule} from "../../components/alert/alert.module";
+import {ProgressSpinnerModule} from "primeng";
 @NgModule({
     imports: [
         CommonModule,
@@ -17,7 +18,8 @@ import {AlertModule} from "../../components/alert/alert.module";
         NgbModule,
         ReactiveFormsModule,
         TranslateModule,
-        AlertModule
+        AlertModule,
+        ProgressSpinnerModule
     ],
   declarations: [
     LoginComponent, RegisterUserComponent

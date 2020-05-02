@@ -1,3 +1,5 @@
+<app-progress-spinner class="example-margin"  [value]="value" [backdropEnabled]="true" [displayProgressSpinner]="spinnerWithoutBackdrop">
+</app-progress-spinner>
 <div class="card">
   <div class="card-header">
     <h2>COVID-19 CASE REPORT</h2>
@@ -26,7 +28,11 @@
 <!--          <td>{{case.parentCaseCode}}</td>-->
 <!--          <td>{{case.region}}</td>-->
             <td>{{case.status.value}}</td>
-          <td><button class="form-control" type="button" (click)="followUp(case)">{{'case-follow-up-link' | translate}}</button></td>
+          <td>
+
+            <button pButton type="submit" label="{{'case-follow-up-link' | translate}}" class="ui-button-rounded ui-button-info" (click)="followUp(case)"></button>
+            <!--            <button class="form-control" type="button" (click)="followUp(case)">{{'case-follow-up-link' | translate}}</button>-->
+          </td>
 
         </tr>
         </tbody>

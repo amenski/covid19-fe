@@ -66,14 +66,15 @@
                     {{stat.attName }}</option>
                 </select>
               </div>
-
-              <button type="submit" class="form-control" (click)="onByCodeClick()">{{'community-inspection-search-button'|translate}}</button>
+              <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="6"  animationDuration=".5s" *ngIf="loading"></p-progressSpinner>
+              <button pButton type="submit" label="{{'community-inspection-search-button'|translate}}" class="form-control ui-button-rounded ui-button-info" (click)="onByCodeClick()"></button>
+<!--              <button type="submit" class="form-control" (click)="onByCodeClick()">{{'community-inspection-search-button'|translate}}</button>-->
             </div>
             <alert></alert>
             <!--          SEARCH BY CASE CODE-->
             <div class="row" *ngIf="searchCriteria==='Case code'">
               <div class=" col-sm-6 text-left">
-                <input type="text" class="form-control" formControlName="caseCode" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" required>
+                <input type="text" class="form-control" formControlName="caseCode" placeholder="XX-XXXXXXXXXX" required>
                 <button type="submit" class="form-control" (click)="onByOtherClick()">{{'community-inspection-search-button'|translate}}</button>
               </div>
             </div>
@@ -107,7 +108,10 @@
                   <td>{{case.presumptiveResult.value}}</td>
                   <td>{{case.confirmedResult.value}}</td>
                   <!--          <td>{{case.status.value}}</td>-->
-                  <td><button class="form-control" type="button" (click)="showFollowUp(case)">{{'case-follow-up-link' | translate}}</button></td>
+                  <td>
+                    <button pButton type="submit" label="{{'case-follow-up-link' | translate}}" (click)="showFollowUp(case)" [disabled]="loading" class="form-control ui-button-rounded ui-button-info"></button>
+                    <!--                    <button class="form-control" type="button" (click)="showFollowUp(case)">{{'case-follow-up-link' | translate}}</button>-->
+                  </td>
 
                 </tr>
                 </tbody>

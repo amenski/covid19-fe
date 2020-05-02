@@ -46,23 +46,18 @@
 
 
 <!--              OPTIONS-->
-
               <div formArrayName="options">
-              <div *ngFor="let op of options.controls; let i=index">
-<!--                <div [formGroupName]="i">-->
-
-                {{'questionnaire-option'|translate}} {{i+1}} :
-                  <input #i type="text" formControlName='{{i}}' [formControl]="options[i]" class="form-control">
-                  <button (click)="removeOption()"><i class="fas fa-minus-circle"></i></button>
-                  <button type="button" (click)="addOption(i)">
-                    <i class="fas fa-plus-circle"></i>
-                  </button>
+                <div *ngFor="let op of options.controls; let i=index">
+                  {{'questionnaire-option'|translate}} {{i+1}} :
+                    <input #i type="text" formControlName='{{i}}' [formControl]="options[i]" class="form-control">
+                    <button (click)="removeOption()"><i class="fas fa-minus-circle"></i></button>
+                    <button type="button" (click)="addOption(i)">
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                </div>
               </div>
-
-              </div>
-
-          </div>
-
+             </div>
+<!--          PARENT QUESTION ID AND QUESTION MODIFIED BY-->
           <div class=" row">
             <div class=" col-md-4 pr-md-1">
               <div class=" form-group">
@@ -78,6 +73,7 @@
             </div>
           </div>
 
+<!--            DATE ADDED AND LAST DATE MODIFIED-->
           <div class=" row">
             <div class=" col-md-4 pr-md-1">
               <div class=" form-group">
@@ -111,7 +107,9 @@
   </div>
 
   <div id="footer">
-    <button class=" btn btn-fill btn-danger" type="submit"><i class="fas fa-plus"></i> {{'questionnaire-add-question-button'|translate}}</button>
+    <p-progressSpinner *ngIf="loading" [style]="{width: '50px', height: '50px'}" strokeWidth="6"  animationDuration=".5s"></p-progressSpinner>
+    <button pButton type="submit" label="{{'questionnaire-add-question-button'|translate}}" [disabled]="loading" class="form-control ui-button-rounded ui-button-info"></button>
+    <!--    <button class=" btn btn-fill btn-danger" type="submit"><i class="fas fa-plus"></i> {{'questionnaire-add-question-button'|translate}}</button>-->
   </div>
   </div>
 </form>

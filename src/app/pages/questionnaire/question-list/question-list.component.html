@@ -18,24 +18,32 @@
 <alert></alert>
 <div class="container">
   <span *ngFor="let question of questions">
-    <mat-expansion-panel >
-      <mat-expansion-panel-header>
-        <i class="search-category-icon far fa-question-circle"></i>&nbsp;{{ question.question }}
-<!--         <i class="search-category-icon far fa-star"></i>-->
-      </mat-expansion-panel-header>
+    <p-accordion >
+        <p-accordionTab header="{{ question.question }}" [selected]="false" >
+          <mat-radio-group >
+            <mat-radio-button class="questions-margin" *ngFor="let op of question.options"  [value]="op" (change)="onSelectionChange(question.id, question.question, op)" >{{op}}</mat-radio-button>
+          </mat-radio-group>
+        </p-accordionTab>
+    </p-accordion>
 
-       <div>
-        <mat-radio-group >
-          <mat-radio-button class="questions-margin" *ngFor="let op of question.options"  [value]="op" (change)="onSelectionChange(question.id, question.question, op)" >{{op}}</mat-radio-button>
-        </mat-radio-group>
-<!--        <div class="input-group-append" *ngIf="optionIsDate">-->
-<!--                <input class="form-control" matInput [matDatepicker]="qdate" [formControl]="today" (change)="onSelectionChange(question.id, question.question, $event.target)">-->
-<!--                <mat-datepicker-toggle matSuffix [for]="qdate"></mat-datepicker-toggle>-->
-<!--                <mat-datepicker #qdate></mat-datepicker>-->
-<!--        </div>-->
-     </div>
+<!--    <mat-expansion-panel >-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <i class="search-category-icon far fa-question-circle"></i>&nbsp;{{ question.question }}-->
+<!--&lt;!&ndash;         <i class="search-category-icon far fa-star"></i>&ndash;&gt;-->
+<!--      </mat-expansion-panel-header>-->
 
-    </mat-expansion-panel>
+<!--       <div>-->
+<!--        <mat-radio-group >-->
+<!--          <mat-radio-button class="questions-margin" *ngFor="let op of question.options"  [value]="op" (change)="onSelectionChange(question.id, question.question, op)" >{{op}}</mat-radio-button>-->
+<!--        </mat-radio-group>-->
+<!--&lt;!&ndash;        <div class="input-group-append" *ngIf="optionIsDate">&ndash;&gt;-->
+<!--&lt;!&ndash;                <input class="form-control" matInput [matDatepicker]="qdate" [formControl]="today" (change)="onSelectionChange(question.id, question.question, $event.target)">&ndash;&gt;-->
+<!--&lt;!&ndash;                <mat-datepicker-toggle matSuffix [for]="qdate"></mat-datepicker-toggle>&ndash;&gt;-->
+<!--&lt;!&ndash;                <mat-datepicker #qdate></mat-datepicker>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--     </div>-->
+
+<!--    </mat-expansion-panel>-->
 
   </span>
 

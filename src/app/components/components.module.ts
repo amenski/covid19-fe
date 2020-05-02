@@ -6,7 +6,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FooterComponent } from "./footer/footer.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
-import { AlertComponent } from './alert/alert.component';
 import {AccordionModule} from "ngx-bootstrap/accordion";
 import {TranslateModule} from "@ngx-translate/core";
 

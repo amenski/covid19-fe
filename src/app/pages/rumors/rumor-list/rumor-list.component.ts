@@ -36,6 +36,8 @@ export class RumorListComponent implements OnInit {
   registeredLabel: string = RUMOR_REGISTERED_AS_CASE_STATUS_LABEL;
   inIsolationLabel: string = RUMOR_IN_ISOLATION_STATUS_LABEL;
   searchVal: string = '';
+  investigateLoading: boolean;
+  reportIsolateLoading: boolean;
 
   constructor(private rumorsService: RumorsService, private alertService: AlertService,
               private router: Router) {
@@ -53,15 +55,23 @@ export class RumorListComponent implements OnInit {
   }
 
   investigateRumor(rumor: any) {
+    this.investigateLoading = true;
+
     this.rumorToInvestigate = rumor;
     this.isToBeChangedToWaiting = true;
     this.showInvestigate = true;
+
+    this.investigateLoading = false;
   }
 
   reportOrIsolate(rumor: any) {
+    this.reportIsolateLoading = true;
+
     this.rumorToInvestigate = rumor;
     this.isToBeRegistered = true;
     this.showInvestigate = true;
+
+    this.reportIsolateLoading = false;
   }
 
   checkSearchVal() {
