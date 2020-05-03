@@ -93,6 +93,9 @@ export class FollowUpComponent implements OnInit {
     autoClose: false,
     keepAfterRouteChange: false
   };
+  followUpLoading: boolean = false;
+  /* questionnaire map and Emitter */
+  selectedValuesMap = new Map();
 
   constructor(public fb: FormBuilder, private alertService: AlertService,
               private communityInspectionService: CommunityInspectionService,
@@ -103,7 +106,8 @@ export class FollowUpComponent implements OnInit {
       criteria: '',
       testResultId: '', statusId: '', region: '', recentTravelTo: '',
       updatedByCodeConfirmedResult:'',
-      updatedByCriteriaConfirmedResult:''
+      updatedByCriteriaConfirmedResult:'',
+      updatedByCriteriaStatus: '', updatedByCodeStatus:''
     });
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -120,7 +124,7 @@ export class FollowUpComponent implements OnInit {
     this.attributesService.getAllAttributes().subscribe(result=>{
       this.attributes = result.returnValue.attributes;
       this.status = this.attributes.filter(r=>{
-        return (parseInt(r.attCode)>=1060 && parseInt(r.attCode)<=1064);
+        return (parseInt(r.attCode)>=1060 && parseInt(r.attCode)<=1065);
       });
       this.results = this.attributes.filter(r=>{
         return (parseInt(r.attCode)>=1001 && parseInt(r.attCode)<=1003)
@@ -181,16 +185,14 @@ export class FollowUpComponent implements OnInit {
   }
 
   searchPUIByCaseCode() {
-    alert("Searching PUI by case code");
     this.communityInspectionService.getPUIByCaseCode(this.followupForm.get('caseCode').value).subscribe(result=>{
         this.caseInfo = result.returnValue;
 
       }
     );
     this.alertService.success("Found Case", this.alertOptions);
-    this.loading = false;
     this.showByCodeSearchResult = true;
-
+    this.loading = false;
   }
 
   searchPUIByCriteria() {
@@ -211,11 +213,8 @@ export class FollowUpComponent implements OnInit {
 
     }, error => this.alertService.warn("Error searching case, Couldn't connect to server. Check your internet connection"));
 
-    // if(this.caseSearchResult.length>0){
-    //   this.alertService.success("Results found", this.alertOptions);
-    // }
-    this.loading = false;
     this.showByOtherSearchResult = true;
+    this.loading = false;
   }
 
   onSubmit() {
@@ -236,51 +235,53 @@ export class FollowUpComponent implements OnInit {
     this.codeClicked = false;
   }
 
-  /*addQuestionToFollowUp(puiCaseCode: string, qId: number, selectedOption: string) {
-    let modelPuiFollowUp: ModelPuiFollowUp= new class implements ModelPuiFollowUp {
-      description: string;
-      insertDate: Date;
-      modifiedBy: number;
-      puiCaseCode: string;
-      qId: number;
-      question: string;
-      selectedOption: string;
-    };
-    modelPuiFollowUp.puiCaseCode = puiCaseCode;
-    modelPuiFollowUp.qId = qId;
-    modelPuiFollowUp.selectedOption = selectedOption;
-
-    this.requestSaveFollowUp.list.push(modelPuiFollowUp);
-  }*/
 
   registerFollowUp() {
+    this.followUpLoading = true;
+    /*Questions Validations - To be updated*/
     if(this.selectedValuesMap === null || this.selectedValuesMap.size < 1) {
       this.alertService.warn("Please check if all required fields are filled.", this.alertOptions);
       return;
     }
-    alert("Updating to result: "+this.followupForm.get('updatedByCriteriaConfirmedResult').value);
+    /*Update result and status if modified*/
+    this.updateResultAndStatus();
+    /*Update the PUI Follow up*/
+    this.updatePUIFollowUp();
+    this.followUpLoading = false;
+  }
+
+  updateResultAndStatus(){
+    /*Update Test Result*/
     if(this.followupForm.get('updatedByCodeConfirmedResult').value !== ''){
-
-      this.casesService.updateTestResult(this.caseToFollow.caseCode, parseInt(this.followupForm.get('updatedByCodeConfirmedResult').value) ).subscribe(
-        result=>{
-          this.requestSaveFollowUp = {list: Array.from(this.selectedValuesMap.values())};
-          // console.log(this.requestSaveFollowUp);
-          this.communityInspectionService.registerNewFollow(this.caseToFollow.caseCode, this.requestSaveFollowUp).subscribe(r=>{
-            this.alertService.success("PUI Follow up updated!", this.alertOptions)
-          }, error => this.alertService.warn("Error Updating PUI Follow up!", this.alertOptions));
-
-        })
+      this.casesService.updateTestResult(this.caseInfo.caseCode, this.followupForm.get('updatedByCodeConfirmedResult').value).subscribe(
+        result=> {
+        }, error => this.alertService.warn("Couldn't update PUI confirmed result"))
     }
-    if( this.followupForm.get('updatedByCriteriaConfirmedResult').value !== ''){
+    if( this.followupForm.get('updatedByCriteriaConfirmedResult').value !== '') {
       this.casesService.updateTestResult(this.caseToFollow.caseCode, this.followupForm.get('updatedByCriteriaConfirmedResult').value).subscribe(
-        result=>{
-          this.requestSaveFollowUp = {list: Array.from(this.selectedValuesMap.values())};
-          // console.log(this.requestSaveFollowUp);
-          this.communityInspectionService.registerNewFollow(this.caseToFollow.caseCode, this.requestSaveFollowUp).subscribe(r=>{
-            this.alertService.success("PUI Follow up updated!", this.alertOptions)
-          }, error => this.alertService.warn("Error Updating PUI Follow up!", this.alertOptions));
-        })
+        result => {
+        }, error => this.alertService.warn("Couldn't update PUI confirmed result"))
     }
+
+    /*Update Status*/
+    if(this.followupForm.get('updatedByCodeStatus').value !== ''){
+      this.casesService.updateStatus(this.caseInfo.caseCode, this.followupForm.get('updatedByCodeStatus').value).subscribe(
+        result => {
+        }, error => this.alertService.warn("Couldn't update PUI Current status"))
+    }
+    if(this.followupForm.get('updatedByCriteriaStatus').value !== ''){
+      this.casesService.updateStatus(this.caseToFollow.caseCode, this.followupForm.get('updatedByCriteriaStatus').value).subscribe(
+        result => {
+        }, error => this.alertService.warn("Couldn't update PUI Current status"))
+    }
+    return;
+  }
+
+  updatePUIFollowUp(){
+    this.requestSaveFollowUp = {list: Array.from(this.selectedValuesMap.values())};
+    this.communityInspectionService.registerNewFollow(this.caseToFollow.caseCode, this.requestSaveFollowUp).subscribe(r=>{
+      this.alertService.success("PUI Follow up updated!", this.alertOptions)
+    }, error => this.alertService.warn("Error Updating PUI Follow up!", this.alertOptions));
   }
 
   showFollowUp(followUpCase: ModelCase) {
@@ -288,9 +289,6 @@ export class FollowUpComponent implements OnInit {
     this.caseToFollow = followUpCase;
   }
 
-  /* questionnaire map and Emitter */
-  selectedValuesMap = new Map();
-  // modelpuiFollowupList: ModelPuiFollowUp[];
   getSelectedQuestionOption(message: {id, question, option}) {
     let modelPui: ModelPuiFollowUp = {
       puiCaseCode: this.followupForm.get('caseCode').value,
@@ -298,9 +296,7 @@ export class FollowUpComponent implements OnInit {
       question: message.question,
       selectedOption: message.option
     };
-
     this.selectedValuesMap.set(message.id, modelPui);
-    // console.log(this.selectedValuesMap);
   }
 
 }

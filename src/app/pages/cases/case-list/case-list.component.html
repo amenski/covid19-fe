@@ -27,10 +27,13 @@
           <td>{{case.confirmedResult.value}}</td>
 <!--          <td>{{case.parentCaseCode}}</td>-->
 <!--          <td>{{case.region}}</td>-->
-            <td>{{case.status.value}}</td>
+            <td>
+              <span *ngIf="case.status.value!==deceasedLabel" >{{case.status.value}}</span>
+              <span *ngIf="case.status.value===deceasedLabel" style="background-color: red">{{case.status.value}}</span>
+            </td>
           <td>
-
-            <button pButton type="submit" label="{{'case-follow-up-link' | translate}}" class="ui-button-rounded ui-button-info" (click)="followUp(case)"></button>
+            <button pButton *ngIf="case.status.value===deceasedLabel" type="submit" label="{{'case-view-deceased-history-link' | translate}}" class="ui-button-rounded ui-button-danger" (click)="ViewDeceasedPatientHistory(case)"></button>
+            <button pButton *ngIf="case.status.value!==deceasedLabel" pButton type="submit" label="{{'case-follow-up-link' | translate}}" class="ui-button-rounded ui-button-info" (click)="followUp(case)"></button>
             <!--            <button class="form-control" type="button" (click)="followUp(case)">{{'case-follow-up-link' | translate}}</button>-->
           </td>
 

@@ -278,13 +278,17 @@
 <!--              <input formControlName="admittedToFacility" class=" form-control" placeholder=""/>-->
               <label>{{'add-case-pui-current-status' | translate}}: </label>
               <!--              <input formControlName="status" class=" form-control" placeholder="አሁን ያለበት ሁኔታ"/>-->
-              <input type="text" formControlName="admittedToFacility" placeholder=""
-                     [matAutocomplete]="atAuto" class = "form-control" ngModel>
-              <mat-autocomplete autoActiveFirstOption #atAuto="matAutocomplete">
-                <mat-option *ngFor="let status of statusOptions | async" [value]="status">
-                  {{status}}
-                </mat-option>
-              </mat-autocomplete>
+<!--              <input type="text" formControlName="admittedToFacility" placeholder=""-->
+<!--                     [matAutocomplete]="atAuto" class = "form-control" ngModel>-->
+<!--              <mat-autocomplete autoActiveFirstOption #atAuto="matAutocomplete">-->
+<!--                <mat-option *ngFor="let status of statusOptions | async" [value]="status">-->
+<!--                  {{status}}-->
+<!--                </mat-option>-->
+<!--              </mat-autocomplete>-->
+              <select  class="form-control" formControlName="admittedToFacility" >
+                <option *ngFor="let stat of status" [value]="stat.attCode"  >
+                  <span >{{stat.attName }}</span></option>
+              </select>
             </div>
           </div>
 
@@ -305,13 +309,17 @@
             <div class=" form-group">
               <label>{{'add-case-pui-current-status' | translate}}: </label>
 <!--              <input formControlName="status" class=" form-control" placeholder="አሁን ያለበት ሁኔታ"/>-->
-              <input type="text" formControlName="status" placeholder=""
-                     [matAutocomplete]="sAuto" class = "form-control" ngModel>
-              <mat-autocomplete autoActiveFirstOption #sAuto="matAutocomplete">
-                <mat-option *ngFor="let status of statusOptions | async" [value]="status">
-                  {{status}}
-                </mat-option>
-              </mat-autocomplete>
+<!--              <input type="text" formControlName="status" placeholder=""-->
+<!--                     [matAutocomplete]="sAuto" class = "form-control" ngModel>-->
+<!--              <mat-autocomplete autoActiveFirstOption #sAuto="matAutocomplete">-->
+<!--                <mat-option *ngFor="let stat of status | async" [value]="stat">-->
+<!--                  {{status}}-->
+<!--                </mat-option>-->
+<!--              </mat-autocomplete>-->
+              <select  class="form-control" formControlName="status" >
+                <option *ngFor="let stat of status" [value]="stat.attCode"  >
+                  <span >{{stat.attName }}</span></option>
+              </select>
             </div>
           </div>
 

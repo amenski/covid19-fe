@@ -108,6 +108,7 @@
   "add-case-pui-presumptive-new-result": "Update Presumptive Result To",
   "add-case-pui-confirmed-result": "Confirmed Result",
   "add-case-pui-confirmed-new-result": "Update Confirmed Result",
+  "add-case-pui-new-status": "Update PUI Current Status",
 
   "add-case-report-info": "REPORT INFO",
   "add-case-identified-by": "Case Identified By.",
@@ -117,6 +118,7 @@
 
   "add-case-register-button": "Register Case",
   "case-follow-up-link": "Follow up",
+  "case-view-deceased-history-link": "View Patient History",
   "add-case-pui-parent-case": "Parent Case Code",
 
   "contact-tracing-header1": "TRACE CONTACTS OF CONFIRMED CASES",

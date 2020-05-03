@@ -106,7 +106,8 @@
   "add-case-pui-presumptive-result": "የመጀመሪያ ውጤት",
   "add-case-pui-presumptive-new-result": "አዲስ ግምታዊ ውጤት",
   "add-case-pui-confirmed-result": "የተረጋገጠ ውጤት",
-  "add-case-pui-confirmed-new-result": "አዲስ የተረጋገጠ ውጤት",
+  "add-case-pui-confirmed-new-result": "የህመምተኛው አዲስ የተረጋገጠ ውጤት",
+  "add-case-pui-new-status": "የህመምተኛው አዲስ ሁኔታ",
 
   "add-case-report-info": "የ ሪፖርት መረጃ",
   "add-case-identified-by": "የተለየበት ሁኔታ",
@@ -116,6 +117,7 @@
 
   "add-case-register-button": "ኬዙን ይመዝግቡ",
   "case-follow-up-link": "የህመምተኛ ክትትል",
+  "case-view-deceased-history-link": "የሟች ህክምና ታሪክን ይመልከቱ",
   "add-case-pui-parent-case": "የአስተላላፊው ኬዝ ኮድ",
 
   "contact-tracing-header1": "የህሙማን ኬዞች ግንኙነት ማጣሪያ",

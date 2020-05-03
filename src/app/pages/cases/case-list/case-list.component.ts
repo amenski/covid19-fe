@@ -4,6 +4,7 @@ import {CasesService} from "../../../services/cases.service";
 import {ModelCase} from "../../../models/modelCase";
 import {NavigationExtras, Router} from "@angular/router";
 import {AlertService} from "../../../services/alert.service";
+import {CASE_STATUS_DECEASED_LABEL} from "../../../helpers/constants";
 
 @Component({
   selector: 'app-case-list',
@@ -17,6 +18,7 @@ export class CaseListComponent implements OnInit {
   value = 50;
   displayProgressSpinner = false;
   spinnerWithoutBackdrop = false;
+  deceasedLabel = CASE_STATUS_DECEASED_LABEL;
 
   constructor(private casesService: CasesService, private router: Router, private alertService: AlertService) {}
 
@@ -27,17 +29,16 @@ export class CaseListComponent implements OnInit {
   }
 
   followUp(modelCase: ModelCase) {
-    alert("overlay");
     this.displayProgressSpinner = true;
     setTimeout(() => {
       this.displayProgressSpinner = false;
     }, 30000);
-    // let navigationExtras: NavigationExtras = {
-    //   state: {
-    //     caseToFollow: modelCase,
-    //   }
-    // };
-    // this.router.navigate(['admin/follow-up'], navigationExtras);
+    let navigationExtras: NavigationExtras = {
+      state: {
+        caseToFollow: modelCase,
+      }
+    };
+    this.router.navigate(['admin/follow-up'], navigationExtras);
   }
 
 
@@ -56,5 +57,9 @@ export class CaseListComponent implements OnInit {
 
       this.cases = filteredCases.slice();
     }
+  }
+
+  ViewDeceasedPatientHistory(dpCase: ModelCase) {
+    alert("Under Construction");
   }
 }

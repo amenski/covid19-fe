@@ -36,7 +36,6 @@ export class CommunityInspectionService {
   }
 
   registerNewFollow(caseCode: string, requestSaveFollowUp: RequestSaveFollowUp): Observable<ResponseBase>{
-    alert("casecode "+ caseCode);
     // let followUpUrl = BASE_URL+"/v1/follow-up/"+caseCode;
     let followUpUrl = BASE_URL+"/v1/api/follow-up/"+caseCode;
     return this.httpClient.put<ResponseBase>(followUpUrl, requestSaveFollowUp);
