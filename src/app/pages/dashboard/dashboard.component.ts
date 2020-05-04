@@ -8,6 +8,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {AlertService} from "../../services/alert.service";
+import {DateLabelGenerator} from '../../helpers/util.general';
 
 
 @Component({
@@ -46,6 +47,7 @@ export class DashboardComponent implements OnInit {
   public dailyTotalCases: number[] = [];
   public dailyNewCases: number[] = [];
   public dailyActiveCases: number[] = [];
+  private datesSequenceLabel: string[] = [];
   sortType: string;
   sortReverse: boolean;
 
@@ -76,6 +78,9 @@ export class DashboardComponent implements OnInit {
       this.dailyActiveCases = this.caseStats.map(res=>{
         return res.activeCases;
       })
+      this.datesSequenceLabel = this.caseStats.map( res => {
+        return DateLabelGenerator(new Date(res.reportDate));
+      });
       this.maxNewCase = Math.max(...this.dailyNewCases);
 
 
@@ -435,12 +440,7 @@ export class DashboardComponent implements OnInit {
 
       console.log("total cases: "+ this.dailyTotalCases);
       let data1 = {
-        labels: ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
-          'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
-          'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
-          'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
-          'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25',
-          'APR 26', 'APR 27', 'APR 28', 'APR 29', 'APR 30', 'MAY 01', 'MAY 02', 'MAY 03', 'MAY 04'],
+        labels: this.datesSequenceLabel,
         datasets: [{
           label: "Total Deaths Stat",
           fill: true,
@@ -480,12 +480,7 @@ export class DashboardComponent implements OnInit {
       gradientStroke2.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
 
       let data2 = {
-        labels: ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
-          'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
-          'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
-          'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
-          'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25',
-          'APR 26', 'APR 27', 'APR 28', 'APR 29', 'APR 30', 'MAY 01', 'MAY 02', 'MAY 03', 'MAY 04'],
+        labels: this.datesSequenceLabel,
         datasets: [{
           label: "Currently active cases",
           fill: true,
@@ -515,20 +510,7 @@ export class DashboardComponent implements OnInit {
 
 
       /*****************************************TOTAL COVID-19 CASES****************************************************/
-
-      let chart_labels = ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
-        'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
-        'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
-        'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
-        'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25',
-        'APR 26', 'APR 27', 'APR 28', 'APR 29', 'APR 30', 'MAY 01', 'MAY 02', 'MAY 03', 'MAY 04'];
-      this.datasets = [
-        [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
-        [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
-        [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
-      ];
-      //  this.data = this.datasets[0];
-      this.data = this.dailyTotalCases;
+           this.data = this.dailyTotalCases;
 
       this.canvas = document.getElementById("totalCaseChart");
       this.ctx = this.canvas.getContext("2d");
@@ -543,7 +525,7 @@ export class DashboardComponent implements OnInit {
         type: 'line',
         data: {
           type: 'category',
-          labels: chart_labels,
+          labels: this.datesSequenceLabel,
           datasets: [{
             label: "Total Covid-19 Cases",
             fill: true,
@@ -584,12 +566,7 @@ export class DashboardComponent implements OnInit {
           display: false
         },
         data: {
-          labels: ['MAR 13', 'MAR 14', 'MAR 15', 'MAR 16', 'MAR 17', 'MAR 18', 'MAR 19', 'MAR 20', 'MAR 21', 'MAR 22',
-            'MAR 23', 'MAR 24', 'MAR 25', 'MAR 26', 'MAR 27', 'MAR 28', 'MAR 29', 'MAR 30', 'MAR 31',
-            'APR 01', 'APR 02', 'APR 03', 'APR 04', 'APR 05', 'APR 06', 'APR 07', 'APR 08', 'APR 09', 'APR 10', 'APR 11',
-            'APR 12', 'APR 13', 'APR 14', 'APR 15', 'APR 16', 'APR 17', 'APR 18',
-            'APR 19', 'APR 20', 'APR 21', 'APR 22', 'APR 23', 'APR 24', 'APR 25',
-            'APR 26', 'APR 27', 'APR 28', 'APR 29', 'APR 30', 'MAY 01', 'MAY 02', 'MAY 03', 'MAY 04'],
+          labels: this.datesSequenceLabel,
           datasets: [{
             label: "New cases",
             fill: true,
