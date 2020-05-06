@@ -16,14 +16,8 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/admin/cases",
-    title: "Covid-19 Cases",
+    title: "Covid-19 Case Reporting",
     icon: "icon-atom",
-    class: ""
-  },
-  {
-    path: "/admin/contact-tracing",
-    title: "Contact Tracing",
-    icon: "icon-vector",
     class: ""
   },
   {
@@ -33,15 +27,21 @@ export const ROUTES: RouteInfo[] = [
     class: ""
   },
   {
-    path: "/admin/questionnaire",
-    title: "Questionnaire",
-    icon: "icon-puzzle-10",
-    class: ""
-  },
-  {
     path: "/admin/rumor-list",
     title: "Rumors Investigation",
     icon: "icon-molecule-40",
+    class: ""
+  },
+  {
+    path: "/admin/contact-tracing",
+    title: "Contact Tracing",
+    icon: "icon-vector",
+    class: ""
+  },
+  {
+    path: "/admin/questionnaire",
+    title: "Follow-up Questionnaire",
+    icon: "icon-puzzle-10",
     class: ""
   },
   {
