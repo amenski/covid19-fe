@@ -19,7 +19,7 @@
 <div class="container">
   <span *ngFor="let question of questions">
     <p-accordion >
-        <p-accordionTab header="{{ question.question }}" [selected]="false" >
+        <p-accordionTab header="{{ question.question }}" [selected]="false">
           <mat-radio-group >
             <mat-radio-button class="questions-margin" *ngFor="let op of question.options"  [value]="op" (change)="onSelectionChange(question.id, question.question, op)" >{{op}}</mat-radio-button>
           </mat-radio-group>
