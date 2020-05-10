@@ -25,6 +25,7 @@ import {AlertModule} from "../../components/alert/alert.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
+import { TableModule } from 'primeng/table';
 
 
 
@@ -44,7 +45,8 @@ import {MatSelectModule} from "@angular/material/select";
     AlertModule,
     TranslateModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    TableModule
   ],
   declarations: [
     DashboardComponent,
