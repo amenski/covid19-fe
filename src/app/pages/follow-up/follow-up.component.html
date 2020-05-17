@@ -2,12 +2,12 @@
 
   <div class=" content">
     <div class=" row">
-
       <!--    CONTROLS-->
       <div class=" col-12">
         <div class=" card">
           <div class=" card-header">
             <h4 class=" card-title">{{'community-inspection-header1' | translate}}</h4>
+            <alert></alert>
 
           </div>
           <div class=" card-body">
@@ -70,7 +70,6 @@
               <button pButton type="submit" label="{{'community-inspection-search-button'|translate}}" class="form-control ui-button-rounded ui-button-info" (click)="onByCodeClick()"></button>
 <!--              <button type="submit" class="form-control" (click)="onByCodeClick()">{{'community-inspection-search-button'|translate}}</button>-->
             </div>
-            <alert></alert>
             <!--          SEARCH BY CASE CODE-->
             <div class="row" *ngIf="searchCriteria==='Case code'">
               <div class=" col-sm-6 text-left">
@@ -93,7 +92,6 @@
             <h4 class=" card-title">{{'community-inspection-criteria-search-result'|translate}}</h4>
           </div>
           <div class=" card-body">
-            <alert></alert>
             <div class=" table-responsive">
               <table class=" table tablesorter" id="">
                 <thead class=" text-primary">
@@ -129,23 +127,15 @@
       <!--    SEARCH RESULT - BY CASE CODE-->
       <div class=" col-md-12" *ngIf="showByCodeSearchResult">
         <div class="col-md-6">
-          <table class="table col-md-8">
+          <table class="table">
             <tbody>
             <tr>
               <td>{{'add-case-name'|translate}}</td>
-              <td>{{caseInfo.firstName}} {{caseInfo.lastName}}</td>
+              <td colspan="3">{{caseInfo.firstName}} {{caseInfo.lastName}}</td>
             </tr>
             <tr>
               <td>{{'add-case-pui-current-status'|translate}}</td>
               <td>{{caseInfo.status.value}}</td>
-            </tr>
-            <tr>
-              <td>{{'add-case-pui-parent-case-code'|translate}} </td>
-              <td>{{caseInfo.parentCaseCode}}</td>
-            </tr>
-            <tr>
-              <td>{{'add-case-pui-presumptive-result'|translate}}</td>
-              <td>{{caseInfo.presumptiveResult.value}}</td>
             </tr>
             <tr>
               <td>{{'add-case-pui-confirmed-result'|translate}}</td>
@@ -154,7 +144,7 @@
             <tr>
               <td>{{'add-case-pui-confirmed-new-result'|translate}}</td>
               <td>
-                <select  class="form-control" formControlName="updatedByCodeConfirmedResult" >
+                <select  class="form-control" formControlName="updatedByCodeConfirmedResult">
                   <option *ngFor="let result of results" [value]="result.attCode"  >
                     <span >{{result.attName }}</span></option>
                 </select>
@@ -167,6 +157,14 @@
                   <option *ngFor="let stat of status" [value]="stat.attCode">
                     <span >{{stat.attName }}</span></option>
                 </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p-button label="Update Result" (onClick)="updateConfirmedTestResult($event)" styleClass="ui-button-info"></p-button>
+              </td>
+              <td>
+                <p-button label="Update Status" (onClick)="updatePuiStatus($event)" styleClass="ui-button-info"></p-button>
               </td>
             </tr>
             </tbody>
@@ -279,7 +277,6 @@
         <app-question-list (messageToEmit)="getSelectedQuestionOption($event)"></app-question-list>
         <hr/>
         <hr/>
-        <alert></alert>
         <!--        </div>-->
         <p-progressSpinner *ngIf="followUpLoading" [style]="{width: '50px', height: '50px'}" strokeWidth="6"  animationDuration=".5s"></p-progressSpinner>
         <button pButton type="submit" (click)="registerFollowUp()" label="{{'community-inspection-update-pui-button'|translate}}"
