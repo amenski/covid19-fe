@@ -54,7 +54,11 @@ export class AuthenticationService {
   }
 
   public get currentUserValue(): string {
-    //alert("token to request: "+this.user.token)
+    // Even if user logs out, unless the tab is closed, BehaviorSubject holds valid data. 
+    const token = localStorage.getItem('currentUser');
+    if(!token) {
+      return null;
+    }
     return this.currentUserSubject.value;
   }
   logout() {
