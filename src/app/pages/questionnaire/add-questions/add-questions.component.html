@@ -1,0 +1,115 @@
+<form ngNativeValidate [formGroup]="questionsForm" (ngSubmit) = addQuestion()>
+  <div class=" row">
+
+    <div class=" col-12">
+
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">{{'questionnaire-header2'|translate}}</h4>
+        </div>
+        <div class=" card-body">
+          <!--QUESTION AND IT'S OPTIONS-->
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label>{{'questionnaire-question'|translate}} * </label>
+                <textarea type="text" formControlName="question" class=" form-control" required></textarea>
+              </div>
+            </div>
+
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label>{{'questionnaire-description'|translate}}  </label>
+                <textarea type="text" formControlName="description" class=" form-control"></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <!--CATEGORY AND PARENT QUESTION ID-->
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label>{{'questionnaire-category'|translate}} * </label>
+<!--                <input type="text" formControlName="category" class=" form-control" placeholder="ምድብ"/>-->
+                <input type="text" formControlName="category"
+                       [matAutocomplete]="cAuto" class = "form-control" >
+                <mat-autocomplete autoActiveFirstOption #cAuto="matAutocomplete">
+                  <mat-option *ngFor="let category of categoryOptions | async" [value]="category" required>
+                   {{category}}
+                  </mat-option>
+                </mat-autocomplete>
+              </div>
+            </div>
+            <div class=" col-md-6 pr-md-1">
+              <label>{{'questionnaire-options'|translate}} * </label>
+
+
+<!--              OPTIONS-->
+              <div formArrayName="options">
+                <div *ngFor="let op of options.controls; let i=index">
+                  {{'questionnaire-option'|translate}} {{i+1}} :
+                    <input #i type="text" formControlName='{{i}}' [formControl]="options[i]" class="form-control">
+                    <button (click)="removeOption()"><i class="fas fa-minus-circle"></i></button>
+                    <button type="button" (click)="addOption(i)">
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                </div>
+              </div>
+             </div>
+<!--          PARENT QUESTION ID AND QUESTION MODIFIED BY-->
+          <div class=" row">
+            <div class=" col-md-4 pr-md-1">
+              <div class=" form-group">
+                <label>{{'questionnaire-parent-question-id'|translate}}  </label>
+                <input type="text" formControlName="parentId" class=" form-control" />
+              </div>
+            </div>
+            <div class=" col-md-4 pr-md-1">
+              <div class=" form-group">
+                <label>{{'questionnaire-modified-by'|translate}} </label>
+                <input type="text" formControlName="modifiedBy" class=" form-control" />
+              </div>
+            </div>
+          </div>
+
+<!--            DATE ADDED AND LAST DATE MODIFIED-->
+          <div class=" row">
+            <div class=" col-md-4 pr-md-1">
+              <div class=" form-group">
+                <label> {{'questionnaire-date-added'|translate}}</label>
+                <div class="input-group-append">
+                  <input class="form-control" matInput [matDatepicker]="doa" formControlName="insertDate" [formControl]="insertDate"/>
+                  <mat-datepicker-toggle matSuffix [for]="doa"></mat-datepicker-toggle>
+                  <mat-datepicker #doa></mat-datepicker>
+                </div>
+              </div>
+            </div>
+
+            <div class=" col-md-4 pr-md-1">
+              <div class=" form-group">
+                <label>{{'questionnaire-date-modified'|translate}} </label>
+                <div class="input-group-append">
+                  <input class="form-control" matInput [matDatepicker]="dom"  formControlName="modifiedDate" [formControl]="insertDate"/>
+                  <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
+                  <mat-datepicker #dom></mat-datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <alert></alert>
+    </div>
+    {{'fields-marked-label'|translate}}
+
+  </div>
+
+  <div id="footer">
+    <p-progressSpinner *ngIf="loading" [style]="{width: '50px', height: '50px'}" strokeWidth="6"  animationDuration=".5s"></p-progressSpinner>
+    <button pButton type="submit" label="{{'questionnaire-add-question-button'|translate}}" [disabled]="loading" class="form-control ui-button-rounded ui-button-info"></button>
+    <!--    <button class=" btn btn-fill btn-danger" type="submit"><i class="fas fa-plus"></i> {{'questionnaire-add-question-button'|translate}}</button>-->
+  </div>
+  </div>
+</form>

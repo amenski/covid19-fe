@@ -1,10 +1,12 @@
-import { Component, OnInit, ElementRef, OnDestroy } from "@angular/core";
+import {Component, OnInit, ElementRef, OnDestroy, Input} from "@angular/core";
 import { ROUTES } from "../sidebar/sidebar.component";
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import {BehaviorSubject} from "rxjs";
 import {User} from '../../models/user';
+import {TranslateService} from "@ngx-translate/core";
+import {ModelRumor} from "../../models/modelRumor";
 
 @Component({
   selector: "app-navbar",
@@ -12,6 +14,11 @@ import {User} from '../../models/user';
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+
+  @Input() username: string;
+
+  loggedInUsername: string;
+
   private listTitles: any[];
   location: Location;
   mobile_menu_visible: any = 0;
@@ -26,7 +33,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     location: Location,
     private element: ElementRef,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,  public translate: TranslateService
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -44,6 +51,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
      }
    };
   ngOnInit() {
+    localStorage.setItem('username', this.username);
+    this.loggedInUsername = localStorage.getItem('username');
     window.addEventListener("resize", this.updateColor);
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
@@ -61,7 +70,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     //this.currentUserSubject.next(null);
-    this.router.navigate(['/']);
+    this.router.navigate(['/index']);
   }
 
   collapse() {

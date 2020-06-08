@@ -157,7 +157,9 @@
 
 .table-responsive{
   overflow: scroll;
-  padding-bottom: 10px;
+  overflow-y:auto;
+  max-height:400px;
+  padding-bottom: 20px;
 }
 
 #tables .table-responsive{

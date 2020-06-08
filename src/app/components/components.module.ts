@@ -6,11 +6,13 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FooterComponent } from "./footer/footer.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
-import { AlertComponent } from './alert/alert.component';
+import {AccordionModule} from "ngx-bootstrap/accordion";
+import {TranslateModule} from "@ngx-translate/core";
+
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgbModule],
-  declarations: [FooterComponent, NavbarComponent, SidebarComponent, AlertComponent],
-  exports: [FooterComponent, NavbarComponent, SidebarComponent, AlertComponent]
+    imports: [CommonModule, RouterModule, NgbModule, AccordionModule, TranslateModule.forChild()],
+  declarations: [FooterComponent, NavbarComponent, SidebarComponent],
+  exports: [FooterComponent, NavbarComponent, SidebarComponent]
 })
 export class ComponentsModule {}

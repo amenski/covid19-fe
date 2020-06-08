@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="card">
+    <div class="card-header">
+      <h2>{{'rumor-investigate-header1' | translate}}</h2>
+    </div>
+    <div class="card-body">
+
+      <div class="row">
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'rumor-id' | translate}}: <span style="color: green">{{rumorToInvestigate.id}}</span>  </h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'report-date-to-rrt' | translate }}: {{rumorToInvestigate.reportDate | date}}  </h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'suspect-name' | translate}}: {{rumorToInvestigate.suspectName}} </h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'gender' | translate}}: ({{rumorToInvestigate.gender}})</h2>
+        </div>
+
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'address' | translate}}: ({{rumorToInvestigate.address}})</h2>
+        </div>
+
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'fever' | translate}}: ({{rumorToInvestigate.fever}})</h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'cough' | translate}}: ({{rumorToInvestigate.cough}})</h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'cough' | translate}}: ({{rumorToInvestigate.headache}})</h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'symptoms-duration' | translate}}: ({{rumorToInvestigate.symptomsDuration}})</h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'Reporting Person Name' | translate}}: ({{rumorToInvestigate.reportingPersonName}})</h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'relation-with-suspect' | translate}}: ({{rumorToInvestigate.relationWithSuspect}})</h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'phone-number1' | translate}}: ({{rumorToInvestigate.phoneNumber1}})</h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title">{{'phone-number2' | translate}}: ({{rumorToInvestigate.phoneNumber2}})</h2>
+        </div>
+        <div class=" col-sm-6 text-left">
+          <h2 class=" card-title" >{{'rumor-status' | translate}}: <span style="color: green">({{rumorToInvestigate.status.value}}) </span> </h2>
+        </div>
+    </div>
+      <alert></alert>
+      <div class="row">
+        <div class=" col-sm-6 text-left" *ngIf="isToBeRegistered">
+          <label>Tested +ve=> Send to Register as confirmed case</label>
+<!--          <button (click)="registerRumorAsCase()" type="button"  class="form-control">{{'rumor-report-pui-button' | translate}}</button>-->
+          <button pButton type="submit" label="{{'rumor-report-pui-button' | translate}}" [disabled]="reportLoading"
+                  class="form-control ui-button-rounded ui-button-info" (click)="registerRumorAsCase()">
+            <p-progressSpinner *ngIf="reportLoading" [style]="{width: '30px', height: '30px'}" strokeWidth="4"  ></p-progressSpinner>
+          </button>
+        </div>
+        <div class=" col-sm-6 text-left" *ngIf="isToBeRegistered">
+          <label>Tested -ve => Send to Mandatory Quarantine and Register as unconfirmed case</label>
+<!--          <button (click)="isolateAndRegisterCase()" type="button"  class="form-control">{{'rumor-isolate-pui-button' | translate}}</button>-->
+          <button pButton  type="submit" label="{{'rumor-isolate-pui-button' | translate}}" [disabled]="reportLoading"
+                  class="form-control ui-button-rounded ui-button-info" (click)="isolateAndRegisterCase()">
+            <p-progressSpinner *ngIf="reportLoading" [style]="{width: '30px', height: '30px'}" strokeWidth="4"  ></p-progressSpinner>
+          </button>
+        </div>
+      </div>
+      <button pButton *ngIf="isToBeChangedToWaiting" type="submit" label="{{'rumor-mark-approval-button' | translate}}" [disabled]="approvalLoading"
+              class="form-control ui-button-rounded ui-button-info" (click)="markRumorApproval()">
+        <p-progressSpinner *ngIf="approvalLoading" [style]="{width: '30px', height: '30px'}" strokeWidth="4"  ></p-progressSpinner>
+      </button>
+<!--      <button (click)="markRumorApproval()" *ngIf="isToBeChangedToWaiting" type="button" class="form-control">{{'rumor-mark-approval-button' | translate}}</button>-->
+  </div>
+
+</div>
+</div>

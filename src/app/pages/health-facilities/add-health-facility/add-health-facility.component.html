@@ -1,3 +1,70 @@
-<p>
-  Under Construction
-</p>
+<form ngNativeValidate [formGroup]="facilityForm" (ngSubmit) = addHealthFacility()>
+  <!--HEALTH OFFICIALS AND HEALTH FACILITIES INFO-->
+  <div class=" row">
+
+    <div class=" col-12">
+
+      <div class=" card">
+
+        <div class=" card-header">
+          <h4 class=" card-title">የጤና ተቋም መረጃ</h4>
+        </div>
+
+        <div class=" card-body">
+          <div class=" row">
+            <div class=" col-md-5 pr-md-1">
+              <div class=" form-group">
+                <label>OSM ID  </label>
+                <input type="text" formControlName="osmId" class=" form-control" placeholder="OSM ID"/>
+              </div>
+            </div>
+            <div class=" col-md-5 pr-md-1">
+              <div class=" form-group">
+                <label>Health Facility Name * </label>
+                <input type="text" formControlName="name" class=" form-control" placeholder="የጤና ተቋም ስም"/>
+              </div>
+            </div>
+
+          </div>
+
+          <div class=" row">
+            <div class=" col-md-5 pr-md-1">
+              <div class=" form-group">
+                <label>Amenity * </label>
+                <input type="text" formControlName="amenity" class=" form-control" placeholder="የጤና ተቋም አይነት"/>
+              </div>
+            </div>
+            <div class=" col-md-5 pr-md-1">
+              <div class=" form-group">
+                <label>Address  </label>
+                <input type="text" formControlName="addrFull" class=" form-control" placeholder="አድራሻ"/>
+              </div>
+            </div>
+          </div>
+
+          <div class=" row">
+              <div class=" col-md-5 pr-md-1">
+                <div class=" form-group">
+                  <label>Latitude  </label>
+                  <input type="text" formControlName="xCord" class=" form-control" placeholder="ኬክሮስ"/>
+                </div>
+              </div>
+
+                <div class=" col-md-5 pr-md-1">
+                  <div class=" form-group">
+                    <label>Longitude  </label>
+                    <input type="text" formControlName="yCord" class=" form-control" placeholder="ኬንትሮስ"/>
+                  </div>
+                </div>
+            <alert></alert>
+          </div>
+          Only Fields Marked with * are Mandatory
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <button class=" btn btn-fill btn-danger" type="submit">Register Health Facility</button>
+  </div>
+</form>

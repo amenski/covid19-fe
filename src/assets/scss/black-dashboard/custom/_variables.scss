@@ -4,7 +4,7 @@
 $enable-caret:              true !default;
 $enable-rounded:            true !default;
 $enable-shadows:            true !default;
-$enable-gradients:          false !default;
+$enable-gradients:  g        false !default;
 $enable-transitions:        true !default;
 $enable-grid-classes:       true !default;
 $enable-print-styles:       true !default;
@@ -45,8 +45,8 @@ $blue:    #5e72e4 !default;
 $indigo:  #5603ad !default;
 $purple:  #8965e0 !default;
 $pink:    #f3a4b5 !default;
-$red:     #f5365c !default;
-$orange:  #fb6340 !default;
+$red:     #1d8cf8 !default;
+$orange:  #1d8cf8 !default;
 $yellow:  #ffd600 !default;
 $green:   #2dce89 !default;
 $teal:    #11cdef !default;
@@ -97,12 +97,12 @@ $default-color-opacity:      rgba(182, 182, 182, .6) !default;
 $orange-color:               #f96332 !default;
 
 $default:       #344675 !default;
-$primary:       #e14eca !default;
+$primary:       #1d8cf8 !default;
 $secondary:     #f4f5f7 !default;
 $success:       #00f2c3 !default;
 $info:          #1d8cf8 !default;
 $warning:       #ff8d72 !default;
-$danger:        #fd5d93 !default;
+$danger:        #1d8cf8 !default;
 $black:         #222a42 !default;
 
 
@@ -115,8 +115,8 @@ $warning-states:       #ff6491 !default;
 $danger-states:        #ec250d !default;
 $black-states:         #1d253b !default;
 
-$background-black:           #1e1e2f !default;
-$background-states-black:    #1e1e24 !default;
+$background-black: #2b1d2f !default;
+$background-states-black:    #2B1D2F !default;
 
 // opacity
 $default-opacity:      rgba(182, 182, 182, .6) !default;
@@ -895,7 +895,7 @@ $card-border-color:                 rgba($black, .05);
 $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width});
 $card-cap-bg:                       $gray-100 !default;
 $card-bg:                           $white !default;
-$card-black-background:             #27293d !default;
+$card-black-background: #35303d !default;
 $card-img-overlay-padding:          1.25rem !default;
 
 //$card-group-margin:                 ($grid-gutter-width / 2);

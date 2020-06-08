@@ -1,0 +1,1067 @@
+#  java -jar swagger-codegen-cli.jar generate -i src/app/schema.yml -l typescript-angular -o src/app/generated
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title:  Covid19-case-follow-up
+  description: ''
+host: 'localhost:8080'
+basePath: /
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+schemes:
+  - http
+tags:
+  - name: Case
+    description: 'Case/PUI information Registration'
+  - name: Questionnaire
+    description: 'Questionnaires to be filled'
+paths:
+  '/v1/authenticate':
+    post:
+      operationId: authenticateUser
+      summary: 'Authenticate user to have access to full api'
+      tags:
+        - Authenticate
+      consumes:
+        - application/json
+      parameters:
+        - name: jwtRequest
+          in: body
+          schema:
+            $ref: '#/definitions/jwt-request'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/jwt-response'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/api/facility':
+    put:
+      operationId: registerNewFacility
+      summary: 'Register new facility'
+      tags:
+        - HealthFacility
+      security:
+        - Bearer: []
+      consumes:
+        - application/json
+      parameters:
+        - name: facilityData
+          in: body
+          schema:
+            $ref: '#/definitions/request-save-facility'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-base'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/facility':
+    get:
+      operationId: getAllHealthFacility
+      summary: Get health facility info
+      tags:
+        - HealthFacility
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-health-facility-list'
+  '/v1/facility/{id}':
+    get:
+      operationId: getHealthFacility
+      summary: Get all health facility info
+      tags:
+        - HealthFacility
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/id-in-path-required'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-health-facility-single'
+  '/v1/api/case':
+    put:
+      operationId: registerNewCase
+      summary: 'Register new case'
+      security:
+        - Bearer: []
+      tags:
+        - Case
+      consumes:
+        - application/json
+      parameters:
+        - name: caseData
+          in: body
+          schema:
+            $ref: '#/definitions/request-save-case'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-base'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/case':
+    get:
+      operationId: getCase
+      summary: Get case
+      tags:
+        - Case
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/case-code-in-query'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-case-single'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+    post:
+      operationId: searchCases
+      summary: Search cases by criteria
+      tags:
+        - Case
+      produces:
+        - application/json
+      parameters:
+        - name: criteria
+          in: body
+          schema:
+            $ref: '#/definitions/request-search-case'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-case-list'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/api/case/all':
+    get:
+      operationId: getAllCase
+      summary: Get All case
+      security:
+        - Bearer: []
+      tags:
+        - Case
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-case-list'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/api/case/{code}/update-result':
+    post:
+      operationId: updateResult
+      summary: 'Update case result'
+      security:
+        - Bearer: []
+      tags:
+        - Case
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/case-code-in-path'
+        - $ref: '#/parameters/confirmed-result'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-base'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/api/questionnaire':
+    put:
+      operationId: registerNewQuestionnaire
+      summary: 'Register new questionnaire'
+      tags:
+        - Questionnaire
+      security:
+        - Bearer: []
+      consumes:
+        - application/json
+      parameters:
+        - name: qData
+          in: body
+          schema:
+            $ref: '#/definitions/request-save-questionnaire'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-base'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/questionnaire/{id}':
+    get:
+      operationId: getQuestionnaire
+      summary: Get questionnaire
+      tags:
+        - Questionnaire
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/id-in-path-required'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-questionnaire-single'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/questionnaire/all':
+    get:
+      operationId: getAllQuestionnaires
+      summary: Get all questionnaires
+      tags:
+        - Questionnaire
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-questionnaire-list'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/attributes':
+    get:
+      operationId: getAttributes
+      summary: Get Attributes
+      tags:
+        - Attributes
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-attributes-list'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/api/follow-up/{code}':
+    put:
+      operationId: compileFollowUpQuestionnaire
+      summary: 'Register case follow-up forms'
+      tags:
+        - Case Follow up
+      security:
+        - Bearer: []
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/case-code-in-path'
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/request-save-follow-up'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-base'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/follow-up/{code}':
+    get:
+      operationId: getCaseFollowUpQuestionnaires
+      summary: Get follow up questionnaires
+      tags:
+        - Case Follow up
+      parameters:
+        - $ref: '#/parameters/case-code-in-path'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-pui-follow-up-single'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/api/daily-status':
+    put:
+      operationId: addDailyStatus
+      summary: Add daily status
+      tags:
+        - Daily status
+      security:
+        - Bearer: []
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/model-daily-case-status'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-base'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/daily-status':
+    get:
+      operationId: getDailyStatus
+      summary: Get daily status
+      tags:
+        - Daily status
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/parameter-date-in-query'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-daily-case-status'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/daily-status/all':
+    get:
+      operationId: getAllDailyStatus
+      summary: Get all daily status data
+      tags:
+        - Daily status
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-daily-case-status-list'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/contact-trace/{code}':
+    get:
+      operationId: contactTraceByCaseCode
+      summary: Trace contacts from parent code
+      tags:
+        - Contact Tracing
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/case-code-in-path'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-contact-tracing'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/user/register':
+    put:
+      operationId: registerUser
+      summary: User registration
+      tags:
+        - User
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/model-user'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-base'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/rumor':
+    put:
+      operationId: registerNewRumor
+      summary: 'Register a Rumor'
+      tags:
+        - Rumor
+      consumes:
+        - application/json
+      parameters:
+        - name: rumorData
+          in: body
+          schema:
+            $ref: '#/definitions/request-save-rumor'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-base'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/api/rumor':
+    get:
+      operationId: getAllRumors
+      summary: Get all Rumors reports
+      security:
+        - Bearer: []
+      tags:
+        - Rumor
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-rumor-list'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/api/rumor/{id}':
+    get:
+      operationId: getRumorById
+      summary: Get single Rumor reports
+      security:
+        - Bearer: []
+      tags:
+        - Rumor
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/id-in-path-required'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-model-rumor-single'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+  '/v1/api/rumor/{id}/update-status':
+    post:
+      operationId: updateStatus
+      summary: 'Update status'
+      security:
+        - Bearer: []
+      tags:
+        - Rumor
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/id-in-path-required'
+        - name: status
+          in: body
+          schema:
+            type: integer
+            format: int32
+          required: true
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/response-base'
+        '401':
+          $ref: '#/responses/response-unauthorized'
+        '500':
+          $ref: '#/responses/response-internal-server-error-500'
+parameters:
+  case-code-in-query:
+    in: query
+    name: code
+    type: string
+    required: true
+  case-code-in-path:
+    in: path
+    name: code
+    type: string
+    required: true
+  confirmed-result:
+    in: body
+    name: confirmedResult
+    schema:
+      type: integer
+      format: int32
+    required: true
+  id-in-path-required:
+    in: path
+    name: id
+    type: integer
+    format: int32
+    required: true
+  parameter-date-in-query:
+    in: query
+    name: reportingDate
+    type: string
+    format: date
+definitions:
+  response-base:
+    type: object
+    properties:
+      success:
+        type: boolean
+      resultCode:
+        type: integer
+        format: int32
+      message:
+        type: string
+      errors:
+        type: array
+        items:
+          type: string
+      transactionId:
+        type: string
+      type:
+        type: string
+    discriminator: type
+    required:
+      - success
+      - resultCode
+  jwt-request:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  jwt-response:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          jwtToken:
+            type: string
+  model-health-facility:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      osm_id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      amenity:
+        type: string
+      addrfull:
+        type: string
+      xCord:
+        type: number
+        format: double
+      yCord:
+        type: number
+        format: double
+    required:
+      - name
+      - addrfull
+  model-case:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      caseCode:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      dob:
+        type: string
+        format: date
+      gender:
+        type: string
+        enum:
+          - F
+          - M
+      occupation:
+        type: string
+      passportNumber:
+        type: string
+      incidentContactPhone1:
+        type: string
+      incidentContactPhone2:
+        type: string
+      countryOfResidence:
+        type: string
+      countryOfOrigin:
+        type: string
+      nationality:
+        type: string
+      region:
+        type: string
+      subcityOrZone:
+        type: string
+      woreda:
+        type: string
+      kebele:
+        type: string
+      houseNo:
+        type: string
+      phoneNo:
+        type: string
+      latitude:
+        type: string
+      longitude:
+        type: string
+      presumptiveResult:
+        $ref: '#/definitions/model-enum-id-value'
+      confirmedResult:
+        $ref: '#/definitions/model-enum-id-value'
+      identifiedBy:
+        $ref: '#/definitions/model-enum-id-value'
+      parentCaseCode:
+        type: string
+      recentTravelTo:
+        type: string
+      admittedToFacility:
+        $ref: '#/definitions/model-enum-id-value'
+      status:
+        $ref: '#/definitions/model-enum-id-value'
+      modifiedBy:
+        type: string
+      reportingDate:
+        type: string
+        format: date-time
+      modifiedDate:
+        type: string
+        format: date-time
+    required:
+      - firstName
+      - lastName
+      - passportNumber
+      - incidentContactPhone1
+      - countryOfResidence
+      - identifiedBy
+      - modifiedBy
+      - region
+  model-questionnaire:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      question:
+        type: string
+      options:
+        type: array
+        items:
+          type: string
+      category:
+        $ref: '#/definitions/model-enum-id-value'
+      parentId:
+        type: integer
+        format: int32
+      description:
+        type: string
+      modifiedBy:
+        type: string
+      insertDate:
+        type: string
+        format: date-time
+      modifiedDate:
+        type: string
+        format: date-time
+    required:
+      - question
+      - options
+      - category
+  model-attribute:
+    type: object
+    properties:
+      attName:
+        type: string
+      attType:
+        type: string
+      attCode:
+        type: string
+      attLabel:
+        type: string
+      attDesc:
+        type: string
+  model-pui-follow-up:
+    type: object
+    properties:
+      puiCaseCode:
+        type: string
+      qId:
+        type: integer
+        format: int32
+      question:
+        type: string
+      selectedOption:
+        type: string
+      description:
+        type: string
+      modifiedBy:
+        type: integer
+        format: int32
+      insertDate:
+        type: string
+        format: date-time
+    required:
+      - puiCaseCode
+      - qId
+      - selectedOption
+  model-enum-id-value:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      value:
+        type: string
+  model-daily-case-status:
+    type: object
+    properties:
+      newCases:
+        type: integer
+        format: int32
+      newDeaths:
+        type: integer
+        format: int32
+      totalDeaths:
+        type: integer
+        format: int32
+      recovered:
+        type: integer
+        format: int32
+      activeCases:
+        type: integer
+        format: int32
+      criticalCases:
+        type: integer
+        format: int32
+      totalCases:
+        type: integer
+        format: int32
+      newTests:
+        type: integer
+        format: int32
+      totalTests:
+        type: integer
+        format: int32
+      reportDate:
+        type: string
+        format: date
+  model-user:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - firstName
+      - lastName
+      - email
+      - password
+  model-rumor:
+    type: object
+    properties:
+      id:
+        type: integer
+      suspectName:
+        type: string
+      gender:
+        type: string
+      address:
+        type: string
+      reportDate:
+        type: string
+        format: date-time
+      fever:
+        type: string
+      cough:
+        type: string
+      headache:
+        type: string
+      symptomsDuration:
+        type: integer
+        format: int32
+      reportingPersonName:
+        type: string
+      relationWithSuspect:
+        type: string
+      phoneNumber1:
+        type: string
+      phoneNumber2:
+        type: string
+      modifiedBy:
+        type: string
+      status:
+        $ref: '#/definitions/model-enum-id-value'
+    required:
+      - suspectName
+      - fever
+      - cough
+      - headache
+      - reportingPersonName
+      - phoneNumber1
+      - address
+  model-health-facility-list:
+    type: object
+    properties:
+      facilities:
+        type: array
+        items:
+          $ref: '#/definitions/model-health-facility'
+  model-questionnaire-list:
+    type: object
+    properties:
+      questions:
+        type: array
+        items:
+          $ref: '#/definitions/model-questionnaire'
+  model-case-list:
+    type: object
+    properties:
+      cases:
+        type: array
+        items:
+          $ref: '#/definitions/model-case'
+  model-attribute-list:
+    type: object
+    properties:
+      attributes:
+        type: array
+        items:
+          $ref: '#/definitions/model-attribute'
+  model-pui-follow-up-list:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/model-pui-follow-up'
+    required:
+      - list
+  model-daily-case-status-list:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/model-daily-case-status'
+  response-model-rumor-single:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-rumor'
+  model-rumor-list:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/model-rumor'
+  response-rumor-list:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-rumor-list'
+  request-save-rumor:
+    allOf:
+      - $ref: '#/definitions/model-rumor'
+  request-save-case:
+    allOf:
+      - $ref: '#/definitions/model-case'
+  request-save-questionnaire:
+    allOf:
+      - $ref: '#/definitions/model-questionnaire'
+  request-save-follow-up:
+    allOf:
+      - $ref: '#/definitions/model-pui-follow-up-list'
+  request-save-facility:
+    type: object
+    properties:
+      facilities:
+        type: array
+        items:
+          $ref: '#/definitions/model-health-facility'
+    required:
+      - facilities
+  request-search-case:
+    type: object
+    properties:
+      testResultId:
+        type: integer
+        format: int32
+      statusId:
+        type: integer
+        format: int32
+      region:
+        type: string
+      recentTravelTo:
+        type: string
+  response-case-single:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-case'
+  response-case-list:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-case-list'
+  response-questionnaire-single:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-questionnaire'
+  response-questionnaire-list:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-questionnaire-list'
+  response-attribute-single:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-attribute'
+  response-attributes-list:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-attribute-list'
+  response-pui-follow-up-single:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-pui-follow-up'
+  response-pui-follow-up-list:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-pui-follow-up-list'
+  response-health-facility-single:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-health-facility'
+  response-health-facility-list:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-health-facility-list'
+  response-daily-case-status:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-daily-case-status'
+  response-daily-case-status-list:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-daily-case-status-list'
+  response-contact-tracing:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            type: string
+  response-user-single:
+    allOf:
+      - $ref: '#/definitions/response-base'
+      - type: object
+        properties:
+          returnValue:
+            $ref: '#/definitions/model-user'
+responses:
+  response-internal-server-error-500:
+    description: Internal Server error
+    schema:
+      $ref: '#/definitions/response-base'
+  response-unauthorized:
+    description: Authentication information is missing or invalid
+    schema:
+      $ref: '#/definitions/response-base'
+    headers:
+      WWW_Authenticate:
+        type: string

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import {TranslateService} from "@ngx-translate/core";
 
 declare interface RouteInfo {
   path: string;
@@ -8,41 +9,55 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   {
-    path: "/home",
+    path: "/admin/dashboard",
     title: "Dashboard",
     icon: "icon-chart-pie-36",
     class: ""
   },
   {
-    path: "/cases",
-    title: "Covid-19 Cases",
+    path: "/admin/cases",
+    title: "Covid-19 Case Reporting",
     icon: "icon-atom",
     class: ""
   },
   {
-    path: "/follow-up",
-    title: "PUI Follow Up",
+    path: "/admin/follow-up",
+    title: "Community Surveillance",
     icon: "icon-pin",
-    class: "" },
-  {
-    path: "/health-facilities",
-    title: "Health Facilities",
-    icon: "icon-bell-55",
     class: ""
   },
   {
-    path: "/questionnaire",
-    title: "Questionnaire",
+    path: "/admin/rumor-list",
+    title: "Rumors Investigation",
+    icon: "icon-molecule-40",
+    class: ""
+  },
+  {
+    path: "/admin/contact-tracing",
+    title: "Contact Tracing",
+    icon: "icon-vector",
+    class: ""
+  },
+  {
+    path: "/admin/questionnaire",
+    title: "Follow-up Questionnaire",
     icon: "icon-puzzle-10",
+    class: ""
+  },
+  {
+    path: "/admin/health-facilities",
+    title: "Health Facilities",
+    icon: "icon-rumor-10",
     class: ""
   },
 
   {
-    path: "/user",
+    path: "/admin/user",
     title: "User Profile",
     icon: "icon-single-02",
     class: ""
   }
+
 ];
 
 @Component({
@@ -53,7 +68,7 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor() {}
+  constructor(public translate: TranslateService) {}
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);

@@ -1,135 +1,173 @@
-<div class=" content">
-
+<div class=" landing-content" >
+<div class="row-header">
   <div class=" row">
     <div class=" col-12">
       <div class=" card card-chart">
         <div class=" card-header">
           <div class=" row">
-            <div class=" col-sm-6 text-left">
+            <div class=" col-sm-12 text-center">
               <h5 class=" card-category"><img src="../../../assets/img/favicon-32x32.png"/></h5>
-              <h2 class=" card-title">Total Corona virus Cases</h2>
+              <h2 class=" card-title" style="font-family: 'Helvetica Neue'">{{'total-cases' | translate}} <strong>{{totalCase}}</strong></h2>
             </div>
-            <div class=" col-sm-6">
+            <div class=" col-sm-12">
               <div class=" btn-group btn-group-toggle float-right" data-toggle="buttons">
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[0];updateOptions();clicked=true;clicked1=false;clicked2=false" [ngClass]="{'active':clicked===true}">
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="myChartData.options = this.gradientChartOptionsLinearConfiguration;
+                myChart1.options = this.gradientChartOptionsLinearConfiguration; myChart2.options = this.gradientChartOptionsLinearConfiguration;
+                myChartData.update(); myChart1.update(); myChart2.update(); clicked1=true;clicked2=false" [ngClass]="{'active':clicked1===true}">
                   <input checked="checked" name="options" type="radio" />
 
                   <span class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                    Linear
+                    {{'linear' | translate}}
                   </span>
                   <span class=" d-block d-sm-none">
                     <i class=" tim-icons icon-single-02"> </i>
                   </span>
                 </label>
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[1];updateOptions();clicked=false;clicked1=true;clicked2=false" [ngClass]="{'active':clicked1===true}">
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="myChartData.options = this.gradientChartOptionsLogarithmicConfiguration;
+                myChart1.options = this.gradientChartOptionsLogarithmicConfiguration;  myChart2.options = this.gradientChartOptionsLogarithmicConfiguration;
+                myChartData.update(); myChart1.update(); myChart2.update();  clicked1=false;clicked2=true" [ngClass]="{'active':clicked2===true}">
                   <input class=" d-none d-sm-none" name="options" type="radio"/>
                   <span class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                    Logarithmic
+                    {{'logarithmic' | translate}}
                   </span>
                   <span class=" d-block d-sm-none">
-                    <i class=" tim-icons icon-gift-2"> </i>
+                    <i class="fa fa-line-chart" aria-hidden="true" style="color:red"> </i>
                   </span>
                 </label>
-<!--                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[2];updateOptions();clicked=false;clicked1=false;clicked2=true" [ngClass]="{'active':clicked2===true}">-->
-<!--                  <input class=" d-none" name="options" type="radio" />-->
 
-<!--                  <span-->
-<!--                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"-->
-<!--                  >-->
-<!--                    Sessions-->
-<!--                  </span>-->
-<!--                  <span class=" d-block d-sm-none">-->
-<!--                    <i class=" tim-icons icon-tap-02"> </i>-->
-<!--                  </span>-->
-<!--                </label>-->
               </div>
             </div>
           </div>
         </div>
         <div class=" card-body">
-          <div class=" chart-area"><canvas id="chartBig1"> </canvas></div>
+          <div class=" chart-area"><canvas id="totalCaseChart"> </canvas></div>
         </div>
       </div>
     </div>
   </div>
+
+
   <div class=" row">
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Total Deaths</h5>
+          <h5 class=" card-category">{{'total-deaths' | translate}}</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-bell-55 text-danger-states"> </i> 0
+            <i class=" tim-icons icon-bell-55 text-danger-states"> </i> {{totalDeath}}
           </h3>
         </div>
         <div class=" card-body">
-          <div class=" chart-area"><canvas id="chartLineRed"> </canvas></div>
+          <div class=" chart-area"><canvas id="totalDeathChart"> </canvas></div>
         </div>
       </div>
     </div>
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Daily Cases</h5>
+          <h5 class=" card-category">{{'daily-cases' | translate}}</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-delivery-fast text-info"> </i> 2
+            <i class=" tim-icons icon-delivery-fast text-info"> </i> {{'max' | translate}} = {{maxNewCase}}
           </h3>
         </div>
         <div class=" card-body">
-          <div class=" chart-area"><canvas id="CountryChart"> </canvas></div>
+          <div class=" chart-area"><canvas id="dailyNewCaseChart"> </canvas></div>
         </div>
       </div>
     </div>
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Currently Infected</h5>
+          <h5 class=" card-category">{{'currently-infected' | translate}}</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-send text-success"> </i> 26
+            <i class=" tim-icons icon-send text-success"> </i> {{totalActiveCase}}
           </h3>
         </div>
         <div class=" card-body">
-          <div class=" chart-area"><canvas id="chartLineGreen"> </canvas></div>
+          <div class=" chart-area"><canvas id="activeCaseChart"> </canvas></div>
         </div>
       </div>
     </div>
   </div>
 
   <div class=" row">
-    <div class=" col-lg-6 col-md-12">
-      <div class=" card card-tasks">
-        <div class=" card-header">
-          <h6 class=" title d-inline">Activities(5)</h6>
-          <p class=" card-category d-inline">today</p>
-          <div ngbDropdown>
-            <button
-              class=" btn btn-link btn-icon"
-              data-toggle="dropdown"
-              ngbDropdownToggle
-              type="button"
-            >
-              <i class=" tim-icons icon-settings-gear-63"> </i>
-            </button>
-            <div aria-labelledby="dropdownMenuLink" class=" dropdown-menu-right" ngbDropdownMenu>
-              <a href="javascript:void(0)" ngbDropdownItem> Registered PUI 1 </a>
-              <a href="javascript:void(0)" ngbDropdownItem> PUI 2 recovered </a>
-              <a href="javascript:void(0)" ngbDropdownItem> PUI 3 in CRITICAL CONDITION </a>
+    <div class=" col-lg-12 col-md-20">
+<!--      <div class=" card card-tasks">-->
+
+          <h6 >{{'RECENT-CASES' | translate}}</h6>
+          <alert></alert>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource" matSortDirection="desc" matSortActive="reportDate" matSort class="table tablesorter">
+                <!-- Report Date Column -->
+                <ng-container matColumnDef="reportDate">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'report-date' | translate}} </th>
+                  <td mat-cell *matCellDef="let case">  {{convertDate(case.reportDate) | date}} </td>
+                </ng-container>
+
+                <!-- Total Cases Column -->
+                <ng-container matColumnDef="totalCases">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-total' | translate}} </th>
+                  <td mat-cell *matCellDef="let case"> {{case.totalCases}} </td>
+                </ng-container>
+
+                <!-- New Cases Column -->
+                <ng-container matColumnDef="newCases">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-new' | translate}} </th>
+                  <td mat-cell *matCellDef="let case">
+                    <span *ngIf="case.newCases===0"></span>
+                    <span *ngIf="case.newCases!==0" style="background-color: #fb6340">+{{case.newCases}}</span>
+                  </td>
+                </ng-container>
+
+                <!-- Total Deaths Column -->
+                <ng-container matColumnDef="totalDeaths">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-total-deaths' | translate}} </th>
+                  <td mat-cell *matCellDef="let case">
+                    <span *ngIf="case.totalDeaths===0"></span>
+                    <span *ngIf="case.totalDeaths!==0" style="color: #ec250d"><strong>{{case.totalDeaths}}</strong></span>
+                </ng-container>
+
+                <!-- New Deaths Column -->
+                <ng-container matColumnDef="newDeaths">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-new-deaths' | translate}} </th>
+                  <td mat-cell *matCellDef="let case">
+                    <span *ngIf="case.newDeaths===0"></span>
+                    <span *ngIf="case.newDeaths!==0" style="background-color: #ec250d">+{{case.newDeaths}}</span>
+                  </td>
+                </ng-container>
+
+                <!-- Active cases Column -->
+                <ng-container matColumnDef="activeCases">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-active' | translate}} </th>
+                  <td mat-cell *matCellDef="let case"> {{case.activeCases}} </td>
+                </ng-container>
+
+                <!-- Serious critical  Column -->
+                <ng-container matColumnDef="criticalCases">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-serious' | translate}} </th>
+                  <td mat-cell *matCellDef="let case"> {{case.criticalCases}} </td>
+                </ng-container>
+
+                <!-- Total recovered Column -->
+                <ng-container matColumnDef="recovered">
+
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'daily-total-recovered' | translate}} </th>
+                  <td mat-cell *matCellDef="let case">
+                    <span *ngIf="case.recovered===0"></span>
+                    <span *ngIf="case.recovered!==0" style="color:green"><strong>{{case.recovered}}</strong></span> </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            <mat-paginator  [pageSize]=10 showFirstLastButtons></mat-paginator>
             </div>
-          </div>
-        </div>
-        <div class=" card-body">
 
         </div>
       </div>
     </div>
-    <div class=" col-lg-6 col-md-12">
-      <div class=" card">
-        <div class=" card-header">
-          <h4 class=" card-title">Recent Cases</h4>
-        </div>
-        <div class=" card-body">
 
-        </div>
-      </div>
-    </div>
   </div>
+</div>
 </div>

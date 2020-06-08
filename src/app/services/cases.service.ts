@@ -3,6 +3,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Case} from '../models/case';
 import {BASE_URL} from "../helpers/constants";
+import {ResponseCaseList} from "../models/responseCaseList";
+import {RequestSaveCase} from "../models/requestSaveCase";
+import {ResponseBase} from "../models/responseBase";
 
 @Injectable({
   providedIn: 'root'
@@ -11,30 +14,23 @@ export class CasesService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCases(): Observable<Case[]>{
-    let casesUrl = BASE_URL+"/v1/cases";
-    let headers = {
-        'Access-Control-Allow-Origin': true
-      };
-    // @ts-ignore
-    return this.http.get<Case[]>(casesUrl, headers);
+  getAllCases(): Observable<ResponseCaseList>{
+    let casesUrl = BASE_URL+"/v1/api/case/all";
+    return this.http.get<ResponseCaseList>(casesUrl);
   }
 
-  createNewCase(formData: FormData): Observable<any>{
-      const url = BASE_URL+'/v1/cases';
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-        })
-      };
-      let puiCase = {};
-      formData.forEach((value, key) => {
-        puiCase[key] = value;
-
-        console.log(key+" : "+value);
-      });
-      let json = JSON.stringify(puiCase);
-      return this.http.post(url, puiCase, httpOptions);
+  createNewCase(requestData: RequestSaveCase): Observable<ResponseBase>{
+    const url = BASE_URL+'/v1/api/case';
+    return this.http.put<ResponseBase>(url, requestData);
   }
 
+  updateTestResult(caseCode: string, resultId: number): Observable<ResponseBase>{
+    const updateUrl = BASE_URL + '/v1/api/case/'+ caseCode+ '/update-result';
+    return this.http.put<ResponseBase>(updateUrl, {"id": resultId});
+  }
+
+  updateStatus(caseCode: string, statusId: number){
+    const updateUrl = BASE_URL + '/v1/api/case/'+ caseCode+ '/update-status';
+    return this.http.put<ResponseBase>(updateUrl, {"id": statusId});
+  }
 }

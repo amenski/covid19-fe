@@ -1,0 +1,53 @@
+<form ngNativeValidate [formGroup]="tracingForm"  (ngSubmit)="getContacts()">
+<div class=" content">
+  <div class=" row">
+
+    <!--    CONTROLS-->
+    <div class=" col-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">{{ 'contact-tracing-header1' | translate}}</h4>
+
+        </div>
+        <div class=" card-body">
+
+          <div class="row">
+            <div class=" col-md-6 text-left">
+              <div class=" form-group">
+                <label>{{'add-case-pui-case-code'|translate}}:</label>
+                <input type="text" class="form-control"  formControlName="caseCode" placeholder="XX-XXXXXXXXXX" required/>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class=" col-md-6 text-left">
+              <label>E.g. <S-JMBY3RNIJY </label>
+            </div>
+          </div>
+
+          <alert></alert>
+          <p-progressSpinner *ngIf="loading" [style]="{width: '50px', height: '50px'}" strokeWidth="6"  animationDuration=".5s"></p-progressSpinner>
+          <button pButton type="submit" label="{{'contact-tracing-get-case-contacts-button' | translate}}" [disabled]="loading" class="form-control ui-button-rounded ui-button-info"></button>
+          <!--          <button type="submit" class="form-control" >{{'contact-tracing-get-case-contacts-button' | translate}}</button>-->
+          <hr/>
+          <hr/>
+
+          <div>
+              <p-organizationChart [value]="data" styleClass="company">
+                <ng-template let-node pTemplate="person">
+                    <div class="node-header ui-corner-top">{{node.data.resultStatus}}</div>
+                    <div class="node-content">
+                      <div>{{node.data.patientname}}</div>
+                        <div>{{node.data.code}}</div>
+                    </div>
+                </ng-template>
+            </p-organizationChart>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

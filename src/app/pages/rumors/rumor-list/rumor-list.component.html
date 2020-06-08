@@ -1,0 +1,96 @@
+  <div class="content">
+    <div class="row">
+      <div class="mat-elevation-z8">
+        <alert></alert>
+        <input type="text" class="form-control" [(ngModel)]="searchVal" (ngModelChange)='checkSearchVal()'
+               placeholder="Search&hellip;" >
+        <table mat-table [dataSource]="dataSource" matSortDirection="desc" matSortActive="reportDate" matSort class="table tablesorter">
+          <!-- Report Date Column -->
+          <ng-container matColumnDef="reportDate" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'report-date-to-rrt' | translate}} </th>
+            <td mat-cell *matCellDef="let rumor" >
+              <span *ngIf="rumor.status.value===pendingLabel" style="color: orangered;">{{rumor.reportDate | date}} </span>
+              <span *ngIf="rumor.status.value===waitingResultLabel" style="color: yellow;">{{rumor.reportDate | date}} </span>
+              <span *ngIf="rumor.status.value===registeredLabel || rumor.status.value===inIsolationLabel" style="color: green;">{{rumor.reportDate | date}} </span>
+            </td>
+          </ng-container>
+
+          <!--suspectName Column -->
+          <ng-container matColumnDef="suspectName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'suspect-name' | translate}} </th>
+            <td mat-cell *matCellDef="let rumor">
+              <span *ngIf="rumor.status.value===pendingLabel" style="color: orangered;"> {{rumor.suspectName}}</span>
+              <span *ngIf="rumor.status.value===waitingResultLabel" style="color: yellow;"> {{rumor.suspectName}}</span>
+              <span *ngIf="rumor.status.value===registeredLabel || rumor.status.value===inIsolationLabel" style="color: green;"> {{rumor.suspectName}}</span>
+            </td>
+          </ng-container>
+
+          <!--Reporting Person name Column -->
+          <ng-container matColumnDef="reportingPersonName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Reporting Person Name' | translate}} </th>
+            <td mat-cell *matCellDef="let rumor">
+              <span *ngIf="rumor.status.value===pendingLabel" style="color: orangered;">{{rumor.reportingPersonName}}</span>
+              <span *ngIf="rumor.status.value===waitingResultLabel" style="color: yellow;">{{rumor.reportingPersonName}}</span>
+              <span *ngIf="rumor.status.value===registeredLabel || rumor.status.value===inIsolationLabel" style="color: green;">{{rumor.reportingPersonName}}</span>
+            </td>
+          </ng-container>
+
+          <!-- Relation with Suspect Column -->
+          <ng-container matColumnDef="relationWithSuspect">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'relation-with-suspect' | translate}} </th>
+            <td mat-cell *matCellDef="let rumor">
+              <span *ngIf="rumor.status.value===pendingLabel" style="color: orangered;">{{rumor.relationWithSuspect}} </span>
+              <span *ngIf="rumor.status.value===waitingResultLabel" style="color: yellow;">{{rumor.relationWithSuspect}} </span>
+              <span *ngIf="rumor.status.value===registeredLabel || rumor.status.value===inIsolationLabel" style="color: green;">{{rumor.relationWithSuspect}} </span>
+            </td>
+          </ng-container>
+
+          <!--Phone Number 1 Column -->
+          <ng-container matColumnDef="phoneNumber1">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'phone-number1' | translate}} </th>
+            <td mat-cell *matCellDef="let rumor">
+              <span *ngIf="rumor.status.value===pendingLabel" style="color: orangered;">{{rumor.phoneNumber1}}</span>
+              <span *ngIf="rumor.status.value===waitingResultLabel" style="color: yellow;">{{rumor.phoneNumber1}}</span>
+              <span *ngIf="rumor.status.value===registeredLabel || rumor.status.value===inIsolationLabel" style="color: green;">{{rumor.phoneNumber1}}</span>
+            </td>
+          </ng-container>
+          <!-- Extra Column -->
+          <ng-container matColumnDef="extra">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+            <td mat-cell *matCellDef="let rumor">
+              <button pButton *ngIf="rumor.status.value===pendingLabel" type="submit" label="{{'rumor-investigate-button' | translate}}" [disabled]="investigateLoading"
+                      class="form-control ui-button-rounded ui-button-info" (click)="investigateRumor(rumor)">
+                <p-progressSpinner *ngIf="investigateLoading" [style]="{width: '30px', height: '30px'}" strokeWidth="4"  ></p-progressSpinner>
+              </button>
+              <!--              <button *ngIf="rumor.status.value===pendingLabel" type="button" class="form-control" (click)="investigateRumor(rumor)">-->
+<!--                {{'rumor-investigate-button' | translate}}-->
+<!--              </button>-->
+              <button pButton *ngIf="rumor.status.value===waitingResultLabel" type="submit" label="{{'rumor-report-isolate-pui-button' | translate}}"
+                      [disabled]="reportIsolateLoading" class="form-control ui-button-rounded ui-button-info" (click)="reportOrIsolate(rumor)">
+                <p-progressSpinner *ngIf="reportIsolateLoading" [style]="{width: '50px', height: '50px'}" strokeWidth="6"  animationDuration=".5s"></p-progressSpinner>
+              </button>
+
+<!--              <button *ngIf="rumor.status.value===waitingResultLabel" type="button" class="form-control" (click)="reportOrIsolate(rumor)">-->
+<!--                {{'rumor-report-isolate-pui-button' | translate}}-->
+<!--              </button>-->
+
+
+              <span *ngIf="rumor.status.value===registeredLabel" style="color: green">REGISTERED AS CONFIRMED CASE</span>
+              <span *ngIf="rumor.status.value===inIsolationLabel" style="color: green">REGISTERED AS UNCONFIRMED CASE (PATIENT IN ISOLATION)</span>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!--                      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>-->
+      </div>
+    </div>
+    <div class="row" *ngIf="showInvestigate">
+      <app-rumor-investigation [rumorToInvestigate]="rumorToInvestigate" [isToBeChangedToWaiting]=isToBeChangedToWaiting
+                                [isToBeRegistered]=isToBeRegistered>
+
+      </app-rumor-investigation>
+    </div>
+
+  </div>

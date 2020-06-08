@@ -1,10 +1,11 @@
-<form>
+<form ngNativeValidate [formGroup]="caseForm" (ngSubmit) = addCase()>
 <div class=" row">
-  <div class=" col-6">
+  <div class=" col-lg-6">
+    <!--BASIC INFO -->
 
     <div class=" card">
       <div class=" card-header">
-        <h4 class=" card-title">BASIC INFO / መሰረታዊ መረጃ</h4>
+        <h4 class=" card-title"> {{'add-case-pui-basic-info' | translate}}</h4>
       </div>
       <div class=" card-body">
 
@@ -13,39 +14,55 @@
 
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label> First name *</label>
-                <input class=" form-control" placeholder="ስም" type="text" />
+                <label> {{'add-case-name' | translate}} *</label>
+                <input  *ngIf="rumorToRegister===undefined" pInputText formControlName="firstName" class=" form-control"  type="text" required/>
+                <input  *ngIf="rumorToRegister!==undefined"  pInputText formControlName="firstName" class=" form-control"  type="text" required/>
               </div>
             </div>
 
             <div class=" col-md-6 px-md-1">
               <div class=" form-group">
-                <label> Last name *</label>
-                <input class=" form-control" placeholder="የአባት ስም" type="text" />
+                <label> {{'add-case-last-name' | translate}} *</label>
+                <input formControlName="lastName" class=" form-control" pInputText placeholder="" type="text" required/>
               </div>
             </div>
           </div>
 
           <!--GENDER AND DATE OF BIRTH-->
           <div class=" row">
-
-            <div class=" col-md-7 pr-md-1">
+            <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label> Birth date *</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="የትውልድ ቀን" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                  </div>
+                <label> {{'add-case-birth-date' | translate}} </label>
+                <div class="input-group-append">
+                  <input class="form-control" matInput [matDatepicker]="dob" placeholder="የትውልድ ቀን">
+                  <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                  <mat-datepicker #dob></mat-datepicker>
                 </div>
+<!--                <div class="input-group">-->
+<!--                  <input class="form-control" formControlName="dob" placeholder="የትውልድ ቀን" name="dob"-->
+<!--                         [(ngModel)]="dateOfBirth" ngbDatepicker #dob="ngbDatepicker">-->
+<!--                  <div class="input-group-append">-->
+<!--                    <button  class="form-control" (click)="dob.toggle()" type="button">-->
+<!--                      <i class="fa fa-calendar"></i>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
               </div>
             </div>
 
-            <div class=" col-md-3 px-md-1">
+            <div class=" col-md-6 px-md-1">
               <div class=" form-group">
-                <label> Gender *</label>
-                <ng-select [items]="gender" class=" form-control" formControlName="gender" >
-                </ng-select>
+                <label> {{'add-case-gender' | translate}} </label>
+
+                <input type="text" formControlName="gender" placeholder=""
+                       [matAutocomplete]="gAuto" class = "form-control" *ngIf="rumorToRegister===undefined">
+                <input type="text" formControlName="gender" placeholder=""
+                       [matAutocomplete]="gAuto" class = "form-control" *ngIf="rumorToRegister!==undefined">
+                <mat-autocomplete autoActiveFirstOption #gAuto="matAutocomplete">
+                  <mat-option *ngFor="let gender of genderOptions | async" [value]="gender">
+                    {{gender}}
+                  </mat-option>
+                </mat-autocomplete>
               </div>
             </div>
           </div>
@@ -54,14 +71,14 @@
           <div class=" row">
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label>Phone *</label>
-                <input type="text" class=" form-control" placeholder="ስልክ ቁጥር"/>
+                <label>{{'add-case-phone' | translate}} </label>
+                <input type="text" formControlName="phoneNo" class=" form-control" placeholder="" />
               </div>
             </div>
-            <div class=" col-md-4 px-md-1">
+            <div class=" col-md-6 px-md-1">
               <div class=" form-group">
-                <label> Passport/ID Number *</label>
-                <input type="text" class=" form-control" placeholder="የመታወቂያ/ፓስፖርት ቁጥር"/>
+                <label> {{'add-case-passport-num' | translate}} *</label>
+                <input type="text" formControlName="passportNumber" class=" form-control" placeholder="" required/>
               </div>
             </div>
           </div>
@@ -71,41 +88,103 @@
 
             <div class=" col-md-6 pr-md-1">
               <div class=" form-group">
-                <label>Nationality *</label>
-                <input type="text" class=" form-control" placeholder="ዜግነት"/>
+                <label>{{'add-case-nationality' | translate}} </label>
+                <input type="text" formControlName="nationality" placeholder=""
+                       [matAutocomplete]="nAuto" class = "form-control" (ngModelChange)="_searchNationality(this.caseForm.get('nationality').value)">
+                <mat-autocomplete autoActiveFirstOption #nAuto="matAutocomplete">
+                  <mat-option *ngFor="let nationality of nationalityFilteredOptions | async" [value]="nationality">
+                    {{nationality}}
+                  </mat-option>
+                </mat-autocomplete>
               </div>
             </div>
 
-            <div class=" col-md-4 px-md-1">
+            <div class=" col-md-6 px-md-1">
               <div class=" form-group">
-                <label> Occupation </label>
-                <input type="text" class=" form-control" placeholder="ስራ"/>
+                <label> {{'add-case-occupation' | translate}} </label>
+                <input type="text" formControlName="occupation" placeholder=""
+                       [matAutocomplete]="oAuto" class=" form-control" (ngModelChange)="_searchOccupation(this.caseForm.get('occupation').value)">
+                <mat-autocomplete autoActiveFirstOption #oAuto="matAutocomplete">
+                  <mat-option *ngFor="let occupation of occupationsFilteredOptions | async" [value]="occupation">
+                    {{occupation}}
+                  </mat-option>
+                </mat-autocomplete>
               </div>
             </div>
           </div>
 
+
+        <!--INCIDENT PHONE 1 AND 2-->
+        <div class=" row">
+
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>{{'add-case-incident1' | translate}} *</label>
+              <input type="text" formControlName="incidentPhone1" placeholder="" class=" form-control" required>
+
+            </div>
+          </div>
+
+          <div class=" col-md-6 px-md-1">
+            <div class=" form-group">
+              <label> {{'add-case-incident2' | translate}} </label>
+              <input type="text" formControlName="incidentPhone2" placeholder="" class=" form-control">
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>
-
-  <div class=" col-md-6">
+  <!--RESIDENTIAL INFO -->
+  <div class=" col-lg-6">
     <div class=" card">
       <div class=" card-header">
-        <h4 class=" card-title">RESIDENTIAL INFO / አድራሻ</h4>
+        <h4 class=" card-title">{{'add-case-pui-res-info' | translate}}</h4>
       </div>
       <div class=" card-body">
+        <!--COUNTRY OF RESIDENCE AND ORIGIN-->
+        <div class=" row">
+
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>{{'add-case-cor' | translate}} *</label>
+              <input type="text" formControlName="countryOfResidence" placeholder=""
+                     [matAutocomplete]="crAuto" class=" form-control" (ngModelChange)="_searchCountry(this.caseForm.get('countryOfResidence').value)">
+              <mat-autocomplete autoActiveFirstOption #crAuto="matAutocomplete">
+                <mat-option *ngFor="let countryR of countriesFilteredOptions | async" [value]="countryR">
+                  {{countryR}}
+                </mat-option>
+              </mat-autocomplete>
+            </div>
+          </div>
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>{{'add-case-coo' | translate}} </label>
+              <input type="text" formControlName="countryOfOrigin" placeholder=""
+                     [matAutocomplete]="coAuto" class=" form-control" (ngModelChange)="_searchCountry(this.caseForm.get('countryOfOrigin').value)">
+              <mat-autocomplete autoActiveFirstOption #coAuto="matAutocomplete">
+                <mat-option *ngFor="let countryO of countriesFilteredOptions | async" [value]="countryO">
+                  {{countryO}}
+                </mat-option>
+              </mat-autocomplete>
+            </div>
+          </div>
+        </div>
+
         <!--REGION AND SUB CITY-->
         <div class=" row">
 
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>fdfd *</label>
+              <label>{{'add-case-region' | translate}} *</label>
 <!--              <input type="text" class=" form-control" placeholder="ክልል"/>-->
-              <input type="text" placeholder="Pick one"
-                     [matAutocomplete]="auto" class=" form-control">
-              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option}}
+              <input type="text" formControlName="region" placeholder=""
+                     [matAutocomplete]="rAuto" class=" form-control" (ngModelChange)="_searchRegion(this.caseForm.get('region').value)">
+              <mat-autocomplete autoActiveFirstOption #rAuto="matAutocomplete">
+                <mat-option *ngFor="let region of regionsFilteredOptions | async" [value]="region">
+                  {{region}}
                 </mat-option>
               </mat-autocomplete>
 
@@ -113,8 +192,8 @@
           </div>
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>Sub city *</label>
-              <input type="text" class=" form-control" placeholder="ክፍለ ከተማ"/>
+              <label>{{'add-case-subcity' | translate}} </label>
+              <input type="text" formControlName="subcityOrZone" class=" form-control" placeholder=""/>
             </div>
           </div>
         </div>
@@ -123,30 +202,30 @@
         <div class=" row">
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>Woreda *</label>
-              <input type="text" class=" form-control" placeholder="ወረዳ"/>
+              <label>{{'add-case-woreda' | translate}} </label>
+              <input type="text" formControlName="woreda" class=" form-control" placeholder="" />
             </div>
           </div>
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>Kebele *</label>
-              <input type="text" class=" form-control" placeholder="ቀበሌ"/>
+              <label>{{'add-case-kebele' | translate}} </label>
+              <input type="text" formControlName="kebele" class=" form-control" placeholder="" />
             </div>
           </div>
         </div>
 
         <!--HOUSE NUMBER -->
         <div class=" row">
-          <div class=" col-md-8 pr-md-1">
+          <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>Street name. </label>
-              <input type="text" class=" form-control" placeholder="የመንገድ ስም"/>
+              <label>{{'add-case-street-name' | translate}} </label>
+              <input type="text" formControlName="streetName" class=" form-control" placeholder=""/>
             </div>
           </div>
-          <div class=" col-md-3 pr-md-1">
+          <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>House No. *</label>
-              <input type="text" class=" form-control" placeholder="የቤት ቁጥር"/>
+              <label>{{'add-case-house-no' | translate}} </label>
+              <input type="text" formControlName="houseNo" class=" form-control" placeholder="" />
             </div>
           </div>
         </div>
@@ -155,14 +234,14 @@
         <div class=" row">
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>Latitude </label>
-              <input type="text" class=" form-control" placeholder="ኬክሮስ"/>
+              <label>{{'add-case-latitude' | translate}} </label>
+              <input type="text" formControlName="latitude" class=" form-control" placeholder=""/>
             </div>
           </div>
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>Longitude </label>
-              <input type="text" class=" form-control" placeholder="ኬንትሮስ"/>
+              <label>{{'add-case-longitude' | translate}} </label>
+              <input type="text" formControlName="longitude" class=" form-control" placeholder=""/>
             </div>
           </div>
         </div>
@@ -172,21 +251,44 @@
   </div>
 </div>
 
+
+  <!--TRAVEL HISTORY AND RESULT-->
 <div class=" row">
 
-  <div class=" col-6">
+  <div class=" col-lg-6">
 
     <div class=" card">
       <div class=" card-header">
-        <h4 class=" card-title">TRAVEL HISTORY/ የቅርብ ጊዜ ጉዞዎች</h4>
+        <h4 class=" card-title">{{'add-case-general' | translate}}</h4>
       </div>
       <div class=" card-body">
         <div class=" row">
           <div class=" col-md-8 pr-md-1">
             <div class=" form-group">
-              <label>Search and Select all countries visited recently. </label>
+              <label>{{'add-case-travel-history' | translate}}</label>
 <!--              <input type="text" class=" form-control" placeholder="የቅርብ ጊዜ ጉዞዎች"/>-->
-              <textarea class=" form-control" placeholder="የቅርብ ጊዜ ጉዞዎች"></textarea>
+              <input type="text" formControlName="recentTravelTo" class=" form-control" placeholder=""/>
+            </div>
+          </div>
+        </div>
+        <div class=" row">
+          <div class=" col-md-8 pr-md-1">
+            <div class=" form-group">
+              <label>{{'add-case-admitted-to-facility' | translate}}</label>
+<!--              <input formControlName="admittedToFacility" class=" form-control" placeholder=""/>-->
+              <label>{{'add-case-pui-current-status' | translate}}: </label>
+              <!--              <input formControlName="status" class=" form-control" placeholder="አሁን ያለበት ሁኔታ"/>-->
+<!--              <input type="text" formControlName="admittedToFacility" placeholder=""-->
+<!--                     [matAutocomplete]="atAuto" class = "form-control" ngModel>-->
+<!--              <mat-autocomplete autoActiveFirstOption #atAuto="matAutocomplete">-->
+<!--                <mat-option *ngFor="let status of statusOptions | async" [value]="status">-->
+<!--                  {{status}}-->
+<!--                </mat-option>-->
+<!--              </mat-autocomplete>-->
+              <select  class="form-control" formControlName="admittedToFacility" >
+                <option *ngFor="let stat of status" [value]="stat.attCode"  >
+                  <span >{{stat.attName }}</span></option>
+              </select>
             </div>
           </div>
 
@@ -196,31 +298,150 @@
 
   </div>
 
-  <div class=" col-6">
+  <div class=" col-lg-6">
     <div class=" card">
       <div class=" card-header">
-        <h4 class=" card-title">RESULT/ የምርመራ ውጤት</h4>
+        <h4 class=" card-title">{{'add-case-pui-status-result' | translate}}</h4>
       </div>
       <div class=" card-body">
         <div class=" row">
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>Presumptive Result </label>
-              <textarea class=" form-control" placeholder="የመጀመሪያ ውጤት"></textarea>
+              <label>{{'add-case-pui-current-status' | translate}}: </label>
+<!--              <input formControlName="status" class=" form-control" placeholder="አሁን ያለበት ሁኔታ"/>-->
+<!--              <input type="text" formControlName="status" placeholder=""-->
+<!--                     [matAutocomplete]="sAuto" class = "form-control" ngModel>-->
+<!--              <mat-autocomplete autoActiveFirstOption #sAuto="matAutocomplete">-->
+<!--                <mat-option *ngFor="let stat of status | async" [value]="stat">-->
+<!--                  {{status}}-->
+<!--                </mat-option>-->
+<!--              </mat-autocomplete>-->
+              <select  class="form-control" formControlName="status" >
+                <option *ngFor="let stat of status" [value]="stat.attCode"  >
+                  <span >{{stat.attName }}</span></option>
+              </select>
             </div>
           </div>
 
           <div class=" col-md-6 pr-md-1">
             <div class=" form-group">
-              <label>Confirmed Result </label>
-              <textarea class=" form-control" placeholder="የተረጋገጠ ውጤት" disabled="disabled"></textarea>
+              <label>{{'add-case-pui-parent-case-code' | translate}} </label>
+              <input formControlName="parentCaseCode" class=" form-control" placeholder=""/>
+            </div>
+          </div>
+        </div>
+        <div class=" row">
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>{{'add-case-pui-presumptive-result' | translate}} </label>
+              <input type="text" formControlName="presumptiveResult" class=" form-control" placeholder="" disabled/>
+            </div>
+          </div>
+
+          <div class=" col-md-6 pr-md-1">
+            <div class=" form-group">
+              <label>{{'add-case-pui-confirmed-result' | translate}} </label>
+              <input type="text" formControlName="confirmedResult" class=" form-control" placeholder="" disabled="disabled"/>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
-    <button class=" btn btn-fill btn-danger" type="submit">Register Case</button>
+
+  <!--HEALTH OFFICIALS AND HEALTH FACILITIES INFO-->
+<div class=" row">
+
+    <div class=" col-12">
+
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">{{'add-case-report-info' | translate}} </h4>
+        </div>
+        <div class=" card-body">
+          <div class=" row">
+            <div class=" col-md-8 pr-md-1">
+              <div class=" form-group">
+                <label>{{'add-case-identified-by' | translate}}  * </label>
+<!--                <input type="text" formControlName="identifiedBy" class=" form-control" placeholder="የለየው ሰው"/>-->
+                <input type="text" formControlName="identifiedBy" placeholder=""
+                       [matAutocomplete]="ibAuto" class = "form-control" >
+                <mat-autocomplete autoActiveFirstOption #ibAuto="matAutocomplete">
+                  <mat-option *ngFor="let ib of identifiedByOptions | async" [value]="ib">
+                    {{ib}}
+                  </mat-option>
+                </mat-autocomplete>
+              </div>
+            </div>
+
+          </div>
+          <div class=" row">
+            <div class=" col-md-8 pr-md-1">
+              <div class=" form-group">
+                <label>{{'add-case-modified-by' | translate}}  * </label>
+                <input type="text" formControlName="modifiedBy" class=" form-control" placeholder=""/>
+              </div>
+            </div>
+
+          </div>
+
+          <div class=" row">
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label>{{'report-date' | translate}}  </label>
+                <div class="input-group-append">
+                  <input class="form-control" matInput [matDatepicker]="dor" formControlName="reportDate" [formControl]="date">
+                  <mat-datepicker-toggle matSuffix [for]="dor"></mat-datepicker-toggle>
+                  <mat-datepicker #dor></mat-datepicker>
+                </div>
+<!--                <div class="input-group">-->
+<!--                  <input class="form-control" formControlName="reportDate" placeholder="የተመዘገበበት ቀን" name="dor"-->
+<!--                         [(ngModel)]="reportDate" ngbDatepicker #dor="ngbDatepicker" required>-->
+<!--                  <div class="input-group-append">-->
+<!--                    <button  class="form-control" (click)="dor.toggle()" type="button">-->
+<!--                      <i class="fa fa-calendar" ></i>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
+              </div>
+            </div>
+
+            <div class=" col-md-6 pr-md-1">
+              <div class=" form-group">
+                <label>{{'add-case-modified-date' | translate}}  </label>
+                <div class="input-group-append">
+                  <input class="form-control" matInput [matDatepicker]="dom"  formControlName="modifiedDate" [formControl]="date">
+                  <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
+                  <mat-datepicker #dom></mat-datepicker>
+                </div>
+<!--                <div class="input-group">-->
+<!--                  <input class="form-control" formControlName="modifiedDate" placeholder="መጨረሻ የተስተካከለበት ቀን" name="dom"-->
+<!--                         [(ngModel)]="modifiedDate" ngbDatepicker #dom="ngbDatepicker" required>-->
+<!--                  <div class="input-group-append">-->
+<!--                    <button class="form-control" (click)="dom.toggle()" type="button">-->
+<!--                      <i class="fa fa-calendar"></i>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
+              </div>
+            </div>
+          </div>
+          <alert></alert>
+        </div>
+      </div>
+
+    </div>
+  {{'fields-marked-label' | translate}}
+
+  </div>
+
+  <div id="footer">
+    <p-progressSpinner *ngIf="loading" [style]="{width: '50px', height: '50px'}" strokeWidth="6"  animationDuration=".5s"></p-progressSpinner>
+    <button pButton type="submit" label="{{'add-case-register-button' | translate}}" [disabled]="loading" class="form-control ui-button-rounded ui-button-info"></button>
+    <!--    <button class=" btn btn-fill btn-danger" type="submit"><i class="fas fa-bug"></i> {{'add-case-register-button' | translate}}</button>-->
+  </div>
+
 </form>

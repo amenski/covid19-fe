@@ -4,19 +4,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthLayoutRoutes } from './auth-layout.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from "@angular/common/http";
 
 import {LoginComponent} from "../../pages/login/login.component";
 import {RegisterUserComponent} from "../../pages/register/register-user.component";
+import {TranslateModule} from "@ngx-translate/core";
+import {AlertModule} from "../../components/alert/alert.module";
+import {ProgressSpinnerModule} from "primeng";
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(AuthLayoutRoutes),
-    FormsModule,
-    HttpClientModule,
-    NgbModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(AuthLayoutRoutes),
+        FormsModule,
+        NgbModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        AlertModule,
+        ProgressSpinnerModule
+    ],
   declarations: [
     LoginComponent, RegisterUserComponent
   ]
